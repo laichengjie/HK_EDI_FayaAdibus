@@ -1,0 +1,281 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B0BFA58B-86AC-497A-9F08-4968B4AE5C29}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HK_EDI.Service</RootNamespace>
+    <AssemblyName>HK_EDI.Service</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.4.0.4\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="BC.LogicPub, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\ERP2.0\PublicDll\BC.LogicPub.dll</HintPath>
+    </Reference>
+    <Reference Include="LanguageResource, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\ERP2.0\PublicDll\LanguageResource.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.1.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\ERP2.0\PublicDll\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="protobuf-net">
+      <HintPath>..\..\..\ERP2.0\PublicDll\protobuf-net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FayaAdibus\BasSet\VendCustSetDal.cs" />
+    <Compile Include="FayaAdibus\BasSet\StockSetDal.cs" />
+    <Compile Include="FayaAdibus\BasSet\DiscountTypeDal.cs" />
+    <Compile Include="FayaAdibus\GetPackingList\GetPackingListBase.cs" />
+    <Compile Include="FayaAdibus\GetPackingList\GetPackingListService.cs" />
+    <Compile Include="FayaAdibus\GetPackingList\IGetPackingListService.cs" />
+    <Compile Include="FayaAdibus\GetReplenishmentOrder\GetReplenishmentOrderBase.cs" />
+    <Compile Include="FayaAdibus\GetReplenishmentOrder\GetReplenishmentOrderService.cs" />
+    <Compile Include="FayaAdibus\GetReplenishmentOrder\IGetReplenishmentOrderService.cs" />
+    <Compile Include="FayaAdibus\CreateCGOrder\CreateCGOrderBase.cs" />
+    <Compile Include="FayaAdibus\CreateCGOrder\CreateCGOrderService.cs" />
+    <Compile Include="FayaAdibus\CreateCGOrder\ICreateCGOrderService.cs" />
+    <Compile Include="FayaAdibus\GetEstimatedShipment\IGetEstimatedShipmentService.cs" />
+    <Compile Include="FayaAdibus\GetEstimatedShipment\GetEstimatedShipmentService.cs" />
+    <Compile Include="FayaAdibus\GetEstimatedShipment\GetEstimatedShipmentBase.cs" />
+    <Compile Include="FayaAdibus\MD5Set.cs" />
+    <Compile Include="FayaAdibus\Pur_ReceiptData\IReceiptDataApi.cs" />
+    <Compile Include="FayaAdibus\Pur_ReceiptData\ReceiptDataBase.cs" />
+    <Compile Include="FayaAdibus\Pur_ReceiptData\ReceiptDataApi.cs" />
+    <Compile Include="FayaAdibus\CreateReceipt\ICreateReceiptService.cs" />
+    <Compile Include="FayaAdibus\CreateReceipt\CreateReceiptBase.cs" />
+    <Compile Include="FayaAdibus\CreateReceipt\CreateReceiptService.cs" />
+    <Compile Include="Orders\PaymentMethodService.cs" />
+    <Compile Include="Authentication\FormsAuthenticationService.cs" />
+    <Compile Include="Authentication\IAuthenticationService.cs" />
+    <Compile Include="Common\CreateGuid.cs" />
+    <Compile Include="Common\HttpProc.cs" />
+    <Compile Include="Common\SerializeHelper.cs" />
+    <Compile Include="Configuration\ISettingService.cs" />
+    <Compile Include="Configuration\SettingExtensions.cs" />
+    <Compile Include="Configuration\SettingService.cs" />
+    <Compile Include="Customers\ChangePasswordRequest.cs" />
+    <Compile Include="Customers\CustomerRegistrationRequest.cs" />
+    <Compile Include="Customers\CustomerRegistrationResult.cs" />
+    <Compile Include="Customers\CustomerRegistrationService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Customers\CustomerService.cs" />
+    <Compile Include="Customers\ICustomerRegistrationService.cs" />
+    <Compile Include="Customers\ICustomerService.cs" />
+    <Compile Include="Customers\PasswordChangeResult.cs" />
+    <Compile Include="EDI_Config\EDI_ConfigService.cs" />
+    <Compile Include="EDI_Config\IEDI_ConfigService.cs" />
+    <Compile Include="Logging\DefaultLogger.cs" />
+    <Compile Include="Logging\ICustomerActivityService.cs" />
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\LoggingExtensions.cs" />
+    <Compile Include="Logging\NullLogger.cs" />
+    <Compile Include="Orders\BasCompanyService.cs" />
+    <Compile Include="Orders\ISAPPosSaleAsicsService.cs" />
+    <Compile Include="Orders\SAPPosSaleAsicsService.cs" />
+    <Compile Include="Orders\BC_Sal_SendGoodsService.cs" />
+    <Compile Include="Orders\IBC_Sal_SendGoodsService.cs" />
+    <Compile Include="Orders\OrderHandle.cs" />
+    <Compile Include="Orders\IBasCompanyService.cs" />
+    <Compile Include="Orders\IOrderHandle.cs" />
+    <Compile Include="Orders\IJobOrderTraceDetailService.cs" />
+    <Compile Include="Orders\IJobOrderTraceService.cs" />
+    <Compile Include="Orders\IPostSkuErrorRecordsService.cs" />
+    <Compile Include="Orders\IPostSkuRecordsDetailService.cs" />
+    <Compile Include="Orders\JobOrderTraceDetailService.cs" />
+    <Compile Include="Orders\JobOrderTraceService.cs" />
+    <Compile Include="Orders\PostSkuErrorRecordsService.cs" />
+    <Compile Include="Orders\PostSkuRecordsDetailService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\EncryptionService.cs" />
+    <Compile Include="Security\IEncryptionService.cs" />
+    <Compile Include="Security\IPermissionProvider.cs" />
+    <Compile Include="Security\IPermissionService.cs" />
+    <Compile Include="Security\PermissionService.cs" />
+    <Compile Include="Security\StandardPermissionProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="StockModel\IStockDataService.cs" />
+    <Compile Include="StockModel\StockDataService.cs" />
+    <Compile Include="ShopModel\IShopDataService.cs" />
+    <Compile Include="ShopModel\ShopDataService.cs" />
+    <Compile Include="Tasks\IScheduleTaskService.cs" />
+    <Compile Include="Tasks\ITask.cs" />
+    <Compile Include="Tasks\ITaskRunTimeService.cs" />
+    <Compile Include="Tasks\ScheduleTaskService.cs" />
+    <Compile Include="Tasks\Task.cs" />
+    <Compile Include="Tasks\TaskManager.cs" />
+    <Compile Include="Tasks\TaskRunTimeService.cs" />
+    <Compile Include="Tasks\TaskThread.cs" />
+    <Compile Include="Utility\JsonHelper.cs" />
+    <Compile Include="WMS\Best\EnumFolds\CommonEnum.cs" />
+    <Compile Include="WMS\Best\Models\item.cs" />
+    <Compile Include="WMS\Best\Models\O2OResponse.cs" />
+    <Compile Include="WMS\Best\Models\Proudct.cs" />
+    <Compile Include="WMS\Best\Models\recipient.cs" />
+    <Compile Include="WMS\Best\Models\RequestBase.cs" />
+    <Compile Include="WMS\Best\Models\Response.cs" />
+    <Compile Include="WMS\Best\Models\RequestContent.cs" />
+    <Compile Include="WMS\Best\Models\SyncExpressOrder.cs" />
+    <Compile Include="WMS\Best\Models\SyncRmaInfo.cs" />
+    <Compile Include="WMS\Best\Models\Update\Product.cs" />
+    <Compile Include="WMS\Best\Models\Update\Response2.cs" />
+    <Compile Include="WMS\Best\Models\sender.cs" />
+    <Compile Include="WMS\Best\Models\SyncAsnInfo.cs" />
+    <Compile Include="WMS\Best\Models\SyncBaseModel.cs" />
+    <Compile Include="WMS\Best\Models\SyncProductInfo.cs" />
+    <Compile Include="WMS\Best\Models\SyncSalesOrderInfo.cs" />
+    <Compile Include="WMS\Best\Models\Update\UpdateAsnStatus.cs" />
+    <Compile Include="WMS\Best\Models\Update\UpdateRmaStatus.cs" />
+    <Compile Include="WMS\Best\Models\Update\UpdateSalesOrderStatus.cs" />
+    <Compile Include="WMS\Best\Utils.cs" />
+    <Compile Include="WMS\ChunFeng\Models\BackNetSalOrder.cs" />
+    <Compile Include="WMS\ChunFeng\Models\PushB2C.cs" />
+    <Compile Include="WMS\ChunFeng\Models\PushJITB2B.cs" />
+    <Compile Include="WMS\CommonModels\BaseDataModel.cs" />
+    <Compile Include="WMS\CommonModels\CommonEnum.cs" />
+    <Compile Include="WMS\CommonModels\OperationEnum.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WMS\CommonService.cs" />
+    <Compile Include="WMS\Base\FailDTO.cs" />
+    <Compile Include="WMS\HK\OrderOperationStatusContrastEnum.cs" />
+    <Compile Include="WMS\HK\Product.cs" />
+    <Compile Include="WMS\HK\Request.cs" />
+    <Compile Include="WMS\HK\Response.cs" />
+    <Compile Include="WMS\HK\StockQueryResponse.cs" />
+    <Compile Include="WMS\Base\IProductBase.cs" />
+    <Compile Include="WMS\Base\IRequestBase.cs" />
+    <Compile Include="WMS\IWMSService.cs" />
+    <Compile Include="WMS\CommonModels\NormalOrderModel.cs" />
+    <Compile Include="WMS\lockExtend.cs" />
+    <Compile Include="WMS\ChunFeng\EnumFolds\CommonEnum.cs" />
+    <Compile Include="WMS\ChunFeng\IChunFengWebApi.cs" />
+    <Compile Include="WMS\ChunFeng\Models\BaseModel.cs" />
+    <Compile Include="WMS\ChunFeng\Models\CancelOrder.cs" />
+    <Compile Include="WMS\ChunFeng\Models\ProductBase.cs" />
+    <Compile Include="WMS\ChunFeng\Models\PushB2B.cs" />
+    <Compile Include="WMS\ChunFeng\Models\PushBackOrder.cs" />
+    <Compile Include="WMS\ChunFeng\Models\PushProduct.cs" />
+    <Compile Include="WMS\ChunFeng\Models\PushPurchase.cs" />
+    <Compile Include="WMS\ChunFeng\Models\Response.cs" />
+    <Compile Include="WMS\ChunFeng\Models\Response2.cs" />
+    <Compile Include="WMS\ChunFeng\Models\ResponseContent.cs" />
+    <Compile Include="WMS\ChunFeng\Models\SearchResponse.cs" />
+    <Compile Include="WMS\ChunFeng\Models\SearchStock.cs" />
+    <Compile Include="WMS\ChunFeng\Models\TransferInto.cs" />
+    <Compile Include="WMS\ChunFeng\RequestBase.cs" />
+    <Compile Include="WMS\ChunFeng\Utils.cs" />
+    <Compile Include="WMS\SKU360\EnumFolds\CommonEnum.cs" />
+    <Compile Include="WMS\SKU360\ISKU360WebApi.cs" />
+    <Compile Include="WMS\SKU360\Models\BackNetSalOrder.cs" />
+    <Compile Include="WMS\SKU360\Models\BaseModel.cs" />
+    <Compile Include="WMS\SKU360\Models\CancelOrder.cs" />
+    <Compile Include="WMS\SKU360\Models\ProductBase.cs" />
+    <Compile Include="WMS\SKU360\Models\PushB2B.cs" />
+    <Compile Include="WMS\SKU360\Models\PushB2C.cs" />
+    <Compile Include="WMS\SKU360\Models\PushBackOrder.cs" />
+    <Compile Include="WMS\SKU360\Models\PushJITB2B.cs" />
+    <Compile Include="WMS\SKU360\Models\PushProduct.cs" />
+    <Compile Include="WMS\SKU360\Models\PushPurchase.cs" />
+    <Compile Include="WMS\SKU360\Models\Response.cs" />
+    <Compile Include="WMS\SKU360\Models\Response2.cs" />
+    <Compile Include="WMS\SKU360\Models\ResponseContent.cs" />
+    <Compile Include="WMS\SKU360\Models\SearchResponse.cs" />
+    <Compile Include="WMS\SKU360\Models\SearchStock.cs" />
+    <Compile Include="WMS\SKU360\Models\TransferInto.cs" />
+    <Compile Include="WMS\SKU360\RequestBase.cs" />
+    <Compile Include="WMS\SKU360\Utils.cs" />
+    <Compile Include="WMS\Base\SuccessDTO.cs" />
+    <Compile Include="WMS\WmsCommonMethod.cs" />
+    <Compile Include="XmlNodeClass\E1WPG01.cs" />
+    <Compile Include="XmlNodeClass\E1WPG02.cs" />
+    <Compile Include="XmlNodeClass\E1WXX01.cs" />
+    <Compile Include="XmlNodeClass\EDI_DC40.cs" />
+    <Compile Include="XmlNodeClass\IDOC.cs" />
+    <Compile Include="XmlNodeClass\ZE1WPG01.cs" />
+    <Compile Include="XmlNodeClass\ZWPUWBW01.cs" />
+    <Compile Include="XmlNodeSCM\appointmentShHbDto.cs" />
+    <Compile Include="XmlNodeSCM\Response.cs" />
+    <Compile Include="XmlNodeSCM\SCMMaster.cs" />
+    <Compile Include="XmlNodeSCM\SCMMatTransInMaster.cs" />
+    <Compile Include="XmlNodeSCM\shitemVO.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HK_EDI.Core\HK_EDI.Core.csproj">
+      <Project>{d59dfe74-014a-47b4-a09e-1a8100466640}</Project>
+      <Name>HK_EDI.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HK_EDI.Data\HK_EDI.Data.csproj">
+      <Project>{8245ce74-f263-474c-891b-b3fd90453721}</Project>
+      <Name>HK_EDI.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

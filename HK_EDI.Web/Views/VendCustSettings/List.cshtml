@@ -1,0 +1,408 @@
+﻿@model Tuple<HK_EDI.Web.Models.VendCustSet.ErpVendCustModel, HK_EDI.Web.Models.VendCustSet.CorVendCustModel>
+@{
+    ViewBag.Title = "供应商配置";
+}
+@using (Html.BeginForm())
+{
+    <div class="section-header">
+        <div class="title">
+            <img src="@Url.Content("~/Content/images/ico-system.png")" alt="" />
+            供应商配置
+        </div>
+    </div>
+
+    <div .clear:after{content:'.';display:block;height:0;clear:both;visibility:hidden}>
+        <div style="  float: left;  width: 35%; ">
+            <table style="  width: 100%; ">
+                <tr>
+                    <td>
+                        <div id="bascard-grid"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div style="  float: left;  width: 65%; ">
+            <table style="  width: 100%; ">
+                <tr>
+                    <td>
+                        <div id="bascard-grid1"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <script type="text/javascript">
+                    var cardtypeids = "";
+                    $(document).ready(function () {
+                         $("#bascard-grid").kendoGrid({
+                            dataSource: {
+                                type: "json",
+                                transport: {
+                                    read: {
+                                        url: "@Html.Raw(Url.Action("QueryErpVendCustList", "VendCustSettings"))",
+                                        type: "POST",
+                                        dataType: "json",
+                                        data: BasCardList
+                                    },
+                                    update: {
+                                        url: '@Html.Raw(Url.Action("UpdateErpVendCustList", "VendCustSettings"))',
+                                        type: "POST",
+                                        dataType: "json"
+                                    },
+                                    create: {
+                                         url: '@Html.Raw(Url.Action("UpdateErpVendCustList", "VendCustSettings"))',
+                                         type: "POST",
+                                         dataType: "json"
+                                     },
+                                    destroy: {
+                                        url: '@Html.Raw(Url.Action("DeleteErpVendCustList", "VendCustSettings"))',
+                                        type: "POST",
+                                        dataType: "json"
+                                    }
+                                },
+                                schema: {
+                                    data: "Data",
+                                    total: "Total",
+                                    errors: "Errors",
+                                    model: {
+                                        id: "ID",
+                                        fields: {
+                                            ID: { editable: false, type: "string" },
+                                            Xuhao: { editable: false, type: "string" },
+                                            ErpVendCustCode: { editable: true, type: "string" },
+                                            ErpVendCustName: { editable: false, type: "string" },
+                                            //OperationType: { editable: true, type: "string" },
+                                            OperationTypeName: { editable: true, type: "string" },
+                                            BillState: { editable: true, type: "string" },
+                                            BillStateName: { editable: true, type: "string" },
+                                            //SOLDTO: {
+                                            //    validation: {required: true, },editable: true, type: "string" }
+                                        }
+                                    }
+                                },
+                                 requestEnd: function (e) {
+                                     if (e.type == "create" || e.type == "update") {
+                                             this.read();
+                                     }
+                                 },
+                                error: function(e) {
+                                    display_kendoui_grid_error(e);
+                                    // Cancel the changes
+                                    this.cancelChanges();
+                                },
+                                pageSize: 15,
+                                serverPaging: true,
+                                serverFiltering: true,
+                                serverSorting: true
+
+                            },
+                            pageable: {
+                                refresh: true,
+                                numeric: false,
+                                previousNext: false,
+                                info: false,
+                                 pageSizes: [10, 15, 20, 50, 100]
+                            },
+                            toolbar: ["create"],
+                            edit: function (e) {
+                       
+                            },
+                            editable: {
+                                confirmation: function (e) {
+                                    return "确定删除 " + e.ErpVendCustName + "?";
+                                },
+                                mode: "inline"
+                            },
+                              scrollable: false,
+                              selectable: true,
+                            columns: [{
+                                field: "ID",
+                                title: "ID",
+                                hidden: true,
+                                width: 50
+                            },
+                            {
+                                field: "Xuhao",
+                                title: "序号",
+                                width: 80
+                             },
+                            { title: 'Erp供应商代码', field: "ErpVendCustID", editor: categoryDropDownEditor, template: "#=ErpVendCustCode#", width: 100 },
+                            { title: 'Erp供应商名称', field: "ErpVendCustName", width: 100 },
+                            //{
+                            //    field: "OperationType",
+                            //    title: "单据类型",
+                            //    width: 50,
+                            //    editor: Editor,
+                            //    template: "#=OperationTypeName#"
+                            //},
+                            {
+                                field: "BillState",
+                                title: "单据状态",
+                                width: 50,
+                                editor: BillStateEditor,
+                                template: "#=BillStateName#"
+                            },
+                            {
+                                command: [{ name: "edit", text: "编辑" }, {
+                                    name: "destroy",
+                                    text: "删除"
+                                }], width: 150
+                            }],
+
+                        });
+                    });
+
+
+                         var cardtypeids = "";
+                            $(document).ready(function () {
+
+                             $("#bascard-grid1").kendoGrid({
+                                 dataSource: {
+                                     type: "json",
+
+                                     transport: {
+                                         read: {
+                                             url: "@Html.Raw(Url.Action("QueryCorVendCustList", "VendCustSettings"))",
+                                             type: "POST",
+                                             dataType: "json",
+                                             data:  StockList
+                                         },
+                                         update: {
+                                             url: '@Html.Raw(Url.Action("UpdateCorVendCustList", "VendCustSettings"))',
+                                             type: "POST",
+                                             dataType: "json",
+                                             data: BasErpStockList
+                                         },
+                                         create: {
+                                              url: '@Html.Raw(Url.Action("UpdateCorVendCustList", "VendCustSettings"))',
+                                              type: "POST",
+                                              dataType: "json",
+                                              data: BasErpStockList
+                                          },
+                                         destroy: {
+                                             url: '@Html.Raw(Url.Action("DeleteCorVendCustList", "VendCustSettings"))',
+                                             type: "POST",
+                                             dataType: "json"
+                                         }
+                                     },
+                                     schema: {
+                                         data: "Data",
+                                         total: "Total",
+                                         errors: "Errors",
+                                         model: {
+                                             id: "ID",
+                                             fields: {
+                                                 ID: { editable: false, type: "string" },
+                                                 Xuhao: { editable: false, type: "string" },
+                                                 ErpVendCustID: { editable: false, type: "string" },
+                                                 //CorSOLDTO:   {  validation: {required: true, },editable: true, type: "string" },
+                                                 CorVendCustCode: { validation: { required: true, }, editable: true, type: "string" },
+                                                 CorVendCustName: { validation: { required: true, },editable: true, type: "string" },
+                                                 Checker: { editable: false, type: "string" },
+                                                 ModifyDTM: { editable: false, type: "string" }
+                                             }
+                                         }
+                                     },
+                                     requestEnd: function (e) {
+                                         if (e.type == "create" || e.type == "update") {
+                                             this.read();
+                                         }
+                                     },
+                                     error: function (e) {
+                                         display_kendoui_grid_error(e);
+
+                                         this.cancelChanges();
+                                     },
+                                     pageSize: 15,
+                                     serverPaging: true,
+                                     serverFiltering: true,
+                                     serverSorting: true
+
+                                    },
+                                    pageable: {
+                                        refresh: true,
+                                        numeric: false,
+                                        previousNext: false,
+                                        info: false,
+                                        pageSizes: [10, 15, 20, 50, 100]
+                                    },
+                                    toolbar: ["create"],
+                                    edit: function (e) {
+                                    },
+                                    editable: {
+                                        confirmation: function (e) {
+                                            return "确定删除 " + e.CorVendCustName + "?";
+                                        },
+                                        mode: "inline"
+                                    },
+                                    scrollable: false,
+                                    selectable: true,
+                                    columns: [{
+                                        field: "ID",
+                                        title: "ID",
+                                        hidden: true,
+                                        width: 50
+                                    }, {
+                                        field: "ErpVendCustID",
+                                        title: "ErpVendCustID",
+                                        hidden: true,
+                                        width: 50
+                                    },
+                                    {
+                                        field: "Xuhao",
+                                        title: "序号",
+                                        width: 80
+                                    },
+                                    //{
+                                    //    field: "CorSOLDTO",
+                                    //    title: "发票代码",
+                                    //    width: 80
+                                    //},
+                                    {
+                                        field: "CorVendCustCode",
+                                        title: "供应商代码",
+                                        width: 80
+                                    },
+                                    {
+                                        field: "CorVendCustName",
+                                        title: "供应商名称",
+                                        width: 80
+                                    },
+                                    {
+                                        field: "Checker",
+                                        title: "操作人",
+                                        width: 100,
+                                    },
+                                    {
+                                        field: "ModifyDTM",
+                                        title: "修改时间",
+                                        width: 100,
+                                        format: "{0:G}"
+                                    },
+                                    {
+                                        command: [
+                                            { name: "edit", text: "编辑" },
+                                            {
+                                                name: "destroy",
+                                                text: "删除"
+                                            }], width: 100
+                                    }],
+
+                                });
+                            });
+
+                            //var vErpVendCustID = "";
+                        
+
+                            $("#bascard-grid").on('click', 'tbody[role="rowgroup"] tr', function () {
+                                // 获取当前选择行数据
+                                var row = $("#bascard-grid").data("kendoGrid").select();
+                                var data = $("#bascard-grid").data("kendoGrid").dataItem(row);
+                                //vErpVendCustID = data.ErpVendCustID;
+                                var grid1 = $('#bascard-grid1').data('kendoGrid');
+                                grid1.dataSource.read();
+                            });
+                            function categoryDropDownEditor(container, options) {
+                                $('<input required name="' + options.field + '" id="ss"/>')
+                                    .appendTo(container)
+                                    .kendoDropDownList({
+                                        autoBind: false,
+                                        dataTextField: "ErpVendCustCode",
+                                        dataValueField: "ErpVendCustID",
+                                        optionLabel: "请选择",//下拉选择提示文字
+                                        dataSource: {
+                                            transport: {
+                                                read: {
+                                                    url: "@Html.Raw(Url.Action("GetSelectList", "VendCustSettings"))",
+                                                    type: "POST",
+                                                    dataType: "json"
+                                                }
+                                            },
+                                        },
+                                        change: function () {
+                                            cardtypeids = $("#ss").val();
+                                            options.model.ErpVendCustID = cardtypeids;
+                                        }
+
+                                    });
+                            }
+
+                            function BasCardList() {
+                                return {
+                                    ErpVendCustID: $('#@Html.FieldIdFor(model => model.Item1.ErpVendCustID)').val(),
+                                };
+
+                            }
+                           function StockList() {
+                                var row = $("#bascard-grid").data("kendoGrid").select();
+                                var data = $("#bascard-grid").data("kendoGrid").dataItem(row);
+                                if (data !=null && data.ErpVendCustID != ""){
+                                    return {
+                                        vErpVendCustID: data.ErpVendCustID
+                                    };
+                                }
+
+                            }
+                           function BasErpStockList() {
+                                var row = $("#bascard-grid").data("kendoGrid").select();
+                                var data = $("#bascard-grid").data("kendoGrid").dataItem(row);
+                                if (data ==null || data.ErpVendCustID == "")
+                                { return alert("请选择Erp供应商"); } else {
+                                    return {
+                                       vErpVendCustID: data.ErpVendCustID
+                                    };
+                                }
+
+                            }
+            
+                           function Editor(container, options) {
+                               $('<input required name="' + options.field + '" id="demorder"/>')
+                                   .appendTo(container)
+                                   .kendoDropDownList({
+                                       dataSource: {
+                                           data: [
+                                               { OperationType: 'GetEstimatedShipment', OperationTypeName: '期货采购订单' },
+                                               { OperationType: 'GetPacking', OperationTypeName: '采购到货单' },
+                                           ]
+                                       },
+                                       dataTextField: "OperationTypeName",
+                                       dataValueField: "OperationType",
+                                       change: function () {
+                                           cardtypeids = $("#demorder").val();
+                                           options.model.OperationType = cardtypeids;
+                                           if (options.model.OperationType == "GetEstimatedShipment") {
+                                               options.model.OperationTypeName = "期货采购订单"
+                                           } else {
+                                               options.model.OperationTypeName = "采购到货单"
+                                           }
+                                       }
+                                   })
+                           }
+                           function BillStateEditor(container, options) {
+                               $('<input required name="' + options.field + '" id="debillstate"/>')
+                                   .appendTo(container)
+                                   .kendoDropDownList({
+                                       dataSource: {
+                                           data: [
+                                               { BillState: '0', BillStateName: '未送审' },
+                                               { BillState: '1', BillStateName: '已审核' },
+                                           ]
+                                       },
+                                       dataTextField: "BillStateName",
+                                       dataValueField: "BillState",
+                                       change: function () {
+                                           cardtypeids = $("#debillstate").val();
+                                           options.model.BillState = cardtypeids;
+                                           if (options.model.BillState == "0") {
+                                               options.model.BillStateName = "未送审"
+                                           } else {
+                                               options.model.BillStateName = "已审核"
+                                           }
+                                       }
+                                   })
+                           }
+                           
+        </script>
+    </div>
+
+}

@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8245CE74-F263-474C-891B-B3FD90453721}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HK_EDI.Data</RootNamespace>
+    <AssemblyName>HK_EDI.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\ERP2.0\PublicDll\System.Data.SqlServerCe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DbContextExtensions.cs" />
+    <Compile Include="DBHelper.cs" />
+    <Compile Include="EfDataProviderManager.cs" />
+    <Compile Include="EfRepository.cs" />
+    <Compile Include="HK_EDI_ObjectContext.cs" />
+    <Compile Include="IDbContext.cs" />
+    <Compile Include="Initializers\CreateCeDatabaseIfNotExists.cs" />
+    <Compile Include="Initializers\CreateTablesIfNotExist.cs" />
+    <Compile Include="Initializers\DropCreateCeDatabaseAlways.cs" />
+    <Compile Include="Initializers\DropCreateCeDatabaseIfModelChanges.cs" />
+    <Compile Include="Initializers\SqlCeInitializer.cs" />
+    <Compile Include="Mapping\Configuration\SettingMap.cs" />
+    <Compile Include="Mapping\Customers\CustomerMap.cs" />
+    <Compile Include="Mapping\Customers\CustomerRoleMap.cs" />
+    <Compile Include="Mapping\Logging\ActivityLogMap.cs" />
+    <Compile Include="Mapping\Logging\ActivityLogTypeMap.cs" />
+    <Compile Include="Mapping\Logging\LogMap.cs" />
+    <Compile Include="Mapping\NopEntityTypeConfiguration.cs" />
+    <Compile Include="Mapping\EDI_Config\SD_EDI_StockDetailMap.cs" />
+    <Compile Include="Mapping\EDI_Config\SD_EDI_StockMap.cs" />
+    <Compile Include="Mapping\Orders\BasCompanyMap.cs" />
+    <Compile Include="Mapping\Orders\BC_Sal_SendGoodsMap.cs" />
+    <Compile Include="Mapping\Orders\JobOrderTraceErrDetailMap.cs" />
+    <Compile Include="Mapping\Orders\SAPPosSaleAsicsMap.cs" />
+    <Compile Include="Mapping\Orders\JobOrderTraceDetailMap.cs" />
+    <Compile Include="Mapping\Orders\JobOrderTraceMap.cs" />
+    <Compile Include="Mapping\Orders\PostSkuErrorRecordsMap.cs" />
+    <Compile Include="Mapping\Orders\PostSkuRecordsDetailMap.cs" />
+    <Compile Include="Mapping\Security\PermissionRecordMap.cs" />
+    <Compile Include="Mapping\VendCustModel\VendCustDataMap.cs" />
+    <Compile Include="Mapping\VendCustModel\VendCustDataModel.cs" />
+    <Compile Include="Mapping\StockModel\StockDataModel.cs" />
+    <Compile Include="Mapping\StockModel\StockDataMap.cs" />
+    <Compile Include="Mapping\ShopModel\ShopDataMap.cs" />
+    <Compile Include="Mapping\Tasks\ScheduleTaskMap.cs" />
+    <Compile Include="Mapping\Tasks\TaskRunTimeMap.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlCeDataProvider.cs" />
+    <Compile Include="SqlServerDataProvider.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HK_EDI.Core\HK_EDI.Core.csproj">
+      <Project>{d59dfe74-014a-47b4-a09e-1a8100466640}</Project>
+      <Name>HK_EDI.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

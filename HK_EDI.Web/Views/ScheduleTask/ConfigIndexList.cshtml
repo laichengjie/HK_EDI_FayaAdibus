@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "配置列表";
+}
+
+<div class="section-header">
+    <div class="title">
+        <img src="@Url.Content("~/Content/images/ico-content.png")" alt="" />
+        配置列表
+    </div>
+</div>
+<table class="adminContent">
+<tr>
+<td>
+            <div id="configIndex-tasks-grid"></div>
+
+        <script>
+            $(document).ready(function () {
+                $("#configIndex-tasks-grid").kendoGrid({
+                    dataSource: {
+                        type: "json",
+                        transport: {
+                            read: {
+                                url: '@Html.Raw(Url.Action("ConfigIndexList", "ScheduleTask"))',
+                                type: "POST",
+                                dataType: "json"
+                            }
+                        },
+                        schema: {
+                            data: "Data",
+                            total: "Total",
+                            errors: "Errors",
+                            model: {
+                                id: "CompanyID",
+                                fields: {
+                                    OSInterfaceID: { editable: false, type:"string"  },
+                                    OSStockCode:{ editable: false, type:"string"  },
+                                    OSStockName:{ editable: false, type:"string"  },
+                                    CooperationSys:{ editable: false, type:"string"  },
+                                    CompanyID: { editable: false, type: "string" }
+                                }
+                            }
+                        },
+                        error: function (e) {
+                            display_kendoui_grid_error(e);
+                            this.cancelChanges();
+                        },
+                        serverPaging: true,
+                        serverFiltering: true,
+                        serverSorting: true
+                    },
+                    pageable: {
+                        refresh: true,
+                        numeric: false,
+                        previousNext: false,
+                        info: false
+                    },
+                    editable: {
+                        confirmation: false,
+                        mode: "inline"
+                    },
+                    scrollable: false,
+                    columns: [
+                    {
+                        field: "OSInterfaceID",
+                        title: "接口ID",
+                        width: 300
+                    },
+                    {
+                        field: "CooperationSys",
+                        title: "接口代码",
+                        width: 300
+                    },
+                    //{ 
+                    //    field: "CompanyID",
+                    //    title: "计划任务",
+                    //    width: 100,
+                    //    template: '<a href="@Url.Content("~/Admin/ScheduleTask/List/")#=CompanyID#" class="k-button run-now">计划任务</a>'
+                    //},
+                    { command: { text: "计划任务", click: ManageScheduleTask }, title: " ", width: "180px" }
+                ]
+                });
+            });
+
+            function ManageScheduleTask(e) {
+                e.preventDefault();
+                var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+                console.log(dataItem.CompanyID, dataItem.OSInterfaceID);
+                var url = '@Url.Content("~/Admin/ScheduleTask/List")'+'?CompanyID=' +  dataItem.CompanyID + '&OSInterfaceID=' + dataItem.OSInterfaceID;
+                location.href = url;
+            }
+
+            </script>
+</td>
+</tr>
+</table>
+

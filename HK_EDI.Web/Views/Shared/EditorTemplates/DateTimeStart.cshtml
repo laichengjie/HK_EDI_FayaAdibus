@@ -1,0 +1,22 @@
+@using System.Globalization
+@model DateTime?
+<input id="@ViewData.TemplateInfo.GetFullHtmlFieldId(string.Empty)" name="@ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty)" value="@(Model > DateTime.MinValue || Model.HasValue ? Model.Value.ToString(CultureInfo.CurrentCulture.DateTimeFormat) : null)" />
+@*<script>
+    var timePicker_@(ViewData.TemplateInfo.GetFullHtmlFieldId(string.Empty)) = $("#@(ViewData.TemplateInfo.GetFullHtmlFieldId(string.Empty))").kendoDateTimePicker({
+        change: timePicker_@(ViewData.TemplateInfo.GetFullHtmlFieldId(string.Empty))_Change,
+    }).data("kendoDateTimePicker");
+
+    function timePicker_@(ViewData.TemplateInfo.GetFullHtmlFieldId(string.Empty))_Change() {
+        var timePickerStartDate = timePicker_@(ViewData.TemplateInfo.GetFullHtmlFieldId(string.Empty)).value(),
+        timePickerEndDate = timePicker_@(ViewData["EndDateField"]).value();
+
+        if (timePickerStartDate) {
+            timePickerStartDate = new Date(timePickerstartDate);
+            timePickerStartDate.setDate(timePickerstartDate.getDate());
+            timePicker_@(ViewData["EndDateField"]).min(timePickerStartDate);
+        } else if (timePickerEndDate) {
+            timePicker_@(ViewData.TemplateInfo.GetFullHtmlFieldId(string.Empty)).max(new Date(timePickerEndDate));
+        }
+    }
+</script>*@
+

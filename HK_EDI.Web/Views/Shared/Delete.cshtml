@@ -1,0 +1,13 @@
+﻿@model HK_EDI.Web.Mvc.DeleteConfirmationModel
+@using (Html.BeginForm(Model.ActionName, Model.ControllerName, new { id = Model.Id }))
+{
+    <div>
+        <p>
+            确定要删除吗？
+        </p>
+        <div class="form-actions">
+            <span id="" class="k-button" onclick="$('#@Model.WindowId').data('kendoWindow').close();">取消</span>
+            <input type="submit" class="k-button" value="删除" />
+        </div>
+    </div>
+}

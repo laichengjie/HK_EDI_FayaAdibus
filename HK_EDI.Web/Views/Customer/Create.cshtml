@@ -1,0 +1,19 @@
+﻿@model HK_EDI.Web.Models.Customers.CustomerModel
+@{
+    //page title
+    ViewBag.Title = "添加账号";
+}
+@using (Html.BeginForm())
+{
+    <div class="section-header">
+        <div class="title">
+        <img src="@Url.Content("~/Content/images/ico-customers.png")" alt="" />
+            添加账号 @Html.ActionLink("返回账号列表", "List")
+        </div>
+        <div class="options">
+            <input type="submit" name="save" class="k-button" value="保存" />
+            <input type="submit" name="save-continue" class="k-button" value="保存并继续编辑" />
+        </div>
+    </div>
+    @Html.Partial("_CreateOrUpdate", Model)
+}

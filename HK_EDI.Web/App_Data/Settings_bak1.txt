@@ -1,0 +1,42 @@
+
+DataProvider: sqlserver
+DataConnectionString: Data Source=192.168.100.9;Initial Catalog=HK_ERP;Integrated Security=False;Persist Security Info=False;User ID=dev_user;Password=hkdevdb@100.9
+
+
+DataProvider: sqlserver
+DataConnectionString: Data Source=192.168.100.9;Initial Catalog=HK_ERP_UR_TEMP;Integrated Security=False;Persist Security Info=False;User ID=dev_user;Password=hkdevdb@100.9
+
+
+DataProvider: sqlserver
+DataConnectionString: Data Source=192.168.100.13;Initial Catalog=ERP_V1.18_TEST;Integrated Security=False;Persist Security Info=False;User ID=dev_user;Password=hkdevdb@100.13
+
+
+DataProvider: sqlserver
+DataConnectionString: Data Source=10.0.0.138;Initial Catalog=HKERP_YZ_TEST;Integrated Security=False;Persist Security Info=False;User ID=erpuser;Password=shbs2)!%
+
+
+DataProvider: sqlserver
+DataConnectionString: Data Source=10.100.107.87;Initial Catalog=HKERP_TEST;Integrated Security=False;Persist Security Info=False;User ID=EDIUser;Password=bymEdi.123
+
+
+
+DataProvider: sqlserver
+DataConnectionString: Data Source=10.100.107.87;Initial Catalog=HKERP;Integrated Security=False;Persist Security Info=False;User ID=EDIUser;Password=bymEdi.123
+
+
+
+
+
+
+---UR测试数据 （UR服务器）
+
+DataProvider: sqlserver
+DataConnectionString: Data Source=192.168.13.42;Initial Catalog=HKERP;Integrated Security=False;Persist Security Info=False;User ID=user_HK_dev;Password=Lock*Lock857
+
+
+
+--边城
+
+DataProvider: sqlserver
+DataConnectionString: Data Source=192.168.5.53;Initial Catalog=test;Integrated Security=False;Persist Security Info=False;User ID=sa;Password=northland2047.
+

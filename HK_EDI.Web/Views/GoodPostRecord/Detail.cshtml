@@ -1,0 +1,46 @@
+﻿@model IList<HK_EDI.Web.Models.GoodPostRecord.GoodPostRecordDetailModel>
+
+@using System.Globalization;
+@{
+
+    //page title
+    ViewBag.Title = "订单日志明细";
+}
+@using (Html.BeginForm())
+{
+    <div class="section-header">
+        <div class="title">
+            <img src="@Url.Content("~/Content/images/ico-sales.png")" alt="" />
+            订单日志明细
+        </div>
+    </div>
+    <table class="adminContent data-table" cellpadding="1" border="1">
+        <colgroup>
+            <col width="50" />
+            <col width="200" />
+            <col width="100" />
+        </colgroup>
+        <tr>
+            <th>Id</th>
+            <th>返回数据</th>
+            <th>创建时间</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+        
+            <tr>
+                <td>
+                    @item.Id
+                </td>
+
+                <td>
+                    @item.Content
+                </td>
+                <td>
+                    @item.CreateTime
+                </td>
+            </tr>
+
+        }
+    </table>
+}

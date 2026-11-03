@@ -1,0 +1,86 @@
+﻿@{
+    //page title
+    ViewBag.Title = "角色管理";
+}
+<div class="section-header">
+    <div class="title">
+        <img src="@Url.Content("~/Content/images/ico-customers.png")" alt="" />
+        角色管理
+    </div>
+    <div class="options">
+        <a href="@Url.Action("Create")" class="k-button">添加</a>
+    </div>
+</div>
+<table class="adminContent">
+    <tr>
+        <td>
+
+            <div id="customerroles-grid"></div>
+
+            <script>
+                $(document).ready(function () {
+                    $("#customerroles-grid").kendoGrid({
+                        dataSource: {
+                            type: "json",
+                            transport: {
+                                read: {
+                                    url: "@Html.Raw(Url.Action("List", "CustomerRole"))",
+                                    type: "POST",
+                                    dataType: "json"
+                                }
+                            },
+                            schema: {
+                                data: "Data",
+                                total: "Total",
+                                errors: "Errors"
+                            },
+                            error: function(e) {
+                                display_kendoui_grid_error(e);
+                                // Cancel the changes
+                                this.cancelChanges();
+                            },
+                            serverPaging: true,
+                            serverFiltering: true,
+                            serverSorting: true
+                        },
+                        pageable: {
+                            refresh: true,
+                            numeric: false,
+                            previousNext: false,
+                            info: false
+                        },
+                        editable: {
+                            confirmation: false,
+                            mode: "inline"
+                        },
+                        scrollable: false,
+                        columns: [{
+                            field: "Name",
+                            title: "名称",
+                            width: 300
+                        }, {
+                            field: "Active",
+                            title: "已启用",
+                            width: 100,
+                            headerAttributes: { style: "text-align:center" },
+                            attributes: { style: "text-align:center" },
+                            template: '<img src="@Url.Content("~/Content/images/")active-#=Active#.gif" />'
+                        },{
+                            field: "IsSystemRole",
+                            title: "是系统角色",
+                            width: 100,
+                            headerAttributes: { style: "text-align:center" },
+                            attributes: { style: "text-align:center" },
+                            template: '<img src="@Url.Content("~/Content/images/")active-#=IsSystemRole#.gif" />'
+                        },{
+                            field: "Id",
+                            title: "编辑",
+                            width: 100,
+                            template: '<a href="Edit/#=Id#">编辑</a>'
+                        }]
+                    });
+                });
+            </script>
+        </td>
+    </tr>
+</table>

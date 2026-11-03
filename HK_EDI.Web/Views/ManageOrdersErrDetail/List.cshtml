@@ -1,0 +1,509 @@
+﻿@model HK_EDI.Web.Models.ManageOrdersErrDetail.OrderTraceErrDetailListModel
+@using System.Globalization;
+@{
+
+    //page title
+    ViewBag.Title = "订单异常明细汇总";
+}
+@using (Html.BeginForm())
+{
+    <div class="section-header">
+        <div class="title">
+            <img src="@Url.Content("~/Content/images/ico-sales.png")" alt="" />
+            订单异常明细汇总
+        </div>
+    </div>
+    <table width="100%">
+        <tr>
+            <td class="adminTitle">
+                @Html.LabelFor(model => model.SearchOSInterfaceID):
+            </td>
+            <td class="adminData">
+                @Html.DropDownList("SearchOSInterfaceID", Model.WMSSystems.Where(x => x.Text.Contains("恒康-FayaAdibus")).OrderBy(x => x.Text).ToList())
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.LabelFor(model => model.SearchCompanyId):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.SearchCompanyId)
+            </td>
+        </tr>
+
+        <tr>
+            <td class="adminTitle">
+                @Html.LabelFor(model => model.SearchOrderType):
+            </td>
+            <td class="adminData">
+                @Html.DropDownList("SearchOrderType", Model.OrderTypes)
+            </td>
+        </tr>
+
+        <tr>
+            <td class="adminTitle">
+                @Html.LabelFor(model => model.SearchOpResultStatus):
+            </td>
+            <td class="adminData">
+                @Html.DropDownList("SearchOpResultStatus", Model.OrderStatus)
+            </td>
+        </tr>
+
+        <tr>
+            <td class="adminTitle">
+                @Html.LabelFor(model => model.SearchSignCode):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.SearchSignCode)
+            </td>
+        </tr>
+
+        <tr>
+            <td class="adminTitle">
+                @Html.LabelFor(model => model.SearchNoticeBillNo):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.SearchNoticeBillNo)
+            </td>
+        </tr>
+
+        <tr>
+            <td class="adminTitle">
+                @Html.LabelFor(model => model.ShopID):
+            </td>
+            <td class="adminData">
+                @Html.DropDownList("ShopID", Model.ShopLists.ToList())
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.LabelFor(model => model.BillDate):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.BillDate, "DateTimeNullable")
+            </td>
+        </tr>
+
+        <tr>
+            <td class="adminTitle">
+                @Html.LabelFor(model => model.CreateDateFrom):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.CreateDateFrom, "DateTimeNullable")
+                -
+                @Html.EditorFor(model => model.CreateDateTo, "DateTimeNullable")
+            </td>
+        </tr>
+
+        <tr>
+            <td class="adminTitle">
+                @Html.LabelFor(model => model.ReadDateFrom):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.ReadDateFrom, "DateTimeNullable")
+                -
+                @Html.EditorFor(model => model.ReadDateTo, "DateTimeNullable")
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <input type="button" id="search-customers" class="k-button" value="搜索" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="exportExl" type="button" class="k-button k-button-icontext hidden-on-narrow"><span class="k-icon k-i-excel"></span>Export to Excel</button>
+            </td>
+        </tr>
+    </table>
+    <table class="adminContent">
+
+        <tr>
+            <td>
+                <div id="customers-grid"></div>
+                <script src="/Scripts/kendo/2019.2.619/jquery.min.js"></script>
+                <script src="/Scripts/kendo/2019.2.619/angular.min.js"></script>
+                <script src="/Scripts/kendo/2019.2.619/jszip.js"></script>
+                <script src="/Scripts/kendo/2019.2.619/kendo.all.min.js"></script>
+                <script>
+                    $(document).ready(function () {
+                        $("#customers-grid").kendoGrid({
+                            excel: {
+                                fileName: "订单异常明细汇总.xlsx",
+                                filterable: true
+                            },
+                            dataSource: {
+                                type: "json",
+                                transport: {
+                                    read: {
+                                        url: "@Html.Raw(Url.Action("OrderTraceList", "ManageOrdersErrDetail"))",
+                                        type: "POST",
+                                        dataType: "json",
+                                        data: additionalData
+                                    }
+                                },
+                                schema: {
+                                    data: "Data",
+                                    total: "Total",
+                                    errors: "Errors"
+                                },
+                                error: function (e) {
+                                    display_kendoui_grid_error(e);
+                                    // Cancel the changes
+                                    this.cancelChanges();
+                                },
+                                pageSize: 15,
+                                serverPaging: true,
+                                serverFiltering: true,
+                                serverSorting: true
+                            },
+                            pageable: {
+                                refresh: true,
+                                pageSizes: [10, 15, 20, 50, 100]
+                            },
+                            scrollable: false,
+                            dataBound: onDataBound,
+                            columns: [
+                                {
+                                    field: "Id",
+                                    headerTemplate: "<input id='mastercheckbox' type='checkbox'/>",
+                                    headerAttributes: { style: "text-align:center" },
+                                    attributes: { style: "text-align:center" },
+                                    template: "<input type='checkbox' value='#=Id#' class='checkboxGroups' otherdate='#=OSInterfaceID#,#=SignCode#' />",
+                                    width: 50
+                                },
+                                {
+                                    field: "Id",
+                                    title: "ID",
+                                    width: 50
+                                },
+                                {
+                                    field: "CompanyId",
+                                    title: "公司ID",
+                                    width: 50
+                                },
+                                {
+                                    field: "SignCode",
+                                    title: "订单号",
+                                    width: 150
+                                },
+                                {
+                                    field: "NoticeBillNo",
+                                    title: "单据号",
+                                    width: 120
+                                },
+                                {
+                                    field: "CustomerCode",
+                                    title: "客户代码",
+                                    width: 120,
+                                },
+                                {
+                                    field: "BillTypeID",
+                                    title: "单据类型ID",
+                                    width: 80
+                                },
+                                {
+                                    field: "OrderTypeName",
+                                    title: "单据类型",
+                                    width: 80
+                                },
+                                {
+                                    field: "OpResultStatus",
+                                    title: "订单状态",
+                                    width: 70,
+                                },
+                                {
+                                    field: "CreateDate",
+                                    title: "创建时间",
+                                    width: 100,
+                                    type: "date",
+                                    format: "{0:G}"
+                                },
+                                {
+                                    field: "ReadDate",
+                                    title: "修改时间",
+                                    width: 100,
+                                    type: "date",
+                                    format: "{0:G}"
+                                },
+                                //{
+                                //    field: "ShopID",
+                                //    title: "店铺",
+                                //    width: 100,
+                                //},
+                                {
+                                    field: "BillDate",
+                                    title: "销售日期",
+                                    width: 100,
+                                    type: "date",
+                                    format: "{0:G}"
+                                },
+                                {
+                                    field: "OrderTraceDetail",
+                                    title: "日志明细",
+                                    width: 50
+                                }
+                                //    ,
+                                //{
+                                //    field: "RequestData",
+                                //    title: "请求数据",
+                                //    width: 200
+                                //}
+                                //,{
+                                //    field: "Id",
+                                //    title: "日志明细",
+                                //    width: 80,
+                                //    template: '<a href="Detail?PId=#=Id#" target="_bank">查看日志明细</a>'
+                                //},
+                                //{
+                                //    field: "Id",
+                                //    title: "手工补发",
+                                //    width: 50,
+                                //    template: '<a href="javascript:void(0)" onclick="repostOrder(\'#=NoticeBillNo#\',\'#=CompanyId#\',\'#=SignCode#\')" class="k-button run-now">手工补发</a>'
+                                //}
+                            ]
+                        });
+                    });
+
+                    $('#exportExl').click(function () {
+                        event.preventDefault();
+                        var grid = $("#customers-grid").data("kendoGrid");
+                        grid.saveAsExcel();
+                    });
+                </script>
+
+                <script type="text/javascript">
+
+                    var selectedIds = [];
+                    var selectedIdsOtherDate = [];
+                    $(document).ready(function () {
+
+
+                        //search button
+                        $('#search-customers').click(function () {
+                            var grid = $('#customers-grid').data('kendoGrid');
+                            grid.dataSource.page(1); //new search. Set page size to 1
+                            //grid.dataSource.read(); we already loaded the grid above using "page" function
+                            //clear selected checkboxes
+                            $('.checkboxGroups').attr('checked', false).change();
+                            selectedIds = [];
+                            selectedIdsOtherDate = [];
+                            return false;
+                        });
+
+                        $('#mastercheckbox').click(function () {
+                            $('.checkboxGroups').attr('checked', $(this).is(':checked')).change();
+                        });
+
+
+                        $('#customers-grid').on('change', 'input[type=checkbox][id!=mastercheckbox]', function (e) {
+                            var $check = $(this);
+                            if ($check.is(":checked") == true) {
+                                var checked = jQuery.inArray($check.val(), selectedIds);
+
+                                if (checked == -1) {
+                                    //add id to selectedIds.
+                                    selectedIds.push($check.val());
+                                    selectedIdsOtherDate.push($check.attr('otherdate'));
+                                }
+                            }
+                            else {
+                                var checked = jQuery.inArray($check.val(), selectedIds);
+                                if (checked > -1) {
+                                    //remove id from selectedIds.
+                                    selectedIds = $.grep(selectedIds, function (item, index) {
+                                        return item != $check.val();
+                                    });
+                                    selectedIdsOtherDate = $.grep(selectedIdsOtherDate, function (item, index) {
+                                        return item != $check.attr('otherdate');
+                                    });
+                                }
+                            }
+                            updateMasterCheckbox();
+                        });
+
+                        $('#cancel-customers').click(function (e) {
+                            var otherdate = selectedIdsOtherDate.join(";");
+                            if (!otherdate) {
+                                alert('请选择订单');
+                            }
+
+
+                            if (confirm("确认批量撤销吗?")) {
+                                var url = "/admin/ManageOrdersErrDetail/CancelOrderList?r=" + Math.random();
+                                $.ajax({
+                                    cache: false,
+                                    url: url,
+                                    data: { otherdate: otherdate },
+                                    type: 'post',
+                                    success: function (data) {
+                                        //console.log(data);
+                                        //alert(data);
+
+                                        var htmlstr = '<table class="dialog-window">';
+                                        for (var i = 0; i < data.length; i++) {
+                                            htmlstr += ' <tr>' + '<td>' + data[i].Code + '</td>' + '<td>' + data[i].Message + '</td>' + '</tr> ';
+                                        }
+
+                                        htmlstr += '</table  >';
+                                        htmlstr += ' <div class="dialog-button"><input type="button" id="window-confirm-button" class="confirmButton" value=" 确 认 "/></div>';
+                                        //console.log(htmlstr);
+                                        $("#copyproduct-window").empty();
+                                        $("#copyproduct-window").append(htmlstr);
+                                        var window = $("#copyproduct-window");
+                                        if (!window.data("kendoWindow")) {
+                                            window.kendoWindow({
+                                                modal: true,
+                                                width: "450px",
+                                                title: "结果提示",
+                                                actions: ["Custom", "Close"]
+                                            });
+                                        }
+
+                                        $('#window-confirm-button').die().live('click', function () {
+                                            $("#copyproduct-window").data("kendoWindow").close();
+                                        });
+                                        window.data('kendoWindow').center().open();
+                                    },
+                                    complete: function () { },
+                                    error: function (e) { alert("系统异常") }
+                                });
+                            }
+                        });
+
+                    });
+
+
+                    function updateMasterCheckbox() {
+                        var numChkBoxes = $('#customers-grid input[type=checkbox][id!=mastercheckbox]').length;
+                        var numChkBoxesChecked = $('#customers-grid input[type=checkbox][checked][id!=mastercheckbox]').length;
+                        $('#mastercheckbox').attr('checked', numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
+                    }
+
+                    function onDataBound(e) {
+
+                    }
+
+                    function additionalData() {
+
+                        return {
+                            SearchCompanyId: $('#@Html.FieldIdFor(model => model.SearchCompanyId)').val(),
+                            SearchBillTypeID: $('#@Html.FieldIdFor(model => model.SearchBillTypeID)').val(),
+                            SearchOpResultStatus: $('#@Html.FieldIdFor(model => model.SearchOpResultStatus)').val(),
+                            SearchOrderType: $('#@Html.FieldIdFor(model => model.SearchOrderType)').val(),
+                            SearchNoticeBillNo: $('#@Html.FieldIdFor(model => model.SearchNoticeBillNo)').val(),
+                            SearchOSInterfaceID: $('#@Html.FieldIdFor(model => model.SearchOSInterfaceID)').val(),
+                            SearchSignCode: $('#@Html.FieldIdFor(model => model.SearchSignCode)').val(),
+                            CreateDateFrom: $('#@Html.FieldIdFor(model => model.CreateDateFrom)').val(),
+                            CreateDateTo: $('#@Html.FieldIdFor(model => model.CreateDateTo)').val(),
+                            ReadDateFrom: $('#@Html.FieldIdFor(model => model.ReadDateFrom)').val(),
+                            ReadDateTo: $('#@Html.FieldIdFor(model => model.ReadDateTo)').val(),
+                            //CancelDateFrom:$("#@Html.FieldIdFor(model=>model.CancelDateFrom)").val(),
+                            CancelDateTo: $("#@Html.FieldIdFor(model=>model.CancelDateTo)").val(),
+                            ShopID: $("#@Html.FieldIdFor(model=>model.ShopID)").val(),
+                            BillDate: $("#@Html.FieldIdFor(model=>model.BillDate)").val(),
+                            OrderTraceDetail: $("#@Html.FieldIdFor(model=>model.OrderTraceDetail)").val(),
+                            RequestData: $("#@Html.FieldIdFor(model=>model.RequestData)").val()
+                        };
+                    }
+
+                    $("#SearchOSInterfaceID").change(function () {
+                        window.location.href = "List?OSInterfaceID=" + $("#SearchOSInterfaceID").val();
+                    })
+
+
+
+                    function checkOrderStatus(OSInterfaceID, signCode) {
+                        var url = "/admin/ManageOrdersErrDetail/GetOrderStatus?r=" + Math.random();
+                        $.ajax({
+                            cache: false,
+                            url: url,
+                            data: { OSInterfaceID: OSInterfaceID, signCode: signCode },
+                            type: 'post',
+                            success: function (data) {
+                                alert(data);
+                            },
+                            complete: function () { },
+                            error: function (e) { alert("系统异常") }
+                        });
+                    }
+
+                    function cancelOrder(OSInterfaceID, signCode) {
+                        if (confirm("确认撤销吗?")) {
+                            var url = "/admin/ManageOrdersErrDetail/CancelOrder?r=" + Math.random();
+                            $.ajax({
+                                cache: false,
+                                url: url,
+                                data: { OSInterfaceID: OSInterfaceID, signCode: signCode },
+                                type: 'post',
+                                success: function (data) {
+                                    alert(data);
+                                },
+                                complete: function () { },
+                                error: function (e) { alert("系统异常") }
+                            });
+                        }
+                    }
+
+
+
+
+                    function repost(OSInterfaceID, signCode) {
+                        if (confirm("确认回传吗?")) {
+                            var url = "/admin/ManageOrdersErrDetail/Repost?r=" + Math.random();
+                            $.ajax({
+                                cache: false,
+                                url: url,
+                                data: { OSInterfaceID: OSInterfaceID, signCode: signCode },
+                                type: 'post',
+                                success: function (data) {
+                                    alert(data);
+                                },
+                                complete: function () { },
+                                error: function (e) { alert("系统异常") }
+                            });
+                        }
+                    }
+
+                    function repostOrder(NoticeBillNo, CompanyId, SignCode)
+                    {
+                        if (confirm("确认要补传吗?")) {
+                            var url = "/admin/ManageOrdersErrDetail/RepostOrder?r=" + Math.random();
+                            $.ajax({
+                                cache: false,
+                                url: url,
+                                data: { OSInterfaceID: $("#SearchOSInterfaceID").val(), NoticeBillNo: NoticeBillNo, CompanyId: CompanyId, SignCode: SignCode },
+                                type: 'post',
+                                success: function (data) {
+                                    //alert(data);
+                                    $('#customers-grid').data('kendoGrid').dataSource.read();
+                                    $("#customers-grid").data("kendoGrid").refresh();
+                                },
+                                complete: function () { },
+                                error: function (e) { alert("系统异常") }
+                            });
+                        }
+                    }
+                </script>
+            </td>
+        </tr>
+    </table>
+
+    <div id="copyproduct-window" style="display: none;">
+
+    </div>
+
+    <style>
+        .dialog-window {
+            font-size: 12px;
+            text-align: left;
+            margin-bottom: 10px;
+        }
+
+        .dialog-button {
+            text-align: center;
+        }
+    </style>
+
+}

@@ -1,0 +1,137 @@
+﻿@model HK_EDI.Web.Models.Customers.CustomerModel
+
+@Html.ValidationSummary(false)
+@Html.HiddenFor(model => model.Id)
+
+<div id="customer-edit">
+    <ul>
+        <li @Html.RenderSelectedTabIndex(0, Html.GetSelectedTabIndex())>账号信息
+        </li>
+        <li @Html.RenderSelectedTabIndex(1, Html.GetSelectedTabIndex())>账号角色
+        </li>
+    </ul>
+    <div>
+        @TabInfo()
+    </div>
+    <div>
+        @TabCustomerRoles()
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#customer-edit").kendoTabStrip({
+            animation: {
+                open: {
+                    effects: "fadeIn"
+                }
+            },
+            select: tabstrip_on_tab_select
+        });
+    });
+</script>
+
+
+@*save selected tab index*@
+<input type="hidden" id="selected-tab-index" name="selected-tab-index" value="@Html.GetSelectedTabIndex()">
+
+@helper TabInfo()
+{ 
+
+    <table class="adminContent customer-info-tab">
+        @if (Model.Id == 0)
+        {
+            <tr>
+                <td class="adminTitle">
+                    @Html.LabelFor(model => model.Username):
+                </td>
+                <td class="adminData">
+                    @Html.EditorFor(model => model.Username)
+                    @Html.ValidationMessageFor(model => model.Username)
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td class="adminTitle">
+                    @Html.LabelFor(model => model.Username):
+                </td>
+                <td class="adminData">
+                    @Model.Username
+                    @Html.HiddenFor(model => model.Username)
+                </td>
+            </tr>
+        }
+
+        <tr>
+            <td class="adminTitle">
+                @Html.LabelFor(model => model.Email):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.Email)
+                @Html.ValidationMessageFor(model => model.Email)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.LabelFor(model => model.Password):
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.Password, new { autocomplete = "off", @class = "text-box single-line" })
+                @Html.ValidationMessageFor(model => model.Password)
+                @if (Model.Id > 0)
+                {
+                    <input type="submit" name="changepassword" class="k-button" value="修改密码" />
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <td class="adminTitle">
+                @Html.LabelFor(model => model.Active):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.Active)
+                @Html.ValidationMessageFor(model => model.Active)
+            </td>
+        </tr>
+        @if (Model.Id > 0)
+        {
+            <tr>
+                <td class="adminTitle">
+                    @Html.LabelFor(model => model.CreatedOn):
+                </td>
+                <td class="adminData">
+                    @Html.DisplayFor(model => model.CreatedOn)
+                </td>
+            </tr>
+        }
+        @if (Model.Id > 0)
+        {
+            <tr>
+                <td class="adminTitle">
+                    @Html.LabelFor(model => model.LastActivityDate):
+                </td>
+                <td class="adminData">
+                    @Html.DisplayFor(model => model.LastActivityDate)
+                </td>
+            </tr>
+        }
+    </table>
+}
+@helper TabCustomerRoles()
+{
+    if (Model.AvailableCustomerRoles != null && Model.AvailableCustomerRoles.Count > 0)
+    {
+        foreach (var customerRole in Model.AvailableCustomerRoles)
+        {
+    <div>
+        <input type="checkbox" name="SelectedCustomerRoleIds" value="@customerRole.Id" checked="@(Model.SelectedCustomerRoleIds != null && Model.SelectedCustomerRoleIds.Contains(customerRole.Id))" />@customerRole.Name
+    </div>
+        }
+    }
+    else
+    {
+    <div>没有角色</div>
+    }
+}

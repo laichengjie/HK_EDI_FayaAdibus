@@ -1,0 +1,66 @@
+﻿@using HK_EDI.Web.Menu;
+@using HK_EDI.Core.Infrastructure
+@{
+    //load sitemap
+    var siteMap = new HK_EDI.Web.Menu.XmlSiteMap();
+    siteMap.LoadFrom("~/MenuData/sitemap.config");
+ 
+}
+@helper RenderMenuItem(HK_EDI.Web.Menu.SiteMapNode item)
+{
+    string url = null;
+    if (!string.IsNullOrEmpty(item.ControllerName) && !string.IsNullOrEmpty(item.ActionName))
+    {
+        url = Url.Action(item.ActionName, item.ControllerName, item.RouteValues, null, null);
+    }
+    else if (!string.IsNullOrEmpty(item.Url))
+    {
+        url = item.Url.StartsWith("~/", StringComparison.Ordinal) ? Url.Content(item.Url) : item.Url;
+    }
+    <li>
+
+        @if (!String.IsNullOrEmpty(url))
+        {
+            <a href="@url">
+                @if (!String.IsNullOrEmpty(item.ImageUrl))
+                {
+                    <text>
+                    <img alt="" src="@Url.Content(item.ImageUrl)" />
+                    </text>
+                }
+                @item.Title
+            </a>
+        }
+        else
+        {
+            if (!String.IsNullOrEmpty(item.ImageUrl))
+            {
+            <text>
+            <img alt="" src="@Url.Content(item.ImageUrl)" />
+            </text>
+            }
+            @item.Title
+        }
+        @if (item.ChildNodes.Any(x => x.Visible))
+        {
+            <ul>
+                @foreach (var childItem in item.ChildNodes.Where(x => x.Visible))
+                {
+                    @RenderMenuItem(childItem)
+                }
+            </ul>
+        }
+    </li>
+}
+
+<ul id="admin-menu">
+    @foreach (var item in siteMap.RootNode.ChildNodes.Where(x => x.Visible))
+    {
+        @RenderMenuItem(item)
+    }
+</ul>
+<script>
+    $(document).ready(function () {
+        $("#admin-menu").kendoMenu();
+    });
+</script>

@@ -1,0 +1,36 @@
+﻿@model String
+
+@using Nop.Web.Framework.UI;
+
+@{
+    Html.AddCssFileParts("~/Content/kindeditor/themes/default/default.css");
+    Html.AddScriptParts("~/Content/kindeditor/kindeditor-all-min.js");
+}
+
+<script>
+    KindEditor.ready(function (K) {
+        window.editor = K.create('#@ViewData.TemplateInfo.GetFullHtmlFieldId(string.Empty)', {
+            width: '800px',
+            height: '400px',
+            cssPath: '/Content/kindeditor/plugins/code/prettify.css',
+            uploadJson: '/Content/kindeditor/asp.net/upload_json.ashx',
+            fileManagerJson: '/Content/kindeditor/asp.net/file_manager_json.ashx',
+            allowFileManager: true,
+            afterCreate: function () {
+                var self = this;
+                K.ctrl(document, 13, function () {
+                    self.sync();
+                    K('form[name=example]')[0].submit();
+                });
+                K.ctrl(self.edit.doc, 13, function () {
+                    self.sync();
+                    K('form[name=example]')[0].submit();
+                });
+            }
+        });
+    });
+</script>
+
+@Html.TextArea(string.Empty, /* Name suffix */
+    ViewData.TemplateInfo.FormattedModelValue /* Initial value */
+)

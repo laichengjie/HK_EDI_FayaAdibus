@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "查询网络单据的符合条件";
+}
+<style>
+    .result-container {
+    width:100%;
+    overflow-x:auto;
+    }
+
+    .result-content{ border-collapse:collapse; width:4000px}
+    .result-content td{ border:1px solid #000;text-align:center;}
+</style>
+<div class="section-header">
+    <div class="title">
+        <img src="@Url.Content("~/Content/images/ico-sales.png")" alt="" />
+        查询网络单据的符合条件
+    </div>
+</div>
+<table width="100%">
+    <tr>
+        <td class="adminTitle">
+            @Html.Label("BillNo", "BillNo"):
+        </td>
+        <td class="adminData">
+            @Html.TextBox("BillNo")
+        </td>
+    </tr>
+    <tr>
+        <td class="adminTitle">
+            @Html.Label("OSInterfaceID", "OSInterfaceID"):
+        </td>
+        <td class="adminData">
+            @Html.TextBox("OSInterfaceID")
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <input type="button" id="search" class="k-button" value="搜索" />
+        </td>
+    </tr>
+</table>
+
+<div class="result-container">
+    <table class="result-content">
+        <thead>
+            <tr id="thr"></tr>
+        </thead>
+        <tbody>
+            <tr id="tdr"></tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $().ready(function () {
+        $("#search").click(function () {
+            var billNo = $('#BillNo').val();
+            var ossStockID = $('#OSInterfaceID').val();
+            $.post('@Url.Action("Quest","CheckOrderValidity")', { billNo: billNo, ossStockID: ossStockID }, function (result) {
+                console.log("state:"+result.state);
+                if (!result.state) {
+                    alert(result.msg);
+                    return;
+                }
+                $("#thr").empty();
+                $("#tdr").empty();
+                var data = result.data;
+                for (var i = 0; i < data.length; i++) {
+                    console.log(data[i]);
+                    $("#thr").append($("<td>" + data[i].Name + "</td>"));
+                    if (data[i].Result) {
+                        $("#tdr").append($("<td style='color:green;'>" + data[i].Result + "</td>"));
+                    } else {
+                        $("#tdr").append($("<td style='color:red;'>" + data[i].Result + "</td>"));
+                    }
+                }
+            });
+        });
+    });
+</script>

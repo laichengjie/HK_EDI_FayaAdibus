@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Language Name="Service_DataInterface" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <IDs>
+    <ID FieldName="good">
+      <CNFieldTitle>好得</CNFieldTitle>
+      <TWFieldTitle>好得</TWFieldTitle>
+      <ENFieldTitle></ENFieldTitle>
+      <JPFieldTitle>好得</JPFieldTitle>
+      <KRFieldTitle>tốt</KRFieldTitle>
+      <ModifyDTM>2015-08-17T14:01:03.2055995+08:00</ModifyDTM>
+    </ID>
+  </IDs>
+</Language>

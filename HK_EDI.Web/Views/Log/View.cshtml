@@ -1,0 +1,112 @@
+﻿@using Nop.Admin.Models.Logging;
+@model LogModel
+@{
+    //page title
+    ViewBag.Title = "详情";
+}
+@using (Html.BeginForm())
+{
+    <div class="section-header">
+        <div class="title">
+        <img src="/Content/images/ico-system.png" alt="" />
+            详情 <a href="/Admin/Log/List">(返回系统日志列表)</a>
+
+        </div>
+        <div class="options">
+            <span id="log-delete" class="k-button">删除</span>
+        </div>
+    </div>
+    
+    @Html.ValidationSummary(true)
+    <table class="adminContent">
+        <tr>
+            <td class="adminTitle">
+               <label for="LogLevel" title="日志级别">日志级别</label>:
+
+            </td>
+            <td class="adminData">
+                @Html.DisplayFor(model => model.LogLevel)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+               <label for="ShortMessage" title="简短说明">简短说明</label>:
+
+            </td>
+            <td class="adminData">
+                @Html.DisplayFor(model => model.ShortMessage)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+            <label for="FullMessage" title="完整信息">完整信息</label>:
+
+
+            </td>
+            <td class="adminData">
+                @Html.DisplayFor(model => model.FullMessage)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+             <label for="IpAddress" title="IP地址">IP地址</label>:
+
+            </td>
+            <td class="adminData">
+                @Html.DisplayFor(model => model.IpAddress)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                <label for="CustomerId" title="客户">客户</label>:
+
+            </td>
+            <td class="adminData">
+                @if (Model.CustomerId.HasValue)
+                {
+                    @Html.ActionLink( Model.CustomerEmail, "Edit", "Customer", new { id = Model.CustomerId }, new { })
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+              <label for="PageUrl" title="页面链接">页面链接</label>:
+
+            </td>
+            <td class="adminData">
+                @Html.DisplayFor(model => model.PageUrl)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+             <label for="ReferrerUrl" title="引用链接">引用链接</label>:
+
+            </td>
+            <td class="adminData">
+                @Html.DisplayFor(model => model.ReferrerUrl)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+            <label for="CreatedOn" title="创建日期">创建日期</label>:
+
+            </td>
+            <td class="adminData">
+                @Html.DisplayFor(model => model.CreatedOn)
+            </td>
+        </tr>
+    </table>
+}
+<div id='logmodel-delete-confirmation' style='display:none;'>
+<form action="/Admin/Log/Delete/38978" method="post">    <div>
+        <p>
+            确认删除？
+        </p>
+        <div class="form-actions">
+            <span id="" class="k-button" onclick="$('#logmodel-delete-confirmation').data('kendoWindow').close();">取消</span>
+            <input type="submit" class="k-button" value="删除" />
+        </div>
+    </div>
+</form>
+</div>
+

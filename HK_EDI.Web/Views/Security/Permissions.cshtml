@@ -1,0 +1,86 @@
+﻿@model HK_EDI.Web.Models.Security.PermissionMappingModel
+@{               
+    //page title
+    ViewBag.Title = "访问控制";
+}
+@using (Html.BeginForm())
+{
+    <div class="section-header">
+        <div class="title">
+            <img src="@Url.Content("~/Content/images/ico-configuration.png")" alt="" />
+            访问控制
+        </div>
+        <div class="options">
+            <input type="submit" name="save" class="k-button" value="保存" />
+            <input type="submit" name="save-recoverDefault" class="k-button" value="恢复默认设置" />
+        </div>
+    </div>
+    
+    <table class="adminContent">
+        <tr>
+            <td>
+                @if (Model.AvailablePermissions.Count == 0)
+                {
+                    <text>No permissions defined</text>
+                }
+                else if (Model.AvailableCustomerRoles.Count == 0)
+                {
+                    <text>No customer roles available</text>
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        $(document).ready(function () {            
+                            @foreach (var cr in Model.AvailableCustomerRoles)
+                            {
+                                <text>
+                                $('#selectall-@(cr.Id)').click(function () {
+                                    $('.allow_@(cr.Id)').attr('checked', $(this).is(':checked')).change();
+                                    });
+
+                                </text>
+                            }
+                        });
+                    </script>
+                    <table class="tablestyle" cellspacing="0" rules="all" border="1" style="width: 100%;
+                        border-collapse: collapse;">
+                        <tbody>
+                            <tr class="headerstyle">
+                                <th scope="col">
+                                    <strong>访问权限控制</strong>
+                                </th>
+                                @foreach (var cr in Model.AvailableCustomerRoles)
+                                {
+                                    <th scope="col">
+                                        <strong>@cr.Name</strong>
+                                        <input type="checkbox" id="selectall-@(cr.Id)" />
+                                    </th>
+                                }
+                            </tr>
+                            @{
+                                bool altRow = true;
+                            }
+                            @foreach (var pr in Model.AvailablePermissions)
+                            {
+                                altRow = !altRow;
+                                <tr class="@(altRow ? "altrowstyle" : "rowstyle")">
+                                    <td>
+                                        <span>@pr.Name</span>
+                                    </td>
+                                    @foreach (var cr in Model.AvailableCustomerRoles)
+                                    {
+                                        var allowed = Model.Allowed.ContainsKey(pr.SystemName) && Model.Allowed[pr.SystemName][cr.Id];
+                                        <td>
+                                            <input class="allow_@(cr.Id)" class="allow_@(cr.Id)" type="checkbox" value="@(pr.SystemName)" name="allow_@(cr.Id)" @(allowed ? " checked=checked" : null) />
+                                        </td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            </td>
+        </tr>
+    </table>
+
+}

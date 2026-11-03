@@ -1,0 +1,90 @@
+﻿@model IList<HK_EDI.Web.Models.OrderTrace.OrderTraceDetailModel>
+
+@using System.Globalization;
+@{
+
+    //page title
+    ViewBag.Title = "订单日志明细";
+}
+@using (Html.BeginForm())
+{
+    <div class="section-header">
+        <div class="title">
+            <img src="@Url.Content("~/Content/images/ico-sales.png")" alt="" />
+            订单日志明细
+        </div>
+      <div>
+@if( ViewData["visible"]=="1")
+{
+      <input type ="button" id="forceProcess" value="强制发货" />
+}
+      </div>
+    </div>
+    <table class="adminContent data-table" cellpadding="1" border="1">
+        <colgroup>
+            <col width="50" />
+            <col width="100" />
+            <col width="" />
+            <col width="200" />
+            <col width="200" />
+            <col width="100" />
+        </colgroup>
+        <tr>
+            <th>Id</th>
+            <th>请求唯一标识</th>
+            <th>请求数据</th>
+            <th>返回数据</th>
+            <th>日志描述</th>
+            <th>创建时间</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+        
+            <tr>
+                <td>
+                    @item.Id
+                </td>
+                <td>
+                    @item.SignCode
+                </td>
+                <td>
+                    @item.ContentNote
+                </td>
+                <td>
+                    @item.ContentNoteRequest
+                </td>
+                <td>
+                    @Html.Raw(item.Description)
+                </td>
+                <td>
+                    @item.CreateTime
+                </td>
+            </tr>
+
+        }
+    </table>
+}
+<script type="text/javascript">
+    $(function () {
+        $('#forceProcess').click(function () {
+            if (confirm("确认强制发货吗?")) {
+                var url = "/admin/OrderTrace/ForceOrder?r=" + Math.random();
+                $.ajax({
+                    cache: false,
+                    url: url,
+                    data: { OSInterfaceID: '@ViewData["OSInterfaceID"]', signCode: '@ViewData["SignCode"]' },
+                    type: 'post',
+                    success: function (data) {
+               
+                        if (data != "结果:") {
+                            alert(data);
+                        }
+                            location.reload();
+                    },
+                    complete: function () { },
+                    error: function (e) { alert("系统异常") }
+                });
+            }
+        });
+    });
+</script>

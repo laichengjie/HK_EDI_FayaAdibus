@@ -1,0 +1,43 @@
+@using System.Globalization
+@model DateTime?
+<input id="@ViewData.TemplateInfo.GetFullHtmlFieldId(string.Empty)" name="@ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty)" value="@(Model > DateTime.MinValue || Model.HasValue ? Model.Value.ToString(CultureInfo.CurrentCulture.DateTimeFormat) : null)" />
+<script>
+    var timePicker_@(ViewData["StartDateField"])=$('#@(ViewData["StartDateField"])').kendoDateTimePicker({
+        change:timePicker_@(ViewData["StartDateField"])_Change,
+    }).data("kendoDateTimePicker");
+
+    var timePicker_@(ViewData.TemplateInfo.GetFullHtmlFieldId(string.Empty)) = $("#@(ViewData.TemplateInfo.GetFullHtmlFieldId(string.Empty))").kendoDateTimePicker({
+        change: timePicker_@(ViewData.TemplateInfo.GetFullHtmlFieldId(string.Empty))_Change,
+    }).data("kendoDateTimePicker");
+
+    $(function(){
+        timePicker_@(ViewData["StartDateField"]).max(timePicker_@(ViewData.TemplateInfo.GetFullHtmlFieldId(string.Empty)).value());
+        timePicker_@(ViewData.TemplateInfo.GetFullHtmlFieldId(string.Empty)).min(timePicker_@(ViewData["StartDateField"]).value());
+    })
+
+    function timePicker_@(ViewData["StartDateField"])_Change(){
+        var timePickerStartDateS = timePicker_@(ViewData["StartDateField"]).value(),
+        timePickerEndDateS = timePicker_@(ViewData.TemplateInfo.GetFullHtmlFieldId(string.Empty)).value();
+
+        if (timePickerStartDateS) {
+            timePickerStartDateS = new Date(timePickerStartDateS);
+            timePickerStartDateS.setDate(timePickerStartDateS.getDate());
+            timePicker_@(ViewData.TemplateInfo.GetFullHtmlFieldId(string.Empty)).min(timePickerStartDateS);
+        } else if (timePickerEndDateS) {
+            timePicker_@(ViewData["StartDateField"]).max(new Date(timePickerEndDateS));
+        }
+    }
+
+    function timePicker_@(ViewData.TemplateInfo.GetFullHtmlFieldId(string.Empty))_Change() {
+        var timePickerEndDate = timePicker_@(ViewData.TemplateInfo.GetFullHtmlFieldId(string.Empty)).value(),
+        timePickerStartDate = timePicker_@(ViewData["StartDateField"]).value();
+
+        if (timePickerEndDate) {
+            timePickerEndDate = new Date(timePickerEndDate);
+            timePickerEndDate.setDate(timePickerEndDate.getDate());
+            timePicker_@(ViewData["StartDateField"]).max(timePickerEndDate);
+        } else if (timePickerStartDate) {
+            timePicker_@(ViewData.TemplateInfo.GetFullHtmlFieldId(string.Empty)).min(new Date(timePickerStartDate));
+        }
+    }
+</script>

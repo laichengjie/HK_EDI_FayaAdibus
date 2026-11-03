@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "零售汇总补传功能";
+}
+@using System.Globalization;
+@model HK_EDI.Web.Models.ShopModel.ShopDataModel
+
+@using (Html.BeginForm())
+{
+    <table>
+        <tr>
+            <td class="adminTitle">
+                @Html.LabelFor(model => model.CompanyId):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.CompanyId)
+
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+               @Html.LabelFor(model => model.ShopID):
+            </td>
+            <td class="adminData">
+                @Html.DropDownList("ShopID", Model.ShopList.ToList())
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.LabelFor(model => model.DateTime):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.DateTime)
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="button" onclick="repostOrder()" id="search-customers" class="k-button" value="补传" />
+            </td>
+        </tr>
+    </table>
+
+    <script type="text/javascript">
+
+        function repostOrder() {
+            var comid = $('#@Html.FieldIdFor(model => model.CompanyId)').val();
+            var shopId = $('#@Html.FieldIdFor(model => model.ShopID)').val();
+            var date = $('#@Html.FieldIdFor(model => model.DateTime)').val();
+            if (confirm("确认要补传吗?")) {
+                var url = "/admin/OrderTrace/SummeryRepostOrder?r=" + Math.random();
+                $.ajax({
+                    cache: false,
+                    url: url,
+                    data: { CompanyId: comid, ShopID: shopId, DateTime: date},
+                    type: 'post',
+                    success: function (data) {
+                        alert(data);
+                        //$('#customers-grid').data('kendoGrid').dataSource.read();
+                        //$("#customers-grid").data("kendoGrid").refresh();
+                    },
+                    complete: function () { },
+                    error: function (e) { alert("系统异常") }
+                });
+            }
+        }
+         function SearchData() {
+                return {
+                    CompanyId: $('#@Html.FieldIdFor(model => model.CompanyId)').val(),
+                    ShopID: $('#@Html.FieldIdFor(model => model.ShopID)').val(),
+                    DateTime: $('#@Html.FieldIdFor(model => model.DateTime)').val()
+                };
+            }
+    </script>
+}
+

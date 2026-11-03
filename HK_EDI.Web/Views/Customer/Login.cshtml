@@ -1,0 +1,244 @@
+﻿@model HK_EDI.Web.Models.Customer.LoginModel
+
+@{
+    Layout = null;
+
+    //title
+    ViewBag.Title = "登录";
+}
+<style>
+    .page-title {
+        text-align:center;
+        color:#fff;
+        text-shadow:rgba(0,0,0,0.2) 1px 1px 0px;
+    }
+    .page-title h1.big_t {
+        font-size:58px;
+        font-family:'Gill Sans MT';
+        font-weight:bold;
+    }
+    .page-title h1 small {
+        font-size:18px;
+        font-weight:normal;
+    }
+    .page-title h1 {
+        font-weight:normal;
+
+    }
+    .login_image {
+        width:90px;
+        height:90px;
+        border-radius: 50px;
+        margin:0 auto;
+        overflow:hidden;
+
+        -moz-box-shadow:0px 0px 5px #333 inset;              
+        -webkit-box-shadow:0px 0px 5px #333 inset;           
+        box-shadow:0px 0px 5px #333 inset;
+    }
+    .login_image span {
+        display:block;
+        width:80px;
+        height:80px;
+        border-radius: 50px;
+        margin:5px auto;
+        -webkit-box-shadow: 0px 0px 5px #333;
+        box-shadow: 0px 0px 5px #333;
+        background:url(../content/images/lockico.png) no-repeat center;
+        background-size:50%;
+    }
+    /*.content-wrapper ul {
+        margin-top: 20px;margin-left:0px;
+    }*/
+
+    .content-wrapper ul li {
+        text-align: center;
+        position: relative;
+        margin-bottom: 18px;
+    }
+
+    .content-wrapper {
+        margin: 0 auto;
+        max-width: 960px;
+    }
+
+    ul {
+    }
+
+    ul li {
+        list-style: none;
+    }
+
+    body {
+        color: #333;
+        font-size: .85em;
+        font-family: "微软雅黑";
+        margin: 0;
+        padding: 0;
+        background:url(../content/images/bg.jpg) no-repeat center 0 #f1f1f1;
+        background-size:100%;
+    }
+
+    input, textarea {
+        border:none;
+        background: #fff;
+        font-size: 1.2em;
+        margin: 5px auto;
+        padding: 5px 20px;
+        width: 380px;
+        min-height: 38px;
+        border-radius: 20px;
+        font-family: "微软雅黑";
+        -webkit-transition: all 0.3s; 
+        -moz-transition: all 0.3s; 
+        transition: all 0.3s;
+    }
+    input:focus, textarea:focus,input:hover, textarea:hover {        
+        box-shadow:0 0 3px rgba(52,166,231,0.9);
+        border:none;
+    }
+
+    .lineheight38 {
+        line-height: 38px;
+    }
+
+    .bodycenter {
+        margin: 10px auto;
+        width: 500px;
+    }
+
+    .marginright10 {
+        margin-right: 10px;
+    }
+
+    .float-left {
+        float: left;
+    }
+
+    .clearfloat {
+        clear: both;
+    }
+
+    label {
+        display: block;
+        font-size: 1.2em;
+        color:#fff;
+        text-shadow:rgba(0,0,0,0.3) 1px 1px 0px;
+    }
+
+    input[type="submit"], input[type="button"], button {
+        background-color: #34a6e7;
+        cursor: pointer;
+        font-size: 1.2em;
+        padding: 7px;
+        width: auto;
+        text-shadow:rgba(0,0,0,0.3) 1px 1px 0px;
+        -webkit-transition: all 0.3s; 
+        -moz-transition: all 0.3s; 
+        transition: all 0.3s;
+    }
+    input[type="submit"]:hover, input[type="button"]:hover, button:hover,
+    input[type="submit"]:focus, input[type="button"]:focus, button:focus,
+    input[type="submit"]:active, input[type="button"]:active, button:active,
+    input[type="submit"]:link, input[type="button"]:link, button:link {
+        background:#34e7b7;
+    }
+
+    input[type="checkbox"] {
+        background: none repeat scroll 0 0 transparent;
+        border: inherit;
+        width: auto;
+    }
+
+    input[type="submit"] {
+        border: medium none;
+        color: #fff;
+        min-height: 38px;
+        min-width: 380px;
+    }
+    .login-page {
+        position:relative;
+        height:100%;
+    }
+    .container {
+        position:absolute;
+        width:420px;
+        height:533px;
+        margin:-266px 0 0 -210px;
+        left:50%;
+        top:50%;    
+    }
+</style>
+<div class="page login-page content-wrapper">
+    <div class="container">
+    <div class="page-title">
+        <h1 class="big_t">HK-Faya阿迪<br /><small>恒康法雅对接管理系统</small></h1>
+        <div class="login_image"><span>&nbsp;</span></div>
+        <h1>用户登录</h1>
+    </div>
+    <div class="page-body">
+        <div class="customer-blocks">
+            <div class="returning-wrapper">
+                <div class="form-fields ">
+                    @using (Html.BeginForm())
+                    {
+@*<div class="message-error">
+                            @Html.ValidationSummary(true, "登录失败，请重试")
+                        </div>
+                        <div class="inputs">
+                            @Html.LabelFor(m => m.Username, new { }, ":")
+                            @Html.TextBoxFor(m => m.Username, new { @class = "username", autofocus = "autofocus" })
+                            @Html.ValidationMessageFor(m => m.Username)
+                        </div>
+                        <div class="inputs">
+                            @Html.LabelFor(m => m.Password, new { }, ":")
+                            @Html.PasswordFor(m => m.Password, new { @class = "password" })
+                            @Html.ValidationMessageFor(m => m.Password)
+                        </div>
+                        <div class="inputs reversed">
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.LabelFor(m => m.RememberMe)
+                        </div>
+                        <div class="buttons">
+                            <input class="button-1 login-button" type="submit" value="登  录" />
+                        </div>*@
+                        
+                        <ul data-role="listview" data-inset="true" style="margin:0px;padding:0px;">
+                            <li data-role="fieldcontain">
+                                @*@Html.LabelFor(m => m.UserName)*@
+                                @Html.TextBoxFor(m => m.Username, new { placeholder = "请输入用户名" })
+                            </li>
+
+                            <li data-role="fieldcontain">
+                                @*@Html.LabelFor(m => m.Password)*@
+                                @Html.PasswordFor(m => m.Password, new { placeholder = "请输入密码" })
+                            </li>
+
+                            <li data-role="fieldcontain" style="display:none;">
+                                <div class="bodycenter lineheight38">
+                                    <div class="float-left marginright10">@Html.CheckBoxFor(m => m.RememberMe)</div>
+                                    <div class="float-left">@Html.LabelFor(m => m.RememberMe)</div>
+                                    <div class="clearfloat"></div>
+                                </div>
+                            </li>
+
+                            @if (ViewContext.RouteData.DataTokens.ContainsKey("DisalbeLogin"))
+                            {
+                                <li data-role="fieldcontain">
+                                    <input type="submit" value="网站授权至@(ViewContext.RouteData.DataTokens["DisalbeLogin"])，请重新激活！" disabled="disabled"/>
+                                </li>
+                            }
+                            else
+                            {
+                                <li data-role="fieldcontain">
+                                    <input type="submit" value="登  录" />
+                                </li>
+                            }
+                        </ul>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>

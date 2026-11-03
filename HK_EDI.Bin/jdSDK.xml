@@ -1,0 +1,1408 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>jdSDK</name>
+    </assembly>
+    <members>
+        <member name="P:jdSDK.AbAdibusI.venderId">
+            <summary>
+            商家ＩＤ
+            </summary>
+        </member>
+        <member name="P:jdSDK.AbAdibusI.venderKey">
+            <summary>
+            商家Key
+            </summary>
+        </member>
+        <member name="P:jdSDK.AbAdibusI.serverUrl">
+            <summary>
+            API地址
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.Attribute.aid">
+            <summary>
+            属性名
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.Attribute.name">
+            <summary>
+            属性值名字
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.Attribute.is_key_prop">
+            <summary>
+            关键属性
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.Attribute.is_sale_prop">
+             <summary>
+            销售属性
+             </summary>
+        </member>
+        <member name="P:jdSDK.Domain.Attribute.status">
+             <summary>
+            状态 
+             </summary>
+        </member>
+        <member name="P:jdSDK.Domain.Attribute.index_id">
+            <summary>
+            排序(越小越靠前)
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.Attribute.att_type">
+            <summary>
+            属性类型
+            1、关键属性2、不变属性3、可变属性4、销售属性
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.Attribute.input_type">
+            <summary>
+            输入类型( 1、单选， 2、多选3、输入(最大50个字符) )
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.Attribute.is_req">
+            <summary>
+            是否必填 
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.Attribute.is_fet">
+            <summary>
+            是否筛选
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.Attribute.is_nav">
+            <summary>
+            是否导航
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.AttValue.aid">
+            <summary>
+            属性id
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.AttValue.vid">
+            <summary>
+            属性值id
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.AttValue.name">
+            <summary>
+            属性值名字
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.AttValue.status">
+            <summary>
+            状态（deleted，unvalid，valid）
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.AttValue.index_id">
+            <summary>
+            排序(越小越靠前)
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.Category.id">
+            <summary>
+            类目id
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.Category.index_id">
+            <summary>
+            排序（越小越靠前）
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.Category.fid">
+            <summary>
+            父类目id
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.Category.name">
+            <summary>
+            类目名称
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.Category.Is_parent">
+            <summary>
+            该类目是否为父类目(即：该类目是否还有子类目)
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.Category.status">
+            <summary>
+            类目状态（deleted，unvalid, valid）
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.Category.lev">
+            <summary>
+            等级(类目分为1、2、3级)
+            </summary>
+        </member>
+        <member name="T:jdSDK.Domain.CouponDetail">
+            <summary>
+            优惠金额
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.CouponDetail.coupon_price">
+            <summary>
+            	优惠金额
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.CouponDetail.coupon_type">
+            <summary>
+            	优惠类型
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.CouponDetail.order_id">
+            <summary>
+            	订单编号
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.CouponDetail.sku_id">
+            <summary>
+            	京东sku编号
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.ItemInfo.sku_id">
+            <summary>
+            京东内部SKU的ID
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.ItemInfo.outer_sku_id">
+            <summary>
+            SKU外部ID
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.ItemInfo.sku_name">
+            <summary>
+            商品的名称+SKU规格（比如 XXX商品 红色 XL）
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.ItemInfo.jd_price">
+            <summary>
+            	SKU的京东价
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.ItemInfo.gift_point">
+            <summary>
+            赠送积分
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.ItemInfo.ware_id">
+            <summary>
+            京东内部商品ID
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.ItemInfo.item_total">
+            <summary>
+            	数量
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.LogisticsCompany.logistics_id">
+            <summary>
+            	物流公司ID
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.LogisticsCompany.logistics_name">
+            <summary>
+            	物流公司名称
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.LogisticsCompany.logistics_remark">
+            <summary>
+            备注说明
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.LogisticsCompany.sequence">
+            <summary>
+            序列
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.OrderItem.ware_id">
+            <summary>
+            商品编号
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.OrderItem.ware_name">
+            <summary>
+            商品名称
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.OrderItem.num">
+            <summary>
+            数量
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.OrderItem.jd_price">
+            <summary>
+            价格
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.OrderItem.price">
+            <summary>
+            小计
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.OrderSearch.order_id">
+            <summary>
+            订单号（必须返回的字段）
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.OrderSearch.vender_id">
+            <summary>
+            商家编号
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.OrderSearch.pay_type">
+            <summary>
+            支付方式
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.OrderSearch.order_total_price">
+            <summary>
+            	订单总金额,没有减优惠金额的。
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.OrderSearch.order_seller_price">
+            <summary>
+            订单总金额，有减优惠金额的。
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.OrderSearch.order_payment">
+            <summary>
+            用户应付金额
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.OrderSearch.freight_price">
+            <summary>
+            商品的运费
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.OrderSearch.seller_discount">
+            <summary>
+            商家优惠金额
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.OrderSearch.order_state">
+            <summary>
+            	订单状态（英文）
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.OrderSearch.order_state_remark">
+            <summary>
+            	订单状态说明（中文）
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.OrderSearch.delivery_type">
+            <summary>
+            	送货（日期）类型
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.OrderSearch.invoice_info">
+            <summary>
+            发票信息
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.OrderSearch.order_remark">
+            <summary>
+            买家下单时订单备注
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.OrderSearch.order_start_time">
+            <summary>
+            	下单时间
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.OrderSearch.order_end_time">
+            <summary>
+            结单时间
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.OrderSearch.consignee_info">
+            <summary>
+            收货人基本信息
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.OrderSearch.item_info_list">
+            <summary>
+            订单商品列表
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.OrderSearch.couponDetailList">
+            <summary>
+            	订单商家优惠列表
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.OrderSearch.return_order">
+            <summary>
+            换货订单标识 0:不是换货订单,1:换货订单(默认不返回) 
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.OrderSearch.vender_remark">
+            <summary>
+            商家订单备注（不大于500字符）
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.OrderSearch.after">
+            <summary>
+            该属性并非接口返回．表示该订单退款信息．
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.UserInfo.fullname">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.UserInfo.full_address">
+            <summary>
+            地址
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.UserInfo.telephone">
+            <summary>
+            	固定电话
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.UserInfo.mobile">
+            <summary>
+            	手机
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.UserInfo.province">
+            <summary>
+            		省
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.UserInfo.city">
+            <summary>
+            	市
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.UserInfo.county">
+            <summary>
+            县
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.wardIdInfo.vender_id">
+            <summary>
+            	商家ID
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.wardIdInfo.wareTotal">
+            <summary>
+            商品数量
+            </summary>
+        </member>
+        <member name="P:jdSDK.Domain.wardIdInfo.ware_id_list">
+            <summary>
+            商品ID列表
+            </summary>
+        </member>
+        <member name="T:jdSDK.JDAPI2.OAuthManage">
+            <summary>
+            京东API2.0版本授权
+            </summary>
+        </member>
+        <member name="F:jdSDK.JDAPI2.OAuthManage.AuthorizeUrl">
+            <summary>
+            引导用户跳转到授权页
+            </summary>
+        </member>
+        <member name="M:jdSDK.JDAPI2.OAuthManage.GetCurrentAuthorizeUrl(System.String,System.String,System.String,System.String)">
+            <summary>
+            获取引导用户跳转到授权页
+            </summary>
+            <param name="ClientId">appkey</param>
+            <param name="RedirectUri">callback</param>
+            <param name="state">自定义参数</param>
+            <param name="scope">授权模式，一般为read</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDAPI2.OAuthManage.DoPost(System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            发起一个post请求
+            </summary>
+            <param name="url"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDAPI2.OAuthManage.PostToken(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            获取访问标识sessionKey
+            </summary>
+            <param name="url">API地址</param>
+            <param name="code"></param>
+            <param name="redirect_uri"></param>
+            <param name="client_id"></param>
+            <param name="client_secret"></param>
+            <param name="scope"></param>
+            <returns></returns>
+        </member>
+        <member name="F:jdSDK.AbstractRequest.apiParams">
+            @var array 业务参数集合
+        </member>
+        <member name="M:jdSDK.AbstractRequest.getAppJsonParams">
+            @abstract
+            @return void 将业务参数转换成json字符串
+        </member>
+        <member name="M:jdSDK.AbstractRequest.getApiMethod">
+            @abstract
+            @return void 定义 访问接口的方法名称
+        </member>
+        <member name="P:jdSDK.AbstractRequest.SessionKey">
+            <summary>
+            访问标识
+            </summary>
+        </member>
+        <member name="M:jdSDK.JDRequest`1.addParamInStringField``1(System.String,``0)">
+            <summary>
+            添加参数，用StringField封装该该参数名及其值
+            </summary>
+            <param name="strParamName">strParamName，参数名</param>
+            <param name="strParamValue">strParamValue，参数值</param>
+        </member>
+        <member name="M:jdSDK.JDRequest`1.getAppJsonParams">
+            首先需要对业务参数进行安装首字母排序，然后将业务参数转换json字符串
+            @return string
+        </member>
+        <member name="M:jdSDK.JDRequest`1.GetFileParams">
+            <summary>
+            返回文件类型的参数。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.AfterSearchRequest.query_fields">
+             <summary>
+             	
+            查询字段键值对，详见“查询字段” 
+             </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.AfterSearchRequest.select_fields">
+             <summary>
+             	 
+            返回字段选择,每个字段以逗号分隔可选字段
+             </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.AfterSearchRequest.page">
+            <summary>
+            	分页号：1-100 
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.AfterSearchRequest.page_size">
+            <summary>
+            每页数量：1-10 
+            </summary>
+        </member>
+        <member name="T:jdSDK.JDAPI.Request.LogisticsGetRequest">
+            <summary>
+            商家获取物流公司 
+            </summary>
+        </member>
+        <member name="M:jdSDK.JDAPI.Request.LogisticsGetRequest.getApiMethod">
+            @return void 定义 访问接口的方法名称
+        </member>
+        <member name="M:jdSDK.JDAPI.FileField.GetContent">
+            <summary>
+            返回文件内容。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDAPI.FileField.GetMimeType">
+            <summary>
+            返回媒体文件类型。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDAPI.FileField.GetFileSuffix(System.Byte[])">
+            <summary>
+            获取文件的真实后缀名。目前只支持JPG, GIF, PNG, BMP四种图片文件。
+            </summary>
+            <param name="fileData">文件字节流</param>
+            <returns>JPG, GIF, PNG or null</returns>
+        </member>
+        <member name="M:jdSDK.JDAPI.JDHelper.ksort(System.Collections.Generic.List{jdSDK.JDAPI.FormField})">
+            <summary>
+            排序
+            </summary>
+            <param name="items"></param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDAPI.JDHelper.md5(System.String)">
+            <summary>
+            MD5加密
+            </summary>
+            <param name="strInput">strInput，欲加密的内容</param>
+            <returns>String，加密后的结果</returns>
+        </member>
+        <member name="F:jdSDK.JDAPI.Request.OrderLbpOutstorageRequest.sendType">
+            @var string发货类型，针对lbp商家 不需要
+        </member>
+        <member name="M:jdSDK.JDAPI.Request.OrderLbpOutstorageRequest.getApiMethod">
+            @return void 定义 访问接口的方法名称
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.OrderLbpOutstorageRequest.orderId">
+            @var 订单id
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.OrderLbpOutstorageRequest.packageNum">
+            @var 包裹数
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.OrderLbpOutstorageRequest.logisticsId">
+            @var 物流公司id
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.OrderLbpOutstorageRequest.waybill">
+            @var 运单号
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.OrderLbpOutstorageRequest.tradeNo">
+            @var 流水号
+        </member>
+        <member name="M:jdSDK.JDAPI.Request.OrderSearchOfflineRequest.getAppParams">
+            **
+        </member>
+        <member name="M:jdSDK.JDAPI.Request.OrderSearchOfflineRequest.getApiMethod">
+            
+             获取方法名称
+             @return string
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.OrderSearchOfflineRequest.startDate">
+            @var 查询时间的开始时间
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.OrderSearchOfflineRequest.endDate">
+            @var 查询时间的结束时间
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.OrderSearchOfflineRequest.orderState">
+            @var 状态
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.OrderSearchOfflineRequest.page">
+            @var 分页 页码
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.OrderSearchOfflineRequest.pageSize">
+            @var 分页 每页条数
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.OrderSearchOfflineRequest.optionalFields">
+            @var  返回商家的可选字段,以 ,号分隔
+        </member>
+        <member name="M:jdSDK.JDAPI.Request.OrderSopDeliveryRequest.getApiMethod">
+            @return void 定义 访问接口的方法名称
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.OrderSopDeliveryRequest.orderId">
+            @var 订单id
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.OrderSopDeliveryRequest.logisticsId">
+            @var 物流公司id
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.OrderSopDeliveryRequest.waybill">
+            @var 运单号
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.OrderSopOutStorageRequest.logistics_id">
+            <summary>
+            物流公司ID(只可通过获取商家物流公司接口获得)
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.OrderSopOutStorageRequest.waybill">
+            <summary>
+            运单号(当厂家直送时运单号可为空)
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WareListingGetRequest.cid">
+            <summary>
+            类目
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WareSkuUpdateRequest.sku_id">
+            <summary>
+            	京东的SKU ID 
+            </summary>
+        </member>
+        <!-- 对于成员“P:jdSDK.JDAPI.Request.WareSkuUpdateRequest.field_name”忽略有格式错误的 XML 注释 -->
+        <member name="P:jdSDK.JDAPI.Request.WareSkuUpdateRequest.field_value">
+            <summary>
+                	修改字段值（outer_sku_id所对应的值可为空，为空时就是将此属性值设置为空） 
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WareSkuUpdateRequest.trade_no">
+            <summary>
+            流水号
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.deliveryId">
+            <summary>
+            运单号（通过jingdong.etms.waybillcode.get获取到的运单号）
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.salePlat">
+             <summary>
+             京东快递物流系统为各平台维护了数据字典，如为京东平台，则传入0010001。如没有以下平台，可传入0030001（即其他），数据字典如下： 
+            0010001 京东 
+            0010002 天猫 
+            0010003 苏宁 
+            0010004 亚马逊中国 
+            0020001 ChinaSkin
+            0030001 其他小型销售平台 
+            务必保证该字段的正确
+             </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.customerCode">
+             <summary>
+             商家跟京东快递签订合同后京东快递给商家根据店铺创建的编号，需要唯一。 
+            商家编码（登录京东物流网站（http://www.jd-ex.com/）查看。如无登录账号，可向配送运营人员索取。并非POP系统商家id。）
+             </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.orderId">
+            <summary>
+            商家发货商品的唯一标识，可能为ERP软件生成的新订单号，即商家订单号未必等于平台订单号
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.thrOrderId">
+             <summary>
+             如果订单为京东平台订单，此字段必填。 
+            如果该订单为京东平台之外的订单，请为空。
+             </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.selfPrintWayBill">
+            <summary>
+            是否客户打印运单(是：1，否：0。不填或者超出范围，默认是1)
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.pickMethod">
+            <summary>
+            取件方式(上门收货：1，自送：2。不填或者超出范围，默认是1)
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.packageRequired">
+            <summary>
+            包装要求(不需包装：1，简单包装：2，特殊包装：3。不填或者超出范围，默认是1) 
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.senderName">
+            <summary>
+            寄件人姓名
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.senderAddress">
+            <summary>
+            寄件人地址
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.senderTel">
+            <summary>
+            寄件人电话
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.senderMobile">
+            <summary>
+            寄件人手机(寄件人电话、手机至少有一个不为空) 
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.senderPostcode">
+            <summary>
+            寄件人邮编
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.receiveName">
+            <summary>
+            收件人姓名
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.receiveAddress">
+            <summary>
+            手机人地址
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.province">
+            <summary>
+            收件人省 
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.city">
+            <summary>
+            收件人市
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.county">
+            <summary>
+            收件人县
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.town">
+            <summary>
+            收件人镇 
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.receiveTel">
+            <summary>
+            收件人电话
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.receiveMobile">
+            <summary>
+            收件人手机号(收件人电话、手机至少有一个不为空)
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.postcode">
+            <summary>
+            收件人邮编
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.packageCount">
+            <summary>
+            该订单下的包裹数(大于0，小于1000)，几个包裹就需要打印几个快递单
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.weight">
+            <summary>
+            重量(单位：kg，保留小数点后两位，默认为0 ) 
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.vloumLong">
+            <summary>
+            包裹长(单位：cm,保留小数点后两位)
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.vloumWidth">
+            <summary>
+            包裹宽(单位：cm，保留小数点后两位) 
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.vloumHeight">
+            <summary>
+            包裹高(单位：cm，保留小数点后两位)
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.vloumn">
+            <summary>
+            体积(单位：CM3，保留小数点后两位，默认可传为0 )
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.description">
+            <summary>
+            商品描述
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.collectionValue">
+            <summary>
+            1为代收货款，0为非代收货款
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.collectionMoney">
+             <summary>
+             【是否代收货款】为1，则必填：保留小数点后两位，后台会校验 
+            如果【是否代收货款】为0，则为空。
+             </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.guaranteeValue">
+            <summary>
+            是否保价(是：1，否：0。不填或者超出范围，默认是0) 
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.guaranteeValueAmount">
+            <summary>
+            如果有保价，则保价金额(保留小数点后两位) 为必填，后台有校验。
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.signReturn">
+            <summary>
+            签单返还(是：1，否：0。不填或者超出范围，默认是0) 
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.aging">
+            <summary>
+            时效(普通：1，工作日：2，非工作日：3，晚间：4。不填或者超出范围，默认是1) 
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Request.WayBillSendRequest.transType">
+            <summary>
+            运输类型(陆运：1，航空：2。不填或者超出范围，默认是1) 
+            </summary>
+        </member>
+        <member name="P:Json.TopResponse.error_response">
+            <summary>
+            服务器返回错误。
+            </summary>
+        </member>
+        <member name="P:Json.TopResponse.Body">
+            <summary>
+            服务器返回脚本
+            </summary>
+        </member>
+        <member name="P:Json.TopResponse.Error">
+            <summary>
+            客户端错误
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Response.OrderInfo.order">
+            <summary>
+            	所有订单数据
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Response.OrderLbpOutstorageResponse.vender_id">
+            <summary>
+            	商家ID
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Response.OrderLbpOutstorageResponse.order_id">
+            <summary>
+            	订单ID
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Response.OrderLbpOutstorageResponse.modified">
+            <summary>
+            	lbp出库时间
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Response.order_print_response.print_result">
+            <summary>
+            订单数据
+            </summary> 
+        </member>
+        <member name="P:jdSDK.JDAPI.Response.order_print_response.code">
+            <summary>
+            错误码
+            </summary>
+        </member>
+        <member name="T:jdSDK.JDAPI.Response.OrderSearchResponse">
+            <summary>
+            订单搜索接口
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Response.Vender.col_type">
+            <summary>
+            0.不租仓(SOP),由商家直接发货到消费者
+            2.使用京东物流LBP; 京东发货
+            5.使用京东物流sopl;京东发货
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Response.category_attribute_search_response.attributes">
+            <summary>
+            类目属性值信息
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Response.WareGetAttributeResponse.category_attribute_search_response">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Response.WareSearchResponse.WareSearch">
+            <summary>
+            返回一组商品查询信息
+            </summary>
+        </member>
+        <member name="T:jdSDK.JDAPI.Response.WareSkuStockUpdateResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Response.WareSkuStockUpdateResponse.sku_id">
+            <summary>
+            京东的SKU
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Response.WareSkuStockUpdateResponse.vender_id">
+            <summary>
+            商家ID
+            </summary>
+        </member>
+        <member name="P:jdSDK.JDAPI.Response.WareSkuStockUpdateResponse.modified">
+            <summary>
+            	更新SKU 操作时间
+            </summary>
+        </member>
+        <member name="T:jdSDK.JDAPI.Response.WayBillCodeResponse">
+            <summary>
+            返回物流单号。
+            </summary>
+        </member>
+        <member name="T:jdSDK.JDAPI.WebUtils">
+            <summary>
+            网络工具类。
+            </summary>
+        </member>
+        <member name="M:jdSDK.JDAPI.WebUtils.DoPost(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String,System.String)">
+            <summary>
+            执行HTTP POST请求。
+            </summary>
+            <param name="url">请求地址</param>
+            <param name="parameters">请求参数</param>
+            <returns>HTTP响应</returns>
+        </member>
+        <!-- 对于成员“M:jdSDK.JDAPI.WebUtils.JDDoPost(System.String,System.String,System.String)”忽略有格式错误的 XML 注释 -->
+        <member name="M:jdSDK.JDAPI.WebUtils.JDDoPost(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.String,System.String,System.String)">
+            <summary>
+            京东请求。
+            </summary>
+            <param name="url"></param>
+            <param name="ctype"></param>
+            <param name="content"></param>
+            <param name="charset"></param>
+            <param name="AccessToken"></param>
+            <param name="AppKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDAPI.WebUtils.DoGet(System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            执行HTTP GET请求。
+            </summary>
+            <param name="url">请求地址</param>
+            <param name="parameters">请求参数</param>
+            <returns>HTTP响应</returns>
+        </member>
+        <member name="M:jdSDK.JDAPI.WebUtils.GetResponseAsString(System.Net.HttpWebResponse,System.Text.Encoding)">
+            <summary>
+            把响应流转换为文本。
+            </summary>
+            <param name="rsp">响应流对象</param>
+            <param name="encoding">编码方式</param>
+            <returns>响应文本</returns>
+        </member>
+        <member name="M:jdSDK.JDAPI.WebUtils.BuildGetUrl(System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            组装GET请求URL。
+            </summary>
+            <param name="url">请求地址</param>
+            <param name="parameters">请求参数</param>
+            <returns>带参数的GET请求URL</returns>
+        </member>
+        <member name="M:jdSDK.JDAPI.WebUtils.BuildQuery(System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            组装普通文本请求参数。
+            </summary>
+            <param name="parameters">Key-Value形式请求参数字典</param>
+            <returns>URL编码后的请求数据</returns>
+        </member>
+        <member name="P:jdSDK.JDAPI.WebUtils.Timeout">
+            <summary>
+            请求与响应的超时时间
+            </summary>
+        </member>
+        <member name="T:jdSDK.JDAPI.OauthJdClient">
+            <summary>
+            sdk 客户端
+            </summary> 
+        </member>
+        <member name="F:jdSDK.JDAPI.OauthJdClient.serverUrl">
+            <summary>
+            请求的url
+            </summary>
+        </member>
+        <member name="M:jdSDK.JDAPI.OauthJdClient.#ctor(System.String,System.String,System.String)">
+            <summary>
+            api 2.0  
+            </summary>
+            <param name="serverUrl"></param>
+            <param name="appKey"></param>
+            <param name="appSecrect"></param>
+        </member>
+        <member name="M:jdSDK.JDAPI.OauthJdClient.sign(System.Collections.Generic.Dictionary{System.String,System.String},System.String)">
+            <summary>
+            签名
+            </summary>
+            <param name="_params"></param>
+            <param name="appSecret"></param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDAPI.OauthJdClient.addParamInStringField``1(System.String,``0)">
+            <summary>
+            添加参数，用StringField封装该该参数名及其值
+            </summary>
+            <param name="strParamName">strParamName，参数名</param>
+            <param name="strParamValue">strParamValue，参数值</param>
+        </member>
+        <member name="M:jdSDK.JDAPI.OauthJdClient.execute``1(jdSDK.JDRequest{``0})">
+            
+             @param  $request
+             @return void
+        </member>
+        <member name="T:jdSDK.JDItemAPI">
+            <summary>
+            京东ＡＰＩ
+            </summary>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.WareAdd(System.String,System.String,System.String,System.String,System.String,System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            1.	添加商品
+            </summary>
+            <param name="Attributes">商品属性列表,格式:pid:vid;pid:vid|pid1:vid1;pid1:vid1</param>
+            <param name="cid">类目id</param>
+            <param name="cost_price">进货价</param>
+            <param name="High">高</param>
+            <param name="item_num">货号</param>
+            <param name="jd_price">京东价</param>
+            <param name="Length">长</param>
+            <param name="market_price">市场价</param>
+            <param name="Notes">描述</param>
+            <param name="option_type">操作类型，现只支持：offsale</param>
+            <param name="pack_listing">包装清单</param>
+            <param name="Producter">生产厂商</param>
+            <param name="Service">售后服务</param>
+            <param name="shop_category">店内分类</param>
+            <param name="sku_prices">sku 价格,格式:p1|p2</param>
+            <param name="sku_properties">sku 属性,格式:aid:vid^aid1:vid2|aid3:vid3^aid4:vid4</param>
+            <param name="sku_stocks">sku 库存, 格式:s1|s2</param>
+            <param name="stock_num">库存数</param>
+            <param name="Title">标题</param>
+            <param name="trade_no">流水号</param>
+            <param name="upc_code">upc编码</param>
+            <param name="ware_image">图片路径。</param>
+            <param name="Weight">重量</param>
+            <param name="Wide">宽</param>
+            <param name="Wrap">包装规格</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.WareUpdate(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            2.	修改商品
+            </summary>
+            <param name="attributes">商品属性列表,格式:pid:vid;pid:vid|pid1:vid1;pid1:vid1</param>
+            <param name="cost_price">进货价</param>
+            <param name="high">高</param>
+            <param name="item_num">货号</param>
+            <param name="jd_price">京东价</param>
+            <param name="length">长</param>
+            <param name="market_price">市场价</param>
+            <param name="notes">描述</param>
+            <param name="option_type">操作类型，现只支持：offsale</param>
+            <param name="pack_listing">包装清单</param>
+            <param name="producter">生产厂商</param>
+            <param name="Service">售后服务</param>
+            <param name="shop_category">店内分类</param>
+            <param name="sku_prices">sku 价格,格式:p1|p2</param>
+            <param name="sku_properties">sku 属性,格式:aid:vid^aid1:vid2|aid3:vid3^aid4:vid4</param>
+            <param name="sku_stocks">sku 库存, 格式:s1|s2</param>
+            <param name="title">标题</param>
+            <param name="trade_no">流水号</param>
+            <param name="upc_code">upc编码</param>
+            <param name="ware_id">商品id</param>
+            <param name="weight">重量</param>
+            <param name="wide">宽</param>
+            <param name="wrap">包装规格</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.WareUpdateDelisting(System.String,System.String)">
+            <summary>
+            商品下架
+            </summary>
+            <param name="trade_no">商品的id</param>
+            <param name="ware_id">流水号</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.WareDelete(System.String,System.String)">
+            <summary>
+            通过api 根据ware_id 商品编号 删除商品
+            </summary>
+            <param name="trade_no">流水号</param>
+            <param name="ware_id">商品的id</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.WareGet(System.String,System.String)">
+            <summary>
+            根据商品ID查询单个商品的详细信息 
+            </summary>
+            <param name="ware_id">商品的id</param>
+            <param name="fields">需返回的字段列表。可选值：ware结构体中的所有字段；字段之间用“,”分隔</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.WaresListGet(System.String,System.String)">
+            <summary>
+            批量获取商品信息
+            </summary>
+            <param name="fields">需返回的字段列表。可选值：ware结构体中的所有字段；字段之间用“,”分隔</param>
+            <param name="ware_ids">商品的id，用逗号分隔,最多不能超过10个</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.OWaresSearch(System.Nullable{System.Int32},System.Nullable{System.Single},System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            根据商品的一些信息查询商品。
+            </summary>
+            <param name="category_id">类目id </param>
+            <param name="end_price">最大价格（分</param>
+            <param name="order_by">排序（默认onlineTime ）(offlineTime,onlineTime)</param>
+            <param name="page">分页</param>
+            <param name="page_size">每页多少条</param>
+            <param name="start_price">最小价格（分）</param>
+            <param name="title">商品名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.WareDelistingGet(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            获取商品下架的商品信息
+            </summary>
+            <param name="category_id">类目id</param>
+            <param name="end_modified">结束的修改时间</param>
+            <param name="page">分页</param>
+            <param name="page_size">每页多少条</param>
+            <param name="start_modified">起始的修改时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.WareSkuAdd(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            增加SKU信息
+            </summary>
+            <param name="attributes">Sku属性,销售属性</param>
+            <param name="jd_price">京东价格</param>
+            <param name="stock_num">库存</param>
+            <param name="trade_no">流水号</param>
+            <param name="ware_id">商品id</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.OWareSkuUpdate(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            修改SKU信息 
+            </summary>
+            <param name="jd_price">京东价格</param>
+            <param name="outer_id">外部id</param>
+            <param name="sku_id"></param>
+            <param name="stock_num">库存</param>
+            <param name="trade_no">流水号</param>
+            <param name="ware_id">商品id</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.SkuStockUpdate(System.String,System.Nullable{System.Int64},System.Nullable{System.Int64},System.String)">
+            <summary>
+            通过api 根据sku_id /outer_id修改库存接口，skuId和outerId 至少填一个，如果都有则以sku_id为准。
+            </summary>
+            <param name="outer_id">外部id</param>
+            <param name="quantity">需要更新的库存数量</param>
+            <param name="sku_id">sku的id</param>
+            <param name="trade_no">流水号</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.SkuPriceUpdate(System.String,System.String,System.String,System.String)">
+            <summary>
+            通过api 根据sku_id /outer_id修改价格接口，skuId和outerId 至少填一个，如果都有则以sku_id为准
+            </summary>
+            <param name="jd_price">京东价格</param>
+            <param name="outer_id">外部id</param>
+            <param name="sku_id">sku的id</param>
+            <param name="stock_num">库存</param>
+            <param name="trade_no">流水号</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.WareSkuDelete(System.String,System.Nullable{System.Int64})">
+            <summary>
+             通过api 根据sku_id 删除sku
+            </summary>
+            <param name="sku_id">sku的id</param>
+            <param name="trade_no">流水号</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.WareSkuGet(System.String,System.String)">
+            <summary>
+            获取单个SKU信息
+            </summary>
+            <param name="fields">需返回的字段列表。可选值：Sku结构体中的所有字段；字段之间用“,”分隔</param>
+            <param name="sku_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.SkuCustomGet(System.String,System.String)">
+            <summary>
+            根据商家设定的sku的外部id获取所对应的sku数据，一个sku的外部id对应一个sku数据。 
+            </summary>
+            <param name="fields">需返回的字段列表。可选值：Sku结构体中的所有字段；字段之间用“,”分隔</param>
+            <param name="outer_id">sku的外部商家ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.WareSkusGet(System.String,System.String)">
+            <summary>
+            获取多个商品下的所有sku。能获取到outer_id 
+            </summary>
+            <param name="fields">需返回的字段列表。可选值：Sku结构体中的所有字段；字段之间用“,”分隔</param>
+            <param name="ware_ids">sku所属商品id，必选。ware_ids个数不能超过10个</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.WareListingGet(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            根据商品的一些信息查询商品。 
+            </summary>
+            <param name="cid">类目id</param>
+            <param name="start_modified">起始的修改时间</param>
+            <param name="end_modified">结束的修改时间</param>
+            <param name="page">分页</param>
+            <param name="page_size">每页多少条</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.AfterSearch(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.String)">
+            <summary>
+             通过检索条件，检索退货信息。
+            </summary>
+            <param name="page">	分页号：1-100 </param>
+            <param name="page_size">每页数量：1-10 </param>
+            <param name="query_fields">查询字段键值对，详见“查询字段”</param>
+            <param name="select_fields">返回字段选择,每个字段以逗号分隔可选字段</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.WareCatsGet(System.String)">
+            <summary>
+            1.	获取商家类目信息,根据商家id获取商家已经开通的类目。
+            </summary>
+            <param name="fields">需返回的字段列表。</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.WareGetAttribute(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            获取类目下的属性信息。
+            </summary>
+            <param name="aid">属性id</param>
+            <param name="cid">类目id</param>
+            <param name="fields">需返回的字段列表。</param>
+            <param name="is_key_prop">是否关键属性(true/false)</param>
+            <param name="is_sale_prop">是否销售属性(true/false)</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.WareGetAttValue(System.String,System.String)">
+            <summary>
+            获取类目下的属性值信息。
+            </summary>
+            <param name="avs">属性和属性值 id串，格式例如(pid1;pid2)或(pid1:vid1;pid2:vid2)或(pid1;pid2:vid2)</param>
+            <param name="fields">需返回的字段列表。</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.OrderSearch(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            根据条件检索订单信息
+            </summary>
+            <param name="end_date">开始时间 和 结束时间 不得相差超过1个月</param>
+            <param name="optional_fields">商家希望返回的订单的信息字段,每个字段以逗号分隔</param>
+            <param name="order_state">每个订单状态以逗号分隔,(该接口只提供三个状态， WAIT_SELLER_STOCK_OUT 等待出库， WAIT_SELLER_DELIVERY 等待发货(只适用于SOP商家)， TRADE_CANCELED 取消)</param>
+            <param name="page">查询的页数</param>
+            <param name="page_size">每页的条数（最大page_size 100条）</param>
+            <param name="start_date">开始时间 和 结束时间 不得相差超过1个月</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.OrderGet(System.String,System.String,System.String)">
+            <summary>
+            输入单个订单id，得到所有相关订单信息
+            </summary>
+            <param name="optional_fields">商家希望返回的订单的信息字段,每个字段以逗号分隔</param>
+            <param name="order_id">订单id</param>
+            <param name="order_state">每个订单状态以逗号分隔,(该接口只提供三个状态， WAIT_SELLER_STOCK_OUT 等待出库， WAIT_SELLER_DELIVERY 等待发货(只适用于SOP商家)， TRADE_CANCELED 取消)</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.OrderPrint(System.String,System.String)">
+            <summary>
+            输入单个订单id，得到面单打印内容
+            </summary>
+            <param name="optional_fields">商家希望返回的订单的信息字段,每个字段以逗号分隔</param>
+            <param name="order_id">订单id</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.OrderPrintDataGet(System.String,System.String)">
+            <summary>
+            输入单个订单id，得到面单打印单的数据
+            </summary>
+            <param name="optional_fields">商家希望返回的订单的信息字段,每个字段以逗号分隔</param>
+            <param name="order_id">订单id</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.OOrderSopDelivery(System.Nullable{System.Int32},System.String,System.String,System.String)">
+            <summary>
+            订单SOP发货 ,输入单个订单id，进行发货操作
+            </summary>
+            <param name="logistics_id">物流公司ID(只可通过获取商家物流公司接口获得)</param>
+            <param name="order_id">订单id</param>
+            <param name="trade_no">流水号</param>
+            <param name="waybill">运单号(当商家直送时运单号可为空)</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.OrderSopOutStorage(System.String,System.String,System.Nullable{System.Int32},System.String)">
+            <summary>
+            输入单个订单id，进行sop出库操作
+            </summary>
+            <param name="order_id">订单id</param>
+            <param name="trade_no">流水号</param>
+            <param name="logistics_id">物流公司</param>
+            <param name="waybill">运单号</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.OOrderLbpOutStorage(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            输入单个订单id，进行lbp出库操作
+            </summary>
+            <param name="logistics_id">物流公司id(可通过获取商家物流公司接口获得,0,表示自送,)</param>
+            <param name="order_id">订单id</param>
+            <param name="package_num">包裹数量</param>
+            <param name="send_type">发货类型，默认是1</param>
+            <param name="trade_no">流水号</param>
+            <param name="waybill">运单号(当自送时运单号可为空)</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.OrderWoplOutStorage(System.Nullable{System.Int64},System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            输入单个订单id，进行sopl出库操作
+            </summary>
+            <param name="address_id">发货地址所对应id（可通过商家获取发货地址接口获取到）</param>
+            <param name="order_id">订单id</param>
+            <param name="package_num">包裹数量</param>
+            <param name="send_type">发货类型，默认是1</param>
+            <param name="trade_no">流水号</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.OAfterSearch(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.String)">
+            <summary>
+            根据条件检索订单信息
+            </summary>
+            <param name="page">分页号：1-100</param>
+            <param name="page_size">每页的条数（最大page_size 100条）</param>
+            <param name="query_fields">查询字段对应Field中的key，查询字段的值对应Field中的value</param>
+            <param name="select_fields">返回字段选择,每个字段以逗号分隔</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.AfterTateUpdate(System.String,System.String)">
+            <summary>
+            根据退货单id 进行退货确认操作
+            </summary>
+            <param name="return_id">return_id</param>
+            <param name="trade_no">商家ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.DeliveryLogisticsGet">
+            <summary>
+            检索商家物流公司信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.PromotionSearch(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            根据条件获取促销信息
+            </summary>
+            <param name="check_status"></param>
+            <param name="evt_id">促销编号 17412</param>
+            <param name="evt_status"></param>
+            <param name="evt_type">商品编号 1001211212</param>
+            <param name="level_member">会员级别</param>
+            <param name="page">查询的页数,范围是0至100</param>
+            <param name="page_size">每页的条数,范围是0至20</param>
+            <param name="sku_id">skuid</param>
+            <param name="time_begin_end">活动开始截止时间（格式是：2011-08-04)</param>
+            <param name="time_begin_start">活动开始起始时间（格式是：2011-08-03)</param>
+            <param name="time_end_end">活动结束截止时间（格式是：2011-08-20)</param>
+            <param name="time_end_start">活动结束起始时间（格式是：2011-08-07)</param>
+            <param name="ware_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.VenderGet(System.String)">
+            <summary>
+            返回店铺信息
+            </summary>
+            <param name="fields">要返回的字段。</param>
+            <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.WayBillCodeGet(System.String,System.UInt32)">
+             <summary>
+             获取京东物流预分配的运单号 
+             </summary>
+             <param name="customerCode">商家编码（区分英文大小写）
+            （登录京东物流网站（http://www.jd-ex.com/）查看。如无登录账号，可向配送运营人员索取。并非POP系统商家id。）
+            </param>
+             <param name="preNum"> 获取运单号数量（最大100） </param>
+             <returns></returns>
+        </member>
+        <member name="M:jdSDK.JDItemAPI.WayBillSendGet(jdSDK.JDAPI.Request.WayBillSendRequest)">
+            <summary>
+            京东物流接单接口
+            </summary>
+            <param name="req"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Json.error_response.zh_desc">
+            <summary>
+            错误信息中文描述
+            </summary>
+        </member>
+    </members>
+</doc>

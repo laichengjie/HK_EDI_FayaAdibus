@@ -1,0 +1,185 @@
+﻿@model HK_EDI.Web.Models.GoodPostRecord.GoodPostRecordModel
+@using System.Globalization;
+@{
+
+    //page title
+    ViewBag.Title = "上传商品记录";
+}
+@using (Html.BeginForm())
+{
+    <div class="section-header">
+        <div class="title">
+            <img src="@Url.Content("~/Content/images/ico-sales.png")" alt="" />
+            上传商品记录
+        </div>
+    </div>
+    <table width="100%">
+        <tr>
+            <td class="adminTitle">
+                @Html.LabelFor(model => model.SearchOSStockID):
+            </td>
+            <td class="adminData">
+                @Html.DropDownList("SearchOSStockID", Model.WMSSystems)
+            </td>
+        </tr>
+             <tr>
+            <td class="adminTitle">
+                @Html.LabelFor(model => model.SkuCode):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.SkuCode)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+               @Html.LabelFor(model=>model.IsSuccess):
+            </td>
+            <td class="adminData">
+                @*@Html.EditorFor(model=>model.IsSuccess)*@
+            <input type="checkbox" id ="IsSuccess" name="IsSuccess" checked="checked" />
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.LabelFor(model => model.CreateDateFrom):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.CreateDateFrom, "DateTimeNullable")
+            </td>
+        </tr>
+
+        <tr>
+            <td class="adminTitle">
+                @Html.LabelFor(model => model.CreateDateTo):
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.CreateDateTo, "DateTimeNullable")
+            </td>
+        </tr>
+      
+        <tr>
+            <td colspan="2">
+                <input type="button" id="search-customers" class="k-button" value="搜索" />
+            </td>
+        </tr>
+    </table>
+    <table class="adminContent">
+        <tr>
+            <td>
+                <div id="customers-grid"></div>
+
+                <script>
+                    $(document).ready(function () {
+                        $("#customers-grid").kendoGrid({
+                            dataSource: {
+                                type: "json",
+                                transport: {
+                                    read: {
+                                        url: '@Html.Raw(Url.Action("List", "GoodPostRecord"))',
+                                    type: "POST",
+                                    dataType: "json",
+                                    data: additionalData
+                                }
+                            },
+                            schema: {
+                                data: "Data",
+                                total: "Total",
+                                errors: "Errors"
+                            },
+                            error: function (e) {
+                                display_kendoui_grid_error(e);
+                                this.cancelChanges();
+                            },
+                            pageSize: 15,
+                            serverPaging: true,
+                            serverFiltering: true,
+                            serverSorting: true
+                        },
+                            pageable: {
+                            refresh: true,
+                            pageSizes: [10, 15, 20, 50, 100]
+                            },
+                        scrollable: false,
+                       dataBound: onDataBound,
+                        columns: [{
+                            field: "Id",
+                            title: "ID",
+                            width: 50
+                        },
+                        {
+                            field: "OSInterfaceID",
+                            title: "物流系统(OSInterfaceID)",
+                            width: 150
+                        },
+                        {
+                            field: "SKUCode",
+                            title: "条码",
+                            width: 50
+                        },
+                        {
+                            field: "Qty",
+                            title: "库存数",
+                            width: 80,
+                        },
+                        {
+                            field: "IsSuccess",
+                            title: "是否上传成功",
+                            width: 100,
+                            headerAttributes: { style: "text-align:center" },
+                            attributes: { style: "text-align:center" },
+                            template: '<img src="@Url.Content("~/Content/images/")active-#=IsSuccess#.gif" />'
+                        },
+                        {
+                            field: "CreateTime",
+                            title: "最后同步时间",
+                            width: 100,
+                            type: "date",
+                            format: "{0:G}"
+                        },
+                        {
+                            field: "LastQueryTime",
+                            title: "最后查询库存时间",
+                            width: 100,
+                            type: "date",
+                            format: "{0:G}"
+                        },
+                        {
+                            field: "Id",
+                            title: "日志明细",
+                            width: 80,
+                            template: '<a href="Detail?PId=#=Id#" target="_bank">查看日志明细</a>'
+                        }
+                                              
+                        ]
+                    });
+                    });
+                    $(document).ready(function () {
+
+                        //search button
+                        $('#search-customers').click(function () {
+                            var grid = $('#customers-grid').data('kendoGrid');
+                            grid.dataSource.page(1); //new search. Set page size to 1
+                            //grid.dataSource.read(); we already loaded the grid above using "page" function
+                            //clear selected checkboxes
+                            $('.checkboxGroups').attr('checked', false).change();
+                            return false;
+                        });
+
+                    });
+                    function onDataBound(e) {
+
+                    }
+                    function additionalData() {
+                        return {
+                            SearchOSStockID: $('#@Html.FieldIdFor(model => model.SearchOSStockID)').val(),
+                            SkuCode: $('#@Html.FieldIdFor(model => model.SkuCode)').val(),
+                            CreateDateFrom: $('#@Html.FieldIdFor(model => model.CreateDateFrom)').val(),
+                            CreateDateTo: $('#@Html.FieldIdFor(model => model.CreateDateTo)').val(),
+                            IsSuccess:  $('#IsSuccess').attr('checked')=="checked"?'true':'false'
+                        };
+                    }
+                </script>
+            </td>
+        </tr>
+    </table>
+}

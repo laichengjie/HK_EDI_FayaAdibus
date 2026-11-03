@@ -1,0 +1,163 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2006
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HK_EDI.Core", "HK_EDI.Core\HK_EDI.Core.csproj", "{D59DFE74-014A-47B4-A09E-1A8100466640}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HK_EDI.Data", "HK_EDI.Data\HK_EDI.Data.csproj", "{8245CE74-F263-474C-891B-B3FD90453721}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HK_EDI.Service", "HK_EDI.Service\HK_EDI.Service.csproj", "{B0BFA58B-86AC-497A-9F08-4968B4AE5C29}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{9EF023DD-9D48-4327-B73E-94253DABA08A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HK_EDI.Web", "HK_EDI.Web\HK_EDI.Web.csproj", "{FB79B639-91D0-4B5E-8C10-83C4F02F4E84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HK_EDI.WebApi", "HK_EDI.WebApi\HK_EDI.WebApi.csproj", "{58699112-289C-437C-812D-18D1729299B3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HKEDI.Bin", "HKEDI.Bin", "{DDAABDA9-13A1-4068-99D9-A60E109650B4}"
+	ProjectSection(SolutionItems) = preProject
+		HK_EDI.Bin\DBACCESS.dll = HK_EDI.Bin\DBACCESS.dll
+		HK_EDI.Bin\DBACCESS.pdb = HK_EDI.Bin\DBACCESS.pdb
+		HK_EDI.Bin\FrmBCApi.dll = HK_EDI.Bin\FrmBCApi.dll
+		HK_EDI.Bin\FrmBCApi.dll.config = HK_EDI.Bin\FrmBCApi.dll.config
+		HK_EDI.Bin\FrmBCApi.xml = HK_EDI.Bin\FrmBCApi.xml
+		HK_EDI.Bin\HK.Sms.dll = HK_EDI.Bin\HK.Sms.dll
+		HK_EDI.Bin\IGoubuySdk.dll = HK_EDI.Bin\IGoubuySdk.dll
+		HK_EDI.Bin\IGoubuySdk.pdb = HK_EDI.Bin\IGoubuySdk.pdb
+		HK_EDI.Bin\IGoubuySdk.xml = HK_EDI.Bin\IGoubuySdk.xml
+		HK_EDI.Bin\jdSDK.dll = HK_EDI.Bin\jdSDK.dll
+		HK_EDI.Bin\jdSDK.pdb = HK_EDI.Bin\jdSDK.pdb
+		HK_EDI.Bin\jdSDK.xml = HK_EDI.Bin\jdSDK.xml
+		HK_EDI.Bin\LanguageResource.dll = HK_EDI.Bin\LanguageResource.dll
+		HK_EDI.Bin\Newtonsoft.Json.dll = HK_EDI.Bin\Newtonsoft.Json.dll
+		HK_EDI.Bin\office.dll = HK_EDI.Bin\office.dll
+		HK_EDI.Bin\office.xml = HK_EDI.Bin\office.xml
+		HK_EDI.Bin\OneShopSdk.dll = HK_EDI.Bin\OneShopSdk.dll
+		HK_EDI.Bin\OneShopSdk.pdb = HK_EDI.Bin\OneShopSdk.pdb
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{9F696046-7CDF-4C66-A88D-C68CD88AD8AD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D59DFE74-014A-47B4-A09E-1A8100466640}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D59DFE74-014A-47B4-A09E-1A8100466640}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D59DFE74-014A-47B4-A09E-1A8100466640}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D59DFE74-014A-47B4-A09E-1A8100466640}.Debug|x64.Build.0 = Debug|Any CPU
+		{D59DFE74-014A-47B4-A09E-1A8100466640}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D59DFE74-014A-47B4-A09E-1A8100466640}.Debug|x86.Build.0 = Debug|Any CPU
+		{D59DFE74-014A-47B4-A09E-1A8100466640}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D59DFE74-014A-47B4-A09E-1A8100466640}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D59DFE74-014A-47B4-A09E-1A8100466640}.Release|x64.ActiveCfg = Release|Any CPU
+		{D59DFE74-014A-47B4-A09E-1A8100466640}.Release|x64.Build.0 = Release|Any CPU
+		{D59DFE74-014A-47B4-A09E-1A8100466640}.Release|x86.ActiveCfg = Release|Any CPU
+		{D59DFE74-014A-47B4-A09E-1A8100466640}.Release|x86.Build.0 = Release|Any CPU
+		{8245CE74-F263-474C-891B-B3FD90453721}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8245CE74-F263-474C-891B-B3FD90453721}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8245CE74-F263-474C-891B-B3FD90453721}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8245CE74-F263-474C-891B-B3FD90453721}.Debug|x64.Build.0 = Debug|Any CPU
+		{8245CE74-F263-474C-891B-B3FD90453721}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8245CE74-F263-474C-891B-B3FD90453721}.Debug|x86.Build.0 = Debug|Any CPU
+		{8245CE74-F263-474C-891B-B3FD90453721}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8245CE74-F263-474C-891B-B3FD90453721}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8245CE74-F263-474C-891B-B3FD90453721}.Release|x64.ActiveCfg = Release|Any CPU
+		{8245CE74-F263-474C-891B-B3FD90453721}.Release|x64.Build.0 = Release|Any CPU
+		{8245CE74-F263-474C-891B-B3FD90453721}.Release|x86.ActiveCfg = Release|Any CPU
+		{8245CE74-F263-474C-891B-B3FD90453721}.Release|x86.Build.0 = Release|Any CPU
+		{B0BFA58B-86AC-497A-9F08-4968B4AE5C29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0BFA58B-86AC-497A-9F08-4968B4AE5C29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0BFA58B-86AC-497A-9F08-4968B4AE5C29}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B0BFA58B-86AC-497A-9F08-4968B4AE5C29}.Debug|x64.Build.0 = Debug|Any CPU
+		{B0BFA58B-86AC-497A-9F08-4968B4AE5C29}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B0BFA58B-86AC-497A-9F08-4968B4AE5C29}.Debug|x86.Build.0 = Debug|Any CPU
+		{B0BFA58B-86AC-497A-9F08-4968B4AE5C29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0BFA58B-86AC-497A-9F08-4968B4AE5C29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0BFA58B-86AC-497A-9F08-4968B4AE5C29}.Release|x64.ActiveCfg = Release|Any CPU
+		{B0BFA58B-86AC-497A-9F08-4968B4AE5C29}.Release|x64.Build.0 = Release|Any CPU
+		{B0BFA58B-86AC-497A-9F08-4968B4AE5C29}.Release|x86.ActiveCfg = Release|Any CPU
+		{B0BFA58B-86AC-497A-9F08-4968B4AE5C29}.Release|x86.Build.0 = Release|Any CPU
+		{FB79B639-91D0-4B5E-8C10-83C4F02F4E84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB79B639-91D0-4B5E-8C10-83C4F02F4E84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB79B639-91D0-4B5E-8C10-83C4F02F4E84}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FB79B639-91D0-4B5E-8C10-83C4F02F4E84}.Debug|x64.Build.0 = Debug|Any CPU
+		{FB79B639-91D0-4B5E-8C10-83C4F02F4E84}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FB79B639-91D0-4B5E-8C10-83C4F02F4E84}.Debug|x86.Build.0 = Debug|Any CPU
+		{FB79B639-91D0-4B5E-8C10-83C4F02F4E84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB79B639-91D0-4B5E-8C10-83C4F02F4E84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB79B639-91D0-4B5E-8C10-83C4F02F4E84}.Release|x64.ActiveCfg = Release|Any CPU
+		{FB79B639-91D0-4B5E-8C10-83C4F02F4E84}.Release|x64.Build.0 = Release|Any CPU
+		{FB79B639-91D0-4B5E-8C10-83C4F02F4E84}.Release|x86.ActiveCfg = Release|Any CPU
+		{FB79B639-91D0-4B5E-8C10-83C4F02F4E84}.Release|x86.Build.0 = Release|Any CPU
+		{58699112-289C-437C-812D-18D1729299B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58699112-289C-437C-812D-18D1729299B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58699112-289C-437C-812D-18D1729299B3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{58699112-289C-437C-812D-18D1729299B3}.Debug|x64.Build.0 = Debug|Any CPU
+		{58699112-289C-437C-812D-18D1729299B3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{58699112-289C-437C-812D-18D1729299B3}.Debug|x86.Build.0 = Debug|Any CPU
+		{58699112-289C-437C-812D-18D1729299B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58699112-289C-437C-812D-18D1729299B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58699112-289C-437C-812D-18D1729299B3}.Release|x64.ActiveCfg = Release|Any CPU
+		{58699112-289C-437C-812D-18D1729299B3}.Release|x64.Build.0 = Release|Any CPU
+		{58699112-289C-437C-812D-18D1729299B3}.Release|x86.ActiveCfg = Release|Any CPU
+		{58699112-289C-437C-812D-18D1729299B3}.Release|x86.Build.0 = Release|Any CPU
+		{9F696046-7CDF-4C66-A88D-C68CD88AD8AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F696046-7CDF-4C66-A88D-C68CD88AD8AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F696046-7CDF-4C66-A88D-C68CD88AD8AD}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9F696046-7CDF-4C66-A88D-C68CD88AD8AD}.Debug|x64.Build.0 = Debug|Any CPU
+		{9F696046-7CDF-4C66-A88D-C68CD88AD8AD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9F696046-7CDF-4C66-A88D-C68CD88AD8AD}.Debug|x86.Build.0 = Debug|Any CPU
+		{9F696046-7CDF-4C66-A88D-C68CD88AD8AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F696046-7CDF-4C66-A88D-C68CD88AD8AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F696046-7CDF-4C66-A88D-C68CD88AD8AD}.Release|x64.ActiveCfg = Release|Any CPU
+		{9F696046-7CDF-4C66-A88D-C68CD88AD8AD}.Release|x64.Build.0 = Release|Any CPU
+		{9F696046-7CDF-4C66-A88D-C68CD88AD8AD}.Release|x86.ActiveCfg = Release|Any CPU
+		{9F696046-7CDF-4C66-A88D-C68CD88AD8AD}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D59DFE74-014A-47B4-A09E-1A8100466640} = {9EF023DD-9D48-4327-B73E-94253DABA08A}
+		{8245CE74-F263-474C-891B-B3FD90453721} = {9EF023DD-9D48-4327-B73E-94253DABA08A}
+		{B0BFA58B-86AC-497A-9F08-4968B4AE5C29} = {9EF023DD-9D48-4327-B73E-94253DABA08A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8D25ABF1-6431-4828-ACFC-A19DFC877314}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://vdi-tfs01.hkitcloud.net:8080/tfs/hkit-software
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = HK_EDI.Core\\HK_EDI.Core.csproj
+		SccProjectTopLevelParentUniqueName1 = HK_EDI_FayaAdibus.sln
+		SccProjectName1 = HK_EDI.Core
+		SccLocalPath1 = HK_EDI.Core
+		SccProjectUniqueName2 = HK_EDI.Data\\HK_EDI.Data.csproj
+		SccProjectTopLevelParentUniqueName2 = HK_EDI_FayaAdibus.sln
+		SccProjectName2 = HK_EDI.Data
+		SccLocalPath2 = HK_EDI.Data
+		SccProjectUniqueName3 = HK_EDI.Service\\HK_EDI.Service.csproj
+		SccProjectTopLevelParentUniqueName3 = HK_EDI_FayaAdibus.sln
+		SccProjectName3 = HK_EDI.Service
+		SccLocalPath3 = HK_EDI.Service
+		SccProjectUniqueName4 = HK_EDI.Web\\HK_EDI.Web.csproj
+		SccProjectName4 = HK_EDI.Web
+		SccLocalPath4 = HK_EDI.Web
+		SccProjectUniqueName5 = HK_EDI.WebApi\\HK_EDI.WebApi.csproj
+		SccProjectName5 = HK_EDI.WebApi
+		SccLocalPath5 = HK_EDI.WebApi
+		SccProjectUniqueName6 = UnitTestProject1\\UnitTestProject1.csproj
+		SccProjectName6 = UnitTestProject1
+		SccLocalPath6 = UnitTestProject1
+	EndGlobalSection
+EndGlobal

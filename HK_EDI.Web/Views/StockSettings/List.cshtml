@@ -1,0 +1,376 @@
+﻿@model Tuple<HK_EDI.Web.Models.StockSet.ErpStockSetModel, HK_EDI.Web.Models.StockSet.CorrespondingStockModel>
+@{
+    ViewBag.Title = "仓库配置";
+}
+@using (Html.BeginForm())
+{
+    <div class="section-header">
+        <div class="title">
+            <img src="@Url.Content("~/Content/images/ico-system.png")" alt="" />
+            仓库配置
+        </div>
+    </div>
+
+    <div .clear:after{content:'.';display:block;height:0;clear:both;visibility:hidden}>
+        <div style="  float: left;  width: 35%; ">
+            <table style="  width: 100%; ">
+                <tr>
+                    <td>
+                        <div id="bascard-grid"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div style="  float: left;  width: 65%; ">
+            <table style="  width: 100%; ">
+                <tr>
+                    <td>
+                        <div id="bascard-grid1"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <script type="text/javascript">
+                    var cardtypeids = "";
+                    $(document).ready(function () {
+                         $("#bascard-grid").kendoGrid({
+                            dataSource: {
+                                type: "json",
+                                transport: {
+                                    read: {
+                                        url: "@Html.Raw(Url.Action("QueryErpStockList", "StockSettings"))",
+                                        type: "POST",
+                                        dataType: "json",
+                                        data: BasCardList
+                                    },
+                                    update: {
+                                        url: '@Html.Raw(Url.Action("UpdateErpStockList", "StockSettings"))',
+                                        type: "POST",
+                                        dataType: "json"
+                                    },
+                                    create: {
+                                         url: '@Html.Raw(Url.Action("UpdateErpStockList", "StockSettings"))',
+                                         type: "POST",
+                                         dataType: "json"
+                                     },
+                                    destroy: {
+                                        url: '@Html.Raw(Url.Action("DeleteErpStockList", "StockSettings"))',
+                                        type: "POST",
+                                        dataType: "json"
+                                    }
+                                },
+                                schema: {
+                                    data: "Data",
+                                    total: "Total",
+                                    errors: "Errors",
+                                    model: {
+                                        id: "ID",
+                                        fields: {
+                                            ID: { editable: false, type: "string" },
+                                            Xuhao: { editable: false, type: "string" },
+                                            ErpStockCode: { editable: true, type: "string" },
+                                            ErpStockName: { editable: false, type: "string" },
+                                            IsDemorderForType: { editable: true, type: "bit" },
+                                            IsDemorderForTypeName: { editable: true, type: "string" },
+                                            //SOLDTO: {
+                                            //    validation: {required: true, },editable: true, type: "string" }
+                                        }
+                                    }
+                                },
+                                 requestEnd: function (e) {
+                                     if (e.type == "create" || e.type == "update") {
+                                             this.read();
+                                     }
+                                 },
+                                error: function(e) {
+                                    display_kendoui_grid_error(e);
+                                    // Cancel the changes
+                                    this.cancelChanges();
+                                },
+                                pageSize: 15,
+                                serverPaging: true,
+                                serverFiltering: true,
+                                serverSorting: true
+
+                            },
+                            pageable: {
+                                refresh: true,
+                                numeric: false,
+                                previousNext: false,
+                                info: false,
+                                 pageSizes: [10, 15, 20, 50, 100]
+                            },
+                            toolbar: ["create"],
+                            edit: function (e) {
+                       
+                            },
+                            editable: {
+                                confirmation: function (e) {
+                                    return "确定删除 " + e.ErpStockName + "?";
+                                },
+                                mode: "inline"
+                            },
+                              scrollable: false,
+                              selectable: true,
+                            columns: [{
+                                field: "ID",
+                                title: "ID",
+                                hidden: true,
+                                width: 50
+                            },
+                            {
+                                field: "Xuhao",
+                                title: "序号",
+                                width: 80
+                             },
+                            { title: 'Erp仓库代码', field: "ErpStockID", editor: categoryDropDownEditor, template: "#=ErpStockCode#", width: 100 },
+                            { title: 'Erp仓库名称', field: "ErpStockName", width: 100 },
+                            {
+                                field: "IsDemorderForType",
+                                title: "是否按类型拆单",
+                                width: 50,
+                                editor: Editor,
+                                template: "#=IsDemorderForTypeName#"
+                            },
+                            {
+                                command: [{ name: "edit", text: "编辑" }, {
+                                    name: "destroy",
+                                    text: "删除"
+                                }], width: 150
+                            }],
+
+                        });
+                    });
+
+
+                         var cardtypeids = "";
+                            $(document).ready(function () {
+
+                             $("#bascard-grid1").kendoGrid({
+                                 dataSource: {
+                                     type: "json",
+
+                                     transport: {
+                                         read: {
+                                             url: "@Html.Raw(Url.Action("QueryCorStockList", "StockSettings"))",
+                                             type: "POST",
+                                             dataType: "json",
+                                             data:  StockList
+                                         },
+                                         update: {
+                                             url: '@Html.Raw(Url.Action("UpdateCorStockList", "StockSettings"))',
+                                             type: "POST",
+                                             dataType: "json",
+                                             data: BasErpStockList
+                                         },
+                                         create: {
+                                              url: '@Html.Raw(Url.Action("UpdateCorStockList", "StockSettings"))',
+                                              type: "POST",
+                                              dataType: "json",
+                                              data: BasErpStockList
+                                          },
+                                         destroy: {
+                                             url: '@Html.Raw(Url.Action("DeleteCorStockList", "StockSettings"))',
+                                             type: "POST",
+                                             dataType: "json"
+                                         }
+                                     },
+                                     schema: {
+                                         data: "Data",
+                                         total: "Total",
+                                         errors: "Errors",
+                                         model: {
+                                             id: "ID",
+                                             fields: {
+                                                 ID: { editable: false, type: "string" },
+                                                 Xuhao: { editable: false, type: "string" },
+                                                 ErpStockID: { editable: false, type: "string" },
+                                                 //CorSOLDTO:   {  validation: {required: true, },editable: true, type: "string" },
+                                                 CorStockCode: { validation: { required: true, }, editable: true, type: "string" },
+                                                 CorStockName: { validation: { required: true, },editable: true, type: "string" },
+                                                 Checker: { editable: false, type: "string" },
+                                                 ModifyDTM: { editable: false, type: "string" }
+                                             }
+                                         }
+                                     },
+                                     requestEnd: function (e) {
+                                         if (e.type == "create" || e.type == "update") {
+                                             this.read();
+                                         }
+                                     },
+                                     error: function (e) {
+                                         display_kendoui_grid_error(e);
+
+                                         this.cancelChanges();
+                                     },
+                                     pageSize: 15,
+                                     serverPaging: true,
+                                     serverFiltering: true,
+                                     serverSorting: true
+
+                                    },
+                                    pageable: {
+                                        refresh: true,
+                                        numeric: false,
+                                        previousNext: false,
+                                        info: false,
+                                        pageSizes: [10, 15, 20, 50, 100]
+                                    },
+                                    toolbar: ["create"],
+                                    edit: function (e) {
+                                    },
+                                    editable: {
+                                        confirmation: function (e) {
+                                            return "确定删除 " + e.CorStockName + "?";
+                                        },
+                                        mode: "inline"
+                                    },
+                                    scrollable: false,
+                                    selectable: true,
+                                    columns: [{
+                                        field: "ID",
+                                        title: "ID",
+                                        hidden: true,
+                                        width: 50
+                                    }, {
+                                        field: "ErpStockID",
+                                        title: "ErpStockID",
+                                        hidden: true,
+                                        width: 50
+                                    },
+                                    {
+                                        field: "Xuhao",
+                                        title: "序号",
+                                        width: 80
+                                    },
+                                    //{
+                                    //    field: "CorSOLDTO",
+                                    //    title: "发票代码",
+                                    //    width: 80
+                                    //},
+                                    {
+                                        field: "CorStockCode",
+                                        title: "仓库代码",
+                                        width: 80
+                                    },
+                                    {
+                                        field: "CorStockName",
+                                        title: "仓库名称",
+                                        width: 80
+                                    },
+                                    {
+                                        field: "Checker",
+                                        title: "操作人",
+                                        width: 100,
+                                    },
+                                    {
+                                        field: "ModifyDTM",
+                                        title: "修改时间",
+                                        width: 100,
+                                        format: "{0:G}"
+                                    },
+                                    {
+                                        command: [
+                                            { name: "edit", text: "编辑" },
+                                            {
+                                                name: "destroy",
+                                                text: "删除"
+                                            }], width: 100
+                                    }],
+
+                                });
+                            });
+
+                            //var vErpStockID = "";
+                        
+
+                            $("#bascard-grid").on('click', 'tbody[role="rowgroup"] tr', function () {
+                                // 获取当前选择行数据
+                                var row = $("#bascard-grid").data("kendoGrid").select();
+                                var data = $("#bascard-grid").data("kendoGrid").dataItem(row);
+                                //vErpStockID = data.ErpStockID;
+                                var grid1 = $('#bascard-grid1').data('kendoGrid');
+                                grid1.dataSource.read();
+                            });
+                            function categoryDropDownEditor(container, options) {
+                                $('<input required name="' + options.field + '" id="ss"/>')
+                                    .appendTo(container)
+                                    .kendoDropDownList({
+                                        autoBind: false,
+                                        dataTextField: "ErpStockCode",
+                                        dataValueField: "ErpStockID",
+                                        optionLabel: "请选择",//下拉选择提示文字
+                                        dataSource: {
+                                            transport: {
+                                                read: {
+                                                    url: "@Html.Raw(Url.Action("GetSelectList", "StockSettings"))",
+                                                    type: "POST",
+                                                    dataType: "json"
+                                                }
+                                            },
+                                        },
+                                        change: function () {
+                                            cardtypeids = $("#ss").val();
+                                            options.model.ErpStockID = cardtypeids;
+                                        }
+
+                                    });
+                            }
+
+                            function BasCardList() {
+                                return {
+                                    ErpStockID: $('#@Html.FieldIdFor(model => model.Item1.ErpStockID)').val(),
+                                };
+
+                            }
+                           function StockList() {
+                                var row = $("#bascard-grid").data("kendoGrid").select();
+                                var data = $("#bascard-grid").data("kendoGrid").dataItem(row);
+                                if (data !=null && data.ErpStockID != ""){
+                                    return {
+                                        vErpStockID: data.ErpStockID
+                                    };
+                                }
+
+                            }
+                           function BasErpStockList() {
+                                var row = $("#bascard-grid").data("kendoGrid").select();
+                                var data = $("#bascard-grid").data("kendoGrid").dataItem(row);
+                                if (data ==null || data.ErpStockID == "")
+                                { return alert("请选择Erp仓库"); } else {
+                                    return {
+                                       vErpStockID: data.ErpStockID
+                                    };
+                                }
+
+                            }
+            
+                           function Editor(container, options) {
+                               $('<input required name="' + options.field + '" id="demorder"/>')
+                                   .appendTo(container)
+                                   .kendoDropDownList({
+                                       dataSource: {
+                                           data: [
+                                               { IsDemorderForType: '0', IsDemorderForTypeName: '否' },
+                                               { IsDemorderForType: '1', IsDemorderForTypeName: '是' },
+                                           ]
+                                       },
+                                       dataTextField: "IsDemorderForTypeName",
+                                       dataValueField: "IsDemorderForType",
+                                       change: function () {
+                                           cardtypeids = $("#demorder").val();
+                                           options.model.IsDemorderForType = cardtypeids;
+                                           if (options.model.IsDemorderForType == 1) {
+                                               options.model.IsDemorderForTypeName = "是"
+                                           } else {
+                                               options.model.IsDemorderForTypeName = "否"
+                                           }
+                                       }
+                                   })
+                           }
+                           
+        </script>
+    </div>
+
+}

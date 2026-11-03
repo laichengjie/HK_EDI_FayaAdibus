@@ -1,0 +1,53 @@
+﻿@using HK_EDI.Core.Domain.Customers
+@using HK_EDI.Core;
+@using HK_EDI.Core.Domain.Common;
+@using HK_EDI.Web.UI;
+@{
+    var kendoVersion = "2014.1.318";
+ 
+    
+    //CSS resources
+    <link href="~/Content/kendo/2014.1.318/kendo.bootstrap.mobile.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2014.1.318/kendo.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2014.1.318/kendo.common.min.css" rel="stylesheet" />
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui-themes/smoothness/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" />
+    
+    
+    <script src="~/Scripts/admin.common.js"></script>
+    <script src="~/Scripts/kendo/kendo.messages.zh-CN.js"></script>
+    <script src="~/Scripts/kendo/2014.1.318/cultures/kendo.culture.zh-CN.min.js"></script>
+    <script src="~/Scripts/kendo/2014.1.318/kendo.web.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-migrate-1.2.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+    <script src="/Scripts/kendo/2019.2.619/jquery-1.12.3.min.js"></script>
+    <script src="/Scripts/kendo/2019.2.619/angular.min.js"></script>
+    <script src="/Scripts/kendo/2019.2.619/jszip.js"></script>
+    <script src="/Scripts/kendo/2019.2.619/kendo.all.min.js"></script>
+
+    //page title
+    string adminPageTitle = "";
+    if (!String.IsNullOrWhiteSpace(ViewBag.Title))
+    {
+        adminPageTitle = ViewBag.Title + " / ";
+    }
+    adminPageTitle += "Admin.PageTitle";
+    //has "Manage Maintenance" permission?
+    var canManageMaintenance = true;
+}
+<!DOCTYPE html>
+<html >
+<head>
+    <title>@adminPageTitle</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+</head>
+<body>
+    @RenderBody()
+</body>
+</html>
+

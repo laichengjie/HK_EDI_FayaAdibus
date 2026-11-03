@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "HK-FayaAdibus获取装箱单配置";
+}
+@using HK_EDI.Web.Models.Setting
+@model HK_EDI.Web.Models.Setting.FayaAdibusGetPackingListSettingModel
+
+@using (Html.BeginForm())
+{
+    <table class="adminContent">
+        <tr>
+            <td class="adminTitle">
+                <label>公司代码</label>
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.CompanyId)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                <label>操作员ID</label>
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.CheckerID)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                <label>客户代码(半角英文逗号分隔)</label>
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.SetcustomerCode)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                <label>装箱单获取地址</label>
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.GetPackingListUrl)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                <label>接口SERVICE_CODE</label>
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.SERVICECODE)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                <label>获取接口最近几天数据</label>
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.GetDate)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                <label>接口获取数据日期(天数为负时有效)</label>
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.BeginDate)
+            </td>
+        </tr>
+       
+    </table>
+
+
+    <div>
+        <button type="submit" name="save" value="save" class="k-button">
+            保存
+        </button>
+    </div>
+}

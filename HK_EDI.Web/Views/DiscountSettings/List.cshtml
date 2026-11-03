@@ -1,0 +1,235 @@
+﻿@model HK_EDI.Web.Models.DiscountSet.DiscountSetModel
+@using System.Globalization;
+@{
+    ViewBag.Title = "折扣配置";
+}
+@using (Html.BeginForm())
+{
+    <div class="section-header">
+        <div class="title">
+            <img src="@Url.Content("~/Content/images/ico-system.png")" alt="" />
+            折扣配置
+        </div>
+    </div>
+    @*<table width="100%">
+        <tr>
+            <td class="adminTitle">
+                <label for="DiscountType" title="折扣类型">折扣类型</label>:
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.DiscountType)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="button" id="btnSearch" class="k-button" value="查找" />
+            </td>
+        </tr>
+    </table>*@
+    <table class="adminContent">
+        <tr>
+            <td>
+                <div id="bascard-grid"></div>
+
+                <script>
+                    $(document).ready(function () {
+                         $("#bascard-grid").kendoGrid({
+                            dataSource: {
+                                type: "json",
+                                transport: {
+                                    read: {
+                                        url: "@Html.Raw(Url.Action("QueryList", "DiscountSettings"))",
+                                        type: "POST",
+                                        dataType: "json",
+                                        data: BasCardList
+                                    },
+                                    update: {
+                                        url: '@Html.Raw(Url.Action("UpdateList", "DiscountSettings"))',
+                                        type: "POST",
+                                        dataType: "json"
+                                    },
+                                    create: {
+                                         url: '@Html.Raw(Url.Action("UpdateList", "DiscountSettings"))',
+                                         type: "POST",
+                                         dataType: "json"
+                                     },
+                                    destroy: {
+                                        url: '@Html.Raw(Url.Action("DeleteList", "DiscountSettings"))',
+                                        type: "POST",
+                                        dataType: "json"
+                                    }
+                                },
+                                schema: {
+                                    data: "Data",
+                                    total: "Total",
+                                    errors: "Errors",
+                                    model: {
+                                        id: "ID",
+                                        fields: {
+                                            ID: { editable: false, type: "string" },
+                                            Xuhao: { editable: false, type: "string" },
+                                            DiscountType: { editable: true, type: "string" },
+                                            Discount: { editable: true, type: "decimal" },
+                                            Checker: { editable: false, type: "string" },
+                                            ModifyDTM: { editable: false, type: "string" }
+                                        }
+                                    }
+                                },
+                                 requestEnd: function (e) {
+                                     if (e.type == "create" || e.type == "update") {
+                                         this.read();
+                                     }
+                                 },
+                                error: function(e) {
+                                    display_kendoui_grid_error(e);
+                                    // Cancel the changes
+                                    this.cancelChanges();
+                                },
+                                pageSize: 15,
+                                serverPaging: true,
+                                serverFiltering: true,
+                                serverSorting: true
+
+                            },
+                            pageable: {
+                                refresh: true,
+                                numeric: false,
+                                previousNext: false,
+                                info: false,
+                                 pageSizes: [10, 15, 20, 50, 100]
+                            },
+                            toolbar: ["create"],
+                            edit: function (e) {
+                                //var url = "/admin/DiscountSettings/CheackDataAdd?r=" + Math.random();
+                                //$.ajax({
+                                //    cache: false,
+                                //    url: url,
+                                //    type: 'post',
+                                //    success: function (data) {
+                                //        if (data != "") {
+                                //            alert(data);
+                                //        }
+                                //    },
+                                //    complete: function () { },
+                                //    error: function (e) { alert("系统异常") }
+                                //});
+                            },
+
+                              editable: {
+                                confirmation: false,
+                                mode: "inline"
+                            },
+                              scrollable: false,
+                              selectable: true,
+                              dataBound: onDataBound,
+                            columns: [{
+                                field: "ID",
+                                title: "ID",
+                                hidden: true,
+                                width: 50
+                            },
+                            {
+                                field: "Xuhao",
+                                title: "序号",
+                                width: 80
+                            },
+                            {
+                                field: "DiscountType",
+                                title: "折扣类型",
+                                width: 80
+                            },
+                            {
+                                field: "Discount",
+                                title: "折扣",
+                                type: "decimal",
+                                width: 100,
+                            },
+                            {
+                                field: "Checker",
+                                title: "操作人",
+                                width: 100,
+                            },
+                            {
+                                field: "ModifyDTM",
+                                title: "修改时间",
+                                width: 100,
+                                format: "{0:G}"
+                            },
+                            {
+                                command: [{ name: "edit", text: "编辑" }, {
+                                    name: "destroy",
+                                    text: "删除"
+                                }], width: 100
+                            }],
+
+                        });
+                    });
+
+                </script>
+
+
+                <script type="text/javascript">
+
+                    var selectedIds = [];
+                    $('#btnSearch').click(function () {
+
+                        var grid = $('#bascard-grid').data('kendoGrid');
+                        grid.dataSource.page(1);
+                        $('.checkboxGroups').attr('checked', false).change();
+                        selectedIds = [];
+                        return false;
+                    });
+                    $('#mastercheckbox').click(function () {
+                        $('.checkboxGroups').attr('checked', $(this).is(':checked')).change();
+                    });
+
+                    $('#bascard-grid').on('change', 'input[type=checkbox][id!=mastercheckbox]', function (e) {
+                        var $check = $(this);
+                        if ($check.is(":checked") == true) {
+                            var checked = jQuery.inArray($check.val(), selectedIds);
+                            if (checked == -1) {
+                                //add id to selectedIds.
+                                selectedIds.push($check.val());
+                            }
+                        }
+                        else {
+                            var checked = jQuery.inArray($check.val(), selectedIds);
+                            if (checked > -1) {
+                                //remove id from selectedIds.
+                                selectedIds = $.grep(selectedIds, function (item, index) {
+                                    return item != $check.val();
+                                });
+                            }
+                        }
+                        updateMasterCheckbox();
+                    });
+                    
+
+                    function BasCardList() {
+                        return {
+                            DiscountType: $('#@Html.FieldIdFor(model => model.DiscountType)').val(),
+                        };
+
+                    }
+
+                    function onDataBound(e) {
+                        $('#bascard-grid input[type=checkbox][id!=mastercheckbox]').each(function () {
+                            var currentId = $(this).val();
+                            var checked = jQuery.inArray(currentId, selectedIds);
+                            //set checked based on if current checkbox's value is in selectedIds.
+                            $(this).attr('checked', checked > -1);
+                        });
+
+                        updateMasterCheckbox();
+                    }
+
+                    function updateMasterCheckbox() {
+                        var numChkBoxes = $('#bascard-grid input[type=checkbox][id!=mastercheckbox]').length;
+                        var numChkBoxesChecked = $('#bascard-grid input[type=checkbox][checked][id!=mastercheckbox]').length;
+                        $('#mastercheckbox').attr('checked', numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
+                    }
+                </script>
+            </td>
+        </tr>
+    </table>
+}

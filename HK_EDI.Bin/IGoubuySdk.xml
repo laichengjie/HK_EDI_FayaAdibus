@@ -1,0 +1,215 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>IGoubuySdk</name>
+    </assembly>
+    <members>
+        <member name="T:IGoubuySdk.ApiClient">
+            <summary>
+            接口
+            </summary>
+        </member>
+        <member name="M:IGoubuySdk.ApiClient.CheckToken(System.String,System.String,System.String)">
+            <summary>
+            安全令牌
+            </summary>
+            <param name="userName">用户名</param>
+            <param name="password">密码</param> 
+            <returns></returns>
+        </member>
+        <member name="M:IGoubuySdk.ApiClient.execute``1(IGoubuySdk.TopRequest{``0},System.String,System.String)">
+            <summary>
+            调用接口
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="request"></param>
+            <param name="appkey"></param>
+            <param name="AppSecret"></param>
+            <returns></returns>
+        </member>
+        <member name="T:IGoubuySdk.Request.GetListRequest">
+            <summary>
+            获取商品列表。但是商品详情也需要传store_id.必须要传。
+            </summary>
+        </member>
+        <member name="P:IGoubuySdk.Request.GetListRequest.store_id">
+            <summary>
+            店铺ID
+            </summary>
+        </member>
+        <member name="P:IGoubuySdk.Request.GetListRequest.start_modified">
+            <summary>
+            开始时间
+            </summary>
+        </member>
+        <member name="P:IGoubuySdk.Request.GetListRequest.keyorder">
+            <summary>
+            排序方式 1-销量 2-浏览量 3-价格 空-按最新发布排序
+            </summary>
+        </member>
+        <member name="P:IGoubuySdk.Request.GetListRequest.order">
+            <summary>
+            排序方式 1-升序 2-降序
+            </summary>
+        </member>
+        <member name="P:IGoubuySdk.Request.GetListRequest.page">
+            <summary>
+            每页数量
+            </summary>
+        </member>
+        <member name="P:IGoubuySdk.Request.GetListRequest.curpage">
+            <summary>
+            当前页码
+            </summary>
+        </member>
+        <member name="P:IGoubuySdk.Request.GetListRequest.gc_id">
+            <summary>
+            分类编号
+            </summary>
+        </member>
+        <member name="P:IGoubuySdk.Request.GetListRequest.keyword">
+            <summary>
+            搜索关键字
+            </summary>
+        </member>
+        <member name="P:IGoubuySdk.Request.GetListRequest.barcode">
+            <summary>
+            商品条形码
+            </summary>
+        </member>
+        <member name="P:IGoubuySdk.Request.GetListRequest.b_id">
+            <summary>
+            品牌id
+            </summary>
+        </member>
+        <member name="P:IGoubuySdk.Request.GetOrderDetailRequest.store_id">
+            <summary>
+            店铺ID
+            </summary>
+        </member>
+        <member name="P:IGoubuySdk.Request.OrderListRequest.store_id">
+            <summary>
+            店铺ID（必填，以下可为空）
+            </summary>
+        </member>
+        <member name="P:IGoubuySdk.Request.RefundGetDetailRequest.store_id">
+            <summary>
+            店铺ID
+            </summary>
+        </member>
+        <member name="P:IGoubuySdk.Request.UpdateAddressRequest.receiver_zip">
+            <summary>
+            邮政编码
+            </summary>
+        </member>
+        <member name="P:IGoubuySdk.Request.UpdateAddressRequest.receiver_address">
+            <summary>
+            收货地址
+            </summary>
+        </member>
+        <member name="P:IGoubuySdk.Request.UpdateAddressRequest.receiver_district">
+            <summary>
+            区/县
+            </summary>
+        </member>
+        <member name="P:IGoubuySdk.Request.UpdateAddressRequest.receiver_city">
+            <summary>
+            城市
+            </summary>
+        </member>
+        <member name="P:IGoubuySdk.Request.UpdateAddressRequest.receiver_state">
+            <summary>
+            省份
+            </summary>
+        </member>
+        <member name="P:IGoubuySdk.Request.UpdateAddressRequest.receiver_mobile">
+            <summary>
+            移动电话
+            </summary>
+        </member>
+        <member name="P:IGoubuySdk.Request.UpdateAddressRequest.receiver_phone">
+            <summary>
+            固定电话
+            </summary>
+        </member>
+        <member name="P:IGoubuySdk.Request.UpdateAddressRequest.receiver_name">
+            <summary>
+            收货人全名
+            </summary>
+        </member>
+        <member name="P:IGoubuySdk.Request.UpdateAddressRequest.order_sn">
+            <summary>
+            订单号码
+            </summary>
+        </member>
+        <member name="T:IGoubuySdk.Response.GetListResponse">
+            <summary>
+            获取商品结果列表。
+            </summary>
+        </member>
+        <member name="P:IGoubuySdk.Response.order.fav_store_id">
+            <summary>
+            关注的店铺。
+            </summary>
+        </member>
+        <member name="P:IGoubuySdk.Response.SendBody.state">
+            <summary>
+            发货状态。
+            </summary>
+        </member>
+        <member name="P:IGoubuySdk.Response.UpdateStockBody.state">
+            <summary>
+            状态。
+            </summary>
+        </member>
+        <member name="T:IGoubuySdk.WebUtils">
+            <summary>
+            网络工具类。
+            </summary>
+        </member>
+        <member name="M:IGoubuySdk.WebUtils.DoPost(System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            执行HTTP POST请求。
+            </summary>
+            <param name="url">请求地址</param>
+            <param name="parameters">请求参数</param>
+            <returns>HTTP响应</returns>
+        </member>
+        <member name="M:IGoubuySdk.WebUtils.DoGet(System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            执行HTTP GET请求。
+            </summary>
+            <param name="url">请求地址</param>
+            <param name="parameters">请求参数</param>
+            <returns>HTTP响应</returns>
+        </member>
+        <member name="M:IGoubuySdk.WebUtils.GetResponseAsString(System.Net.HttpWebResponse,System.Text.Encoding)">
+            <summary>
+            把响应流转换为文本。
+            </summary>
+            <param name="rsp">响应流对象</param>
+            <param name="encoding">编码方式</param>
+            <returns>响应文本</returns>
+        </member>
+        <member name="M:IGoubuySdk.WebUtils.BuildGetUrl(System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            组装GET请求URL。
+            </summary>
+            <param name="url">请求地址</param>
+            <param name="parameters">请求参数</param>
+            <returns>带参数的GET请求URL</returns>
+        </member>
+        <member name="M:IGoubuySdk.WebUtils.BuildQuery(System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            组装普通文本请求参数。
+            </summary>
+            <param name="parameters">Key-Value形式请求参数字典</param>
+            <returns>URL编码后的请求数据</returns>
+        </member>
+        <member name="P:IGoubuySdk.WebUtils.Timeout">
+            <summary>
+            请求与响应的超时时间
+            </summary>
+        </member>
+    </members>
+</doc>

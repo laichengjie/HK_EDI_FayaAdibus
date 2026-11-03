@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "TaskRunTime";
+}
+
+<div class="section-header">
+    <div class="title">
+        <img src="@Url.Content("~/Content/images/ico-content.png")" alt="" />
+        TaskRunTime
+    </div>
+</div>
+
+<table class="adminContent">
+    <tr>
+        <td>
+            <div id="schedule-tasks-grid"></div>
+            <script>
+                $(document).ready(function () {
+                    $("#schedule-tasks-grid").kendoGrid({
+                        dataSource: {
+                            type: "json",
+                            transport: {
+                                read: {
+                                    url: '@Html.Raw(Url.Action("List", "TaskRunTime"))',
+                                    type: "POST",
+                                    dataType: "json"
+                                },
+                                update: {
+                                    url: '@Html.Raw(Url.Action("TaskUpdate", "TaskRunTime"))',
+                                    type: "POST",
+                                    dataType: "json"
+                                }
+                            },
+                            schema: {
+                                data: "Data",
+                                total: "Total",
+                                errors: "Errors",
+                                model: {
+                                    id: "Id",
+                                    fields: {
+                                        Key: { editable: false, type: "string" },
+                                        LastTime: { editable: true, type: "date" }
+                                    }
+                                }
+                            },
+                            requestEnd: function (e) {
+                                if (e.type == "create" || e.type == "update") {
+                                    this.read();
+                                }
+                            },
+                            error: function (e) {
+                                display_kendoui_grid_error(e);
+                                this.cancelChanges();
+                            },
+                            serverPaging: true,
+                            serverFiltering: true,
+                            serverSorting: true
+                        },
+                        pageable: {
+                            refresh: true,
+                            numeric: false,
+                            previousNext: false,
+                            info: false
+                        },
+                        editable: {
+                            confirmation: false,
+                            mode: "inline"
+                        },
+                        scrollable: false,
+                        columns: [{
+                            field: "Key",
+                            title: "名称",
+                            width: 500
+                        }, {
+                            field: "LastTime",
+                            title: "最后时间",
+                            width: 500,
+                            format: "{0:G}"
+                        }, {
+                            command: [{ name: "edit", text: "编辑" }]
+                        }]
+                    });
+                });
+            </script>
+        </td>
+    </tr>
+</table>

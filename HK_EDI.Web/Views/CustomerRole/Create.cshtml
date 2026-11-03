@@ -1,0 +1,19 @@
+﻿@model HK_EDI.Web.Models.Customers.CustomerRoleModel
+@{
+    //page title
+    ViewBag.Title = "添加角色";
+}
+@using (Html.BeginForm())
+{
+    <div class="section-header">
+        <div class="title">
+            <img src="@Url.Content("~/Content/images/ico-customers.png")" alt="" />
+            添加角色 @Html.ActionLink("返回角色列表", "List")
+        </div>
+        <div class="options">
+            <input type="submit" name="save" class="k-button" value="保存" />
+            <input type="submit" name="save-continue" class="k-button" value="保存并继续编辑" />
+        </div>
+    </div>
+    @Html.Partial("_CreateOrUpdate", Model)
+}
