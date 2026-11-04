@@ -29,6 +29,7 @@ namespace HK_EDI.Service.WMS.CommonModels
         /// </summary>
         [EnumResource("生成采购到货")]
         CREATERECEIPT = 4,
+
         /// <summary>
         /// 获取Adibus补货单
         /// </summary>
