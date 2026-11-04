@@ -95,6 +95,9 @@
     <Compile Include="FayaAdibus\CreateReceipt\ICreateReceiptService.cs" />
     <Compile Include="FayaAdibus\CreateReceipt\CreateReceiptBase.cs" />
     <Compile Include="FayaAdibus\CreateReceipt\CreateReceiptService.cs" />
+    <Compile Include="FayaAdibus\CreateReplenishmentOrder\ICreateReplenishmentOrderService.cs" />
+    <Compile Include="FayaAdibus\CreateReplenishmentOrder\CreateReplenishmentOrderBase.cs" />
+    <Compile Include="FayaAdibus\CreateReplenishmentOrder\CreateReplenishmentOrderService.cs" />
     <Compile Include="Orders\PaymentMethodService.cs" />
     <Compile Include="Authentication\FormsAuthenticationService.cs" />
     <Compile Include="Authentication\IAuthenticationService.cs" />

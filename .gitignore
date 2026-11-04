@@ -468,9 +468,6 @@ $RECYCLE.BIN/
 # 例外：Views 下的 Log 是视图源码，不能被上方的 [Ll]og/ 规则误忽略
 !HK_EDI.Web/Views/Log/
 
-# 发布/部署输出目录（VS 发布生成，不入库）
-发布/
-
 # 站点运行时生成目录（运行时日志、上传文件）
 HK_EDI.Web/Logs/
 HK_EDI.Web/Files/

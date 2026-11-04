@@ -19,13 +19,15 @@ namespace HK_EDI.Web.Models.Setting
         /// 开始日期
         /// </summary>
         public DateTime BeginDate { get; set; }
+  
         /// <summary>
-        /// 结束日期
+        /// 发货仓编号
         /// </summary>
-        public DateTime EndDate { get; set; }
+        public string DeparturePOSCode  { get; set; }
+         
         /// <summary>
-        /// 客户代码
+        /// 收货店铺编号
         /// </summary>
-        public string SetcustomerCode { get; set; }
+        public string DestinationPOSCode { get; set; }
     }
 }

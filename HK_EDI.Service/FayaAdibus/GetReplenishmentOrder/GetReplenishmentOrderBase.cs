@@ -7,69 +7,154 @@ using System.Threading.Tasks;
 
 namespace HK_EDI.Service.FayaAdibus.GetReplenishmentOrder
 {
+    /// <summary>
+    /// 获取FRS补货单（MW FRS Replenishment order）响应报文
+    /// </summary>
     public class GetReplenishmentOrderBase
     {
         public List<GetReplenishmentOrderBaseHEAD> HEAD { get; set; }
         public List<GetReplenishmentOrderBaseBODY> BODY { get; set; }
     }
+
     public class GetReplenishmentOrderBaseHEAD
     {
+        /// <summary>
+        /// 状态编码（200 成功）
+        /// </summary>
         public string StatusCode { get; set; }
-        public string MSG { get; set; }
+        /// <summary>
+        /// 状态描述
+        /// </summary>
+        public string StatusDesc { get; set; }
     }
+
     /// <summary>
-    /// 补货单明细，字段按接口实际报文字段调整
+    /// 补货单明细，字段与接口响应报文体定义保持一致
     /// </summary>
     public class GetReplenishmentOrderBaseBODY
     {
         /// <summary>
-        /// 补货单号
+        /// 单据类型（REPL）
         /// </summary>
-        public string ReplenishmentNo { get; set; }
-        public string TelNo { get; set; }
-        public string HU_No { get; set; }
-        public string EAN { get; set; }
-        public string Address { get; set; }
-        public string CartonNo { get; set; }
-        public string ETA { get; set; }
-        public string Vender { get; set; }
-        public string CartonWeight { get; set; }
-        public string ItemSize { get; set; }
+        public string DocType { get; set; }
         /// <summary>
-        /// 收货方/客户代码
+        /// 单据号（补货单号）
         /// </summary>
-        public string ShipTo { get; set; }
-        public string Division { get; set; }
-        public string Brand { get; set; }
-        public string Contacts { get; set; }
-        public string SoldTo { get; set; }
-        [JsonProperty(PropertyName = "PN No")]
-        public string PNNo { get; set; }
-        public string ETD { get; set; }
-        [JsonProperty(PropertyName = "SO No")]
-        public string SONo { get; set; }
-        public string ArticleNo { get; set; }
-        public string Quantity { get; set; }
+        public string DocNo { get; set; }
+        /// <summary>
+        /// 客户
+        /// </summary>
+        public string Customer { get; set; }
+        /// <summary>
+        /// 分公司
+        /// </summary>
+        public string Branch { get; set; }
+        /// <summary>
+        /// 发货仓编号
+        /// </summary>
+        public string DeparturePOSCode { get; set; }
+        /// <summary>
+        /// 收货店铺编号
+        /// </summary>
+        public string DestinationPOSCode { get; set; }
+        /// <summary>
+        /// 货号
+        /// </summary>
+        public string Article { get; set; }
+        /// <summary>
+        /// 尺码
+        /// </summary>
+        public string Size { get; set; }
+        /// <summary>
+        /// 条码
+        /// </summary>
+        public string BarCode { get; set; }
+        /// <summary>
+        /// 建议补货量
+        /// </summary>
+        public string ProposedQTY { get; set; }
+        /// <summary>
+        /// 备用字段1
+        /// </summary>
+        public string BackupField1 { get; set; }
+        /// <summary>
+        /// 备用字段2
+        /// </summary>
+        public string BackupField2 { get; set; }
+        /// <summary>
+        /// 备用字段3
+        /// </summary>
+        public string BackupField3 { get; set; }
+        /// <summary>
+        /// 备用字段4
+        /// </summary>
+        public string BackupField4 { get; set; }
+        /// <summary>
+        /// 备用字段5
+        /// </summary>
+        public string BackupField5 { get; set; }
+        /// <summary>
+        /// 当前页码
+        /// </summary>
+        public string CurrentPage { get; set; }
+        /// <summary>
+        /// 总页码
+        /// </summary>
+        public string TotalPage { get; set; }
     }
 
+    /// <summary>
+    /// 请求报文头
+    /// </summary>
     public class PostHeader
     {
         public string SERVICE_CODE { get; set; }
         public string CONSUMER_SYSCODE { get; set; }
         public string VERSION { get; set; }
         public string MESSAGE_ID { get; set; }
-
         public string DTSEND { get; set; }
     }
 
+    /// <summary>
+    /// 请求报文 DATA 节点
+    /// </summary>
     public class PostDATA
     {
         public PostHEAD HEAD { get; set; }
     }
+
+    /// <summary>
+    /// 请求报文 DATA.HEAD 节点
+    /// </summary>
     public class PostHEAD
     {
+        /// <summary>
+        /// KA调用方标识
+        /// </summary>
         public string KAName { get; set; }
-        public string GetDateTime { get; set; }
-        public string CustomerCode { get; set; }
+        /// <summary>
+        /// 单据类型（REPL）
+        /// </summary>
+        public string DocType { get; set; }
+        /// <summary>
+        /// 发货仓编号（多个用“|”分隔，可不填）
+        /// </summary>
+        public string DeparturePOSCode { get; set; }
+        /// <summary>
+        /// 收货店铺编号（多个用“|”分隔，可不填）
+        /// </summary>
+        public string DestinationPOSCode { get; set; }
+        /// <summary>
+        /// 补货单生成时间（返回该日期生成的补货单）
+        /// </summary>
+        public string DocDate { get; set; }
+        /// <summary>
+        /// 获取时间（避免一天多次请求返回相同数据）
+        /// </summary>
+        public string GetDate { get; set; }
+        /// <summary>
+        /// 当前页码（初始值1，单页最多3000行）
+        /// </summary>
+        public string CurrentPage { get; set; }
     }
 }

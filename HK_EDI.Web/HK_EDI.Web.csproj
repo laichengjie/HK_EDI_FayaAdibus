@@ -967,6 +967,7 @@
     <Compile Include="Tasks\CreateCGOrderTask.cs" />
     <Compile Include="Tasks\GetEstimatedShipmentTask.cs" />
     <Compile Include="Tasks\CreateReceiptTask.cs" />
+    <Compile Include="Tasks\CreateReplenishmentOrderTask.cs" />
     <Compile Include="Tasks\GetBaseDataTask.cs" />
     <Compile Include="UI\AsIsBundleOrderer.cs" />
     <Compile Include="UI\ResourceLocation.cs" />

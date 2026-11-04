@@ -13,6 +13,7 @@ using HK_EDI.Data;
 using HK_EDI.Service.EDI_Config;
 using HK_EDI.Service.FayaAdibus.CreateCGOrder;
 using HK_EDI.Service.FayaAdibus.CreateReceipt;
+using HK_EDI.Service.FayaAdibus.CreateReplenishmentOrder;
 using HK_EDI.Service.FayaAdibus.GetEstimatedShipment;
 using HK_EDI.Service.FayaAdibus.GetPackingList;
 using HK_EDI.Service.FayaAdibus.GetReplenishmentOrder;
@@ -142,6 +143,7 @@ namespace HK_EDI.Web
             builder.RegisterType<GetEstimatedShipmentService>().As<IGetEstimatedShipmentService>().InstancePerLifetimeScope();
             builder.RegisterType<GetPackingListService>().As<IGetPackingListService>().InstancePerLifetimeScope();
             builder.RegisterType<GetReplenishmentOrderService>().As<IGetReplenishmentOrderService>().InstancePerLifetimeScope();
+            builder.RegisterType<CreateReplenishmentOrderService>().As<ICreateReplenishmentOrderService>().InstancePerLifetimeScope();
             builder.RegisterType<CreateCGOrderService>().As<ICreateCGOrderService>().InstancePerLifetimeScope();
         }
 

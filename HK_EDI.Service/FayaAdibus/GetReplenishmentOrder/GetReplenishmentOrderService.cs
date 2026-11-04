@@ -21,7 +21,7 @@ using System.Web.Mvc;
 namespace HK_EDI.Service.FayaAdibus.GetReplenishmentOrder
 {
     /// <summary>
-    /// 获取补货单
+    /// 获取FRS补货单（MW FRS Replenishment order）
     /// </summary>
     public class GetReplenishmentOrderService : lockExtend, IGetReplenishmentOrderService, IWMSService
     {
@@ -50,52 +50,28 @@ namespace HK_EDI.Service.FayaAdibus.GetReplenishmentOrder
                 {
                     string password = System.Configuration.ConfigurationManager.AppSettings["password"];
                     string consumer_syscode = System.Configuration.ConfigurationManager.AppSettings["consumer_syscode"];
-
-                    string[] customerCodelist = (_FayaAdibusReplenishmentOrderSet.SetcustomerCode ?? "").Split(",");
                     string servicecode = _FayaAdibusReplenishmentOrderSet.SERVICECODE;
 
-                    if (customerCodelist != null && customerCodelist.Length > 0)
+                    if (!string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(consumer_syscode))
                     {
-                        if (!string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(consumer_syscode))
+                        // 接口只返回某一天生成的补货单，这里按配置的日期范围逐天获取
+                        if (_FayaAdibusReplenishmentOrderSet.GetDate >= 0)//获取几天数据
                         {
-                            string BeginDataTime = DateTime.Now.ToString("yyyy-MM-dd 00:00:00").Replace("/", "-");//计算开始时间
-
-                            foreach (string customerCode in customerCodelist)
+                            for (int i = _FayaAdibusReplenishmentOrderSet.GetDate; i >= 0; i--)
                             {
-                                try
-                                {
-                                    _logger.Information("GetReplenishmentOrderService - Information:获取补货单数据,客户数量:" + customerCodelist.Length + ",当前客户:" + customerCode + "");
-
-                                    if (string.IsNullOrEmpty(customerCode))
-                                        continue;
-                                    if (_FayaAdibusReplenishmentOrderSet.GetDate >= 0)//获取几天数据
-                                    {
-                                        for (int i = _FayaAdibusReplenishmentOrderSet.GetDate; i >= 0; i--)
-                                        {
-                                            BeginDataTime = DateTime.Now.AddDays(-i).ToString("yyyy-MM-dd 00:00:00").Replace("/", "-");//计算开始时间
-                                            GetReplenishmentOrder(BeginDataTime, password, customerCode, consumer_syscode, servicecode);
-                                        }
-                                    }
-                                    else
-                                    {
-                                        BeginDataTime = _FayaAdibusReplenishmentOrderSet.BeginDate.ToString("yyyy-MM-dd 00:00:00").Replace("/", "-");
-                                        GetReplenishmentOrder(BeginDataTime, password, customerCode, consumer_syscode, servicecode);
-                                    }
-                                }
-                                catch
-                                {
-                                    _logger.Error("GetReplenishmentOrderService - Error:获取补货单数据, 获取数据异常,当前客户:" + customerCode + "");
-                                }
+                                string DocDate = DateTime.Now.AddDays(-i).ToString("yyyy-MM-dd 00:00:00").Replace("/", "-");
+                                GetReplenishmentOrder(DocDate, password, consumer_syscode, servicecode);
                             }
                         }
                         else
                         {
-                            _logger.Information("GetReplenishmentOrderService - Information:获取补货单数据,处理失败:WebConfing配置数据为空");
+                            string DocDate = _FayaAdibusReplenishmentOrderSet.BeginDate.ToString("yyyy-MM-dd 00:00:00").Replace("/", "-");
+                            GetReplenishmentOrder(DocDate, password, consumer_syscode, servicecode);
                         }
                     }
                     else
                     {
-                        _logger.Information("GetReplenishmentOrderService - Information:获取补货单数据,请先配置客户代码");
+                        _logger.Information("GetReplenishmentOrderService - Information:获取补货单数据,处理失败:WebConfing配置数据为空");
                     }
                 }
                 catch (Exception ex)
@@ -105,93 +81,128 @@ namespace HK_EDI.Service.FayaAdibus.GetReplenishmentOrder
             }
         }
 
-        public void GetReplenishmentOrder(string getDateTime, string password, string customerCode, string consumer, string servicecode)
+        /// <summary>
+        /// 按指定日期（DocDate）获取补货单，内部按 CurrentPage/TotalPage 分页循环获取
+        /// </summary>
+        public void GetReplenishmentOrder(string docDate, string password, string consumer, string servicecode)
         {
             try
             {
                 MD5Set mD5Set = new MD5Set();
 
-                string[] postParams = new string[3];
-                PostHeader postHeader = new PostHeader();
-                PostDATA postDATA = new PostDATA();
-                PostHEAD postHEAD = new PostHEAD();
-                postHeader.SERVICE_CODE = servicecode;
-                postHeader.CONSUMER_SYSCODE = consumer;
-                postHeader.VERSION = "1";
-                postHeader.MESSAGE_ID = Guid.NewGuid().ToString().Replace("-", "").ToUpper();
-                postHeader.DTSEND = DateTime.Now.ToString("yyyyMMddHHmmss");
-                //请求数据
-                postHEAD.KAName = _FayaAdibusReplenishmentOrderSet.CompanyId;
-                postHEAD.GetDateTime = getDateTime;
-                postHEAD.CustomerCode = customerCode;
-                postDATA.HEAD = postHEAD;
-                #region 保存数据
-                string postHeaderJson = JsonConvert.SerializeObject(postHeader);
-                string postDATAJson = JsonConvert.SerializeObject(postDATA);
-                postParams[0] = postHeaderJson;
-                postParams[1] = mD5Set.MD5Encrypt(password + postHeaderJson + password);
-                postParams[2] = postDATAJson;
-                HK_EDI.Service.Common.WebClient wc = new HK_EDI.Service.Common.WebClient();
-                string Header = "HEADER=" + postParams[0] + "&PASSWORD=" + postParams[1] + "&DATA=" + postParams[2];
-                InsertConnextLog(Header, "");
-                var response = wc.PostWebRequest(_FayaAdibusReplenishmentOrderSet.GetReplenishmentOrderUrl, Header);
-                InsertConnextLog(Header, response);
+                int currentPage = 1;
+                int totalPage = 1;
 
-                GetReplenishmentOrderBase getReplenishmentOrderBase = JsonConvert.DeserializeObject<GetReplenishmentOrderBase>(response);
-
-                if (getReplenishmentOrderBase != null)
+                do
                 {
-                    if (getReplenishmentOrderBase.HEAD[0].StatusCode == "200")
+                    string[] postParams = new string[3];
+                    PostHeader postHeader = new PostHeader();
+                    PostDATA postDATA = new PostDATA();
+                    PostHEAD postHEAD = new PostHEAD();
+                    postHeader.SERVICE_CODE = servicecode;
+                    postHeader.CONSUMER_SYSCODE = consumer;
+                    postHeader.VERSION = "1";
+                    postHeader.MESSAGE_ID = Guid.NewGuid().ToString().Replace("-", "").ToUpper();
+                    postHeader.DTSEND = DateTime.Now.ToString("yyyyMMddHHmmss");
+                    //请求数据
+                    postHEAD.KAName = _FayaAdibusReplenishmentOrderSet.CompanyId;
+                    postHEAD.DocType = "REPL";
+                    postHEAD.DeparturePOSCode = _FayaAdibusReplenishmentOrderSet.DeparturePOSCode ?? "";
+                    postHEAD.DestinationPOSCode = _FayaAdibusReplenishmentOrderSet.DestinationPOSCode ?? "";
+                    postHEAD.DocDate = docDate;
+                    postHEAD.GetDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss").Replace("/", "-");
+                    postHEAD.CurrentPage = currentPage.ToString();
+                    postDATA.HEAD = postHEAD;
+
+                    string postHeaderJson = JsonConvert.SerializeObject(postHeader);
+                    string postDATAJson = JsonConvert.SerializeObject(postDATA);
+                    postParams[0] = postHeaderJson;
+                    postParams[1] = mD5Set.MD5Encrypt(password + postHeaderJson + password);
+                    postParams[2] = postDATAJson;
+                    HK_EDI.Service.Common.WebClient wc = new HK_EDI.Service.Common.WebClient();
+                    string Header = "HEADER=" + postParams[0] + "&PASSWORD=" + postParams[1] + "&DATA=" + postParams[2];
+                    InsertConnextLog(Header, "");
+                    var response = wc.PostWebRequest(_FayaAdibusReplenishmentOrderSet.GetReplenishmentOrderUrl, Header);
+                    InsertConnextLog(Header, response);
+
+                    GetReplenishmentOrderBase getReplenishmentOrderBase = JsonConvert.DeserializeObject<GetReplenishmentOrderBase>(response);
+
+                    if (getReplenishmentOrderBase != null && getReplenishmentOrderBase.HEAD != null && getReplenishmentOrderBase.HEAD.Count > 0)
                     {
-                        List<GetReplenishmentOrderBaseBODY> getlistBODY = getReplenishmentOrderBase.BODY;
-                        var list_distinct = getlistBODY.GroupBy(c => c.ReplenishmentNo).Select(c => c.First());//去重
-                        var ReplenishmentNoList = new SelectList(list_distinct, "ReplenishmentNo", null);
-                        IList<SelectListItem> DisReplenishmentNoLists = ReplenishmentNoList.ToList();
-                        foreach (var ReplenishmentNo in DisReplenishmentNoLists)
+                        if (getReplenishmentOrderBase.HEAD[0].StatusCode == "200")
                         {
-                            DataTable dtDetail = DBHelper.ExecuteDataTable(@"  SELECT top 1 1  FROM    HK_Faya_AdibusGetReplenishmentOrder where ReplenishmentNo = '" + ReplenishmentNo.Value.ToString() + "' ");
-                            if (dtDetail != null && dtDetail.Rows.Count > 0)
+                            List<GetReplenishmentOrderBaseBODY> getlistBODY = getReplenishmentOrderBase.BODY ?? new List<GetReplenishmentOrderBaseBODY>();
+
+                            // 依据返回内容更新总页码（未返回则按1处理）
+                            if (getlistBODY.Count > 0)
                             {
-                                continue;
+                                int tmpTotal = 0;
+                                if (int.TryParse(getlistBODY[0].TotalPage, out tmpTotal) && tmpTotal > 0)
+                                {
+                                    totalPage = tmpTotal;
+                                }
                             }
-                            List<GetReplenishmentOrderBaseBODY> vReplenishmentOrder = getlistBODY.Where(p => p.ReplenishmentNo == ReplenishmentNo.Value.ToString()).ToList();
-                            string _pnno = "";
-                            foreach (GetReplenishmentOrderBaseBODY vReplenishment in vReplenishmentOrder)
+
+                            // 按单据号去重
+                            var list_distinct = getlistBODY.GroupBy(c => c.DocNo).Select(c => c.First()).ToList();
+                            foreach (var docNo in list_distinct)
                             {
-                                AddDataMethod(vReplenishment, "HK_Faya_AdibusGetReplenishmentOrder");
-                                _pnno += vReplenishment.PNNo + ",";
+                                if (string.IsNullOrEmpty(docNo.DocNo))
+                                    continue;
+
+                                DataTable dtDetail = DBHelper.ExecuteDataTable(@"  SELECT top 1 1  FROM    HK_Faya_AdibusGetReplenishmentOrder where DocNo = '" + docNo.DocNo + "' ");
+                                if (dtDetail != null && dtDetail.Rows.Count > 0)
+                                {
+                                    continue;
+                                }
+                                List<GetReplenishmentOrderBaseBODY> vReplenishmentOrder = getlistBODY.Where(p => p.DocNo == docNo.DocNo).ToList();
+                                string _pnno = "";
+                                foreach (GetReplenishmentOrderBaseBODY vReplenishment in vReplenishmentOrder)
+                                {
+                                    AddDataMethod(vReplenishment, "HK_Faya_AdibusGetReplenishmentOrder");
+                                    _pnno += vReplenishment.Article + ",";
+                                }
+
+                                #region 订单状态
+                                List<JobOrderTrace> listorderTrace = new List<JobOrderTrace>();
+                                int orderType = 0;
+                                JobOrderTrace orderTrace = new JobOrderTrace();
+
+                                var orderModel = new NormalOrderModel() { CompanyID = _FayaAdibusReplenishmentOrderSet.CompanyId, BillNo = docNo.DocNo, BillTypeID = "GETREPLENISHMENTORDER", SourcebillNo = _pnno, CustomerCode = vReplenishmentOrder[0].Customer };
+                                orderType = _orderHandle.GetOrderType("GETREPLENISHMENTORDER");
+                                orderTrace = _iJobOrderTraceService.GetJobOrderTrace(_FayaAdibusReplenishmentOrderSet.CompanyId, docNo.DocNo, "AD0000006", orderType);
+                                orderTrace = _orderHandle.AddOrderTrace(orderTrace, orderModel, "AD0000006", orderType, "", "", DateTime.Now);
+
+                                listorderTrace.Add(orderTrace);
+                                #endregion
+                                _logger.Information("GetReplenishmentOrderService - Information:获取补货单数据,处理成功:单号:" + docNo.DocNo);
                             }
 
-                            #region 订单状态
-                            List<JobOrderTrace> listorderTrace = new List<JobOrderTrace>();
-                            int orderType = 0;
-                            JobOrderTrace orderTrace = new JobOrderTrace();
-
-                            var orderModel = new NormalOrderModel() { CompanyID = _FayaAdibusReplenishmentOrderSet.CompanyId, BillNo = ReplenishmentNo.Value.ToString(), BillTypeID = "CREATERECEIPT", SourcebillNo = _pnno, CustomerCode = vReplenishmentOrder[0].ShipTo };
-                            orderType = _orderHandle.GetOrderType("CREATERECEIPT");
-                            orderTrace = _iJobOrderTraceService.GetJobOrderTrace(_FayaAdibusReplenishmentOrderSet.CompanyId, ReplenishmentNo.Value.ToString(), "AD0000006", orderType);
-                            orderTrace = _orderHandle.AddOrderTrace(orderTrace, orderModel, "AD0000006", orderType, "", "", DateTime.Now);
-
-                            listorderTrace.Add(orderTrace);
-                            #endregion
-                            _logger.Information("GetReplenishmentOrderService - Information:获取补货单数据,处理成功:单号:" + ReplenishmentNo.Value.ToString());
+                            if (currentPage >= totalPage)
+                            {
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            _logger.Error("GetReplenishmentOrderService - err:获取补货单数据,处理失败:" + getReplenishmentOrderBase.HEAD[0].StatusCode + ";" + getReplenishmentOrderBase.HEAD[0].StatusDesc + ", content:" + response);
+                            break;
                         }
                     }
                     else
                     {
-                        _logger.Error("GetReplenishmentOrderService - err:获取补货单数据,处理失败:" + getReplenishmentOrderBase.HEAD[0].StatusCode + ";" + getReplenishmentOrderBase.HEAD[0].MSG + ", content:" + response);
+                        _logger.Error("GetReplenishmentOrderService - err:获取补货单数据,处理失败:返回内容为空, content:" + response);
+                        break;
                     }
-                    _logger.Information("GetReplenishmentOrderService - Information:获取补货单数据,客户代码" + customerCode + "处理完成");
-                }
-                else
-                {
-                    _logger.Error("GetReplenishmentOrderService - err:获取补货单数据,处理失败:返回内容为空, content:" + response);
-                }
-                #endregion
+
+                    currentPage++;
+                } while (true);
+
+                _logger.Information("GetReplenishmentOrderService - Information:获取补货单数据,日期" + docDate + "处理完成");
             }
             catch (Exception ex)
             {
-                _logger.Error("GetReplenishmentOrderService - err:获取补货单数据,处理失败:" + customerCode + ex.ToString());
+                _logger.Error("GetReplenishmentOrderService - err:获取补货单数据,处理失败:" + docDate + ex.ToString());
             }
         }
 
@@ -203,14 +214,14 @@ namespace HK_EDI.Service.FayaAdibus.GetReplenishmentOrder
             string column = "(";
             string val = "values(";
             string link = "";
-            int index = 0;
             //获取Type对象所有公共属性
             PropertyInfo[] info = type.GetProperties();
-            int count = info.Count();
-            SqlParameter[] p = new SqlParameter[count];
+            List<SqlParameter> p = new List<SqlParameter>();
             foreach (PropertyInfo item in info)
             {
-                if (item.Name.ToLower() == "detail")
+                string name = item.Name.ToLower();
+                // 明细导航属性与分页字段不入库
+                if (name == "detail" || name == "currentpage" || name == "totalpage")
                 {
                     continue;
                 }
@@ -220,18 +231,11 @@ namespace HK_EDI.Service.FayaAdibus.GetReplenishmentOrder
                 //给字段变量赋值
                 if ((item.GetValue(nodel) != null ? item.GetValue(nodel).ToString() : "") == "0000-00-00 00:00:00")
                 {
-                    p[index++] = new SqlParameter("@" + item.Name, null);
+                    p.Add(new SqlParameter("@" + item.Name, null));
                 }
                 else
                 {
-                    if (item.Name.ToLower() == "etd" || item.Name.ToLower() == "eta") //DateTime
-                    {
-                        p[index++] = new SqlParameter("@" + item.Name, StampToDateTime(item.GetValue(nodel).ToString()));
-                    }
-                    else
-                    {
-                        p[index++] = new SqlParameter("@" + item.Name, item.GetValue(nodel) != null ? item.GetValue(nodel) : DBNull.Value);
-                    }
+                    p.Add(new SqlParameter("@" + item.Name, item.GetValue(nodel) != null ? item.GetValue(nodel) : DBNull.Value));
                 }
 
                 link = ",";
@@ -239,16 +243,7 @@ namespace HK_EDI.Service.FayaAdibus.GetReplenishmentOrder
             column += ")";
             val += ")";
             strsql += column + val; ;
-            return DBHelper.ExecuteNonTranQuery(strsql, p);
-        }
-
-        private static DateTime StampToDateTime(string time)
-        {
-            time = time.Substring(0, 10);
-            double timestamp = Convert.ToInt64(time);
-            System.DateTime dateTime = new System.DateTime(1970, 1, 1, 0, 0, 0, 0);
-            dateTime = dateTime.AddSeconds(timestamp).ToLocalTime();
-            return dateTime;
+            return DBHelper.ExecuteNonTranQuery(strsql, p.ToArray());
         }
 
         private static void InsertConnextLog(string RequestData, string ResponseData)

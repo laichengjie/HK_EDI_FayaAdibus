@@ -25,10 +25,19 @@
         </tr>
         <tr>
             <td class="adminTitle">
-                <label>客户代码(半角英文逗号分隔)</label>
+                <label>发货仓编号(可不填，多个用|分隔)</label>
             </td>
             <td class="adminData">
-                @Html.EditorFor(model => model.SetcustomerCode)
+                @Html.EditorFor(model => model.DeparturePOSCode)
+            </td>
+        </tr>
+
+         <tr>
+            <td class="adminTitle">
+                <label>收货店铺编号(可不填，多个用|分隔)</label>
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.DestinationPOSCode)
             </td>
         </tr>
         <tr>

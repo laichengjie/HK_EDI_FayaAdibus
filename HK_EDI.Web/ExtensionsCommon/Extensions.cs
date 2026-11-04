@@ -161,6 +161,9 @@ namespace HK_EDI.Web.ExtensionsCommon
                 case "CreateReceiptService":
                     @namespace = string.Format("HK_EDI.Service.FayaAdibus.CreateReceipt.{0},HK_EDI.Service", config.CooperationSys);
                     break;
+                case "CreateReplenishmentOrderService":
+                    @namespace = string.Format("HK_EDI.Service.FayaAdibus.CreateReplenishmentOrder.{0},HK_EDI.Service", config.CooperationSys);
+                    break;
             }
             var instance = @namespace.CreateInstance<IWMSService>(scope);
             return instance;
