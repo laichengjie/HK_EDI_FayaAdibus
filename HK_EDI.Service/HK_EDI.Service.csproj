@@ -79,6 +79,9 @@
     <Compile Include="FayaAdibus\GetPackingList\GetPackingListBase.cs" />
     <Compile Include="FayaAdibus\GetPackingList\GetPackingListService.cs" />
     <Compile Include="FayaAdibus\GetPackingList\IGetPackingListService.cs" />
+    <Compile Include="FayaAdibus\PushReplenishmentOrderConfirm\PushReplenishmentOrderConfirmBase.cs" />
+    <Compile Include="FayaAdibus\PushReplenishmentOrderConfirm\PushReplenishmentOrderConfirmService.cs" />
+    <Compile Include="FayaAdibus\PushReplenishmentOrderConfirm\IPushReplenishmentOrderConfirmService.cs" />
     <Compile Include="FayaAdibus\GetReplenishmentOrder\GetReplenishmentOrderBase.cs" />
     <Compile Include="FayaAdibus\GetReplenishmentOrder\GetReplenishmentOrderService.cs" />
     <Compile Include="FayaAdibus\GetReplenishmentOrder\IGetReplenishmentOrderService.cs" />

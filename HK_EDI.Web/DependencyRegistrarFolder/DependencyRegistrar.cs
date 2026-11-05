@@ -145,6 +145,7 @@ namespace HK_EDI.Web
             builder.RegisterType<GetReplenishmentOrderService>().As<IGetReplenishmentOrderService>().InstancePerLifetimeScope();
             builder.RegisterType<CreateReplenishmentOrderService>().As<ICreateReplenishmentOrderService>().InstancePerLifetimeScope();
             builder.RegisterType<CreateCGOrderService>().As<ICreateCGOrderService>().InstancePerLifetimeScope();
+            builder.RegisterType<PushReplenishmentOrderConfirmService>().As<IPushReplenishmentOrderConfirmService>().InstancePerLifetimeScope();
         }
 
         public int Order

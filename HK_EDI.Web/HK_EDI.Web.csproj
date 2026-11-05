@@ -963,6 +963,7 @@
     <Compile Include="Mvc\NullJsonResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tasks\GetPackingListTask.cs" />
+    <Compile Include="Tasks\PushReplenishmentOrderConfirmTask.cs" />
     <Compile Include="Tasks\GetReplenishmentOrderTask.cs" />
     <Compile Include="Tasks\CreateCGOrderTask.cs" />
     <Compile Include="Tasks\GetEstimatedShipmentTask.cs" />

@@ -168,8 +168,8 @@ namespace HK_EDI.Service.FayaAdibus.GetReplenishmentOrder
                                 int orderType = 0;
                                 JobOrderTrace orderTrace = new JobOrderTrace();
 
-                                var orderModel = new NormalOrderModel() { CompanyID = _FayaAdibusReplenishmentOrderSet.CompanyId, BillNo = docNo.DocNo, BillTypeID = "GETREPLENISHMENTORDER", SourcebillNo = _pnno, CustomerCode = vReplenishmentOrder[0].Customer };
-                                orderType = _orderHandle.GetOrderType("GETREPLENISHMENTORDER");
+                                var orderModel = new NormalOrderModel() { CompanyID = _FayaAdibusReplenishmentOrderSet.CompanyId, BillNo = docNo.DocNo, BillTypeID = "GETREPL", SourcebillNo = _pnno, CustomerCode = vReplenishmentOrder[0].Customer };
+                                orderType = _orderHandle.GetOrderType("GETREPL");
                                 orderTrace = _iJobOrderTraceService.GetJobOrderTrace(_FayaAdibusReplenishmentOrderSet.CompanyId, docNo.DocNo, "AD0000006", orderType);
                                 orderTrace = _orderHandle.AddOrderTrace(orderTrace, orderModel, "AD0000006", orderType, "", "", DateTime.Now);
 

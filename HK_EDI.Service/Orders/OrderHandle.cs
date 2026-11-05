@@ -468,11 +468,11 @@ namespace HK_EDI.Service.Orders
                 case "CREATERECEIPT":
                     result = (int)OrderTypeEnum.CREATERECEIPT;
                     break;
-                case "GETREPLENISHMENTORDER":
-                    result = (int)OrderTypeEnum.GETREPLENISHMENTORDER;
-                    break;
-                case "CREATEREPLENISHMENT":
-                    result = (int)OrderTypeEnum.CREATEREPLENISHMENT;
+                case "GETREPL":
+                    result = (int)OrderTypeEnum.GETREPL;
+                    break; 
+                case "CREATEREPL":
+                    result = (int)OrderTypeEnum.CREATEREPL;
                     break;
 
             }

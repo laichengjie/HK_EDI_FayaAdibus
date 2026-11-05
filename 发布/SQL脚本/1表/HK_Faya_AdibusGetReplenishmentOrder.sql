@@ -7,21 +7,23 @@ IF NOT EXISTS (SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[HK
 BEGIN
     CREATE TABLE [dbo].[HK_Faya_AdibusGetReplenishmentOrder](
         [Id]                [int] IDENTITY(1,1) NOT NULL,
-        [DocType]           [nvarchar](20)  NULL,
-        [DocNo]             [nvarchar](100) NULL,
-        [Customer]          [nvarchar](100) NULL,
-        [Branch]            [nvarchar](100) NULL,
-        [DeparturePOSCode]  [nvarchar](100) NULL,
-        [DestinationPOSCode][nvarchar](100) NULL,
-        [Article]           [nvarchar](100) NULL,
-        [Size]              [nvarchar](50)  NULL,
-        [BarCode]           [nvarchar](100) NULL,
-        [ProposedQTY]       [nvarchar](50)  NULL,
-        [BackupField1]      [nvarchar](200) NULL,
-        [BackupField2]      [nvarchar](200) NULL,
-        [BackupField3]      [nvarchar](200) NULL,
-        [BackupField4]      [nvarchar](200) NULL,
-        [BackupField5]      [nvarchar](200) NULL,
+        [DocType]           [nvarchar](20)  NULL,--单据类型
+        [DocNo]             [nvarchar](100) NULL,--单据号
+        [Customer]          [nvarchar](100) NULL,--客户
+        [Branch]            [nvarchar](100) NULL,--分公司
+        [DeparturePOSCode]  [nvarchar](100) NULL,--发货仓编号
+        [DestinationPOSCode][nvarchar](100) NULL,--收货店铺编号
+        [Article]           [nvarchar](100) NULL,--货号
+        [Size]              [nvarchar](50)  NULL,--尺码
+        [BarCode]           [nvarchar](100) NULL,--条码
+        [ProposedQTY]       [nvarchar](50)  NULL,--备用字段
+        [BackupField1]      [nvarchar](200) NULL,--备用字段
+        [BackupField2]      [nvarchar](200) NULL,--备用字段
+        [BackupField3]      [nvarchar](200) NULL,--备用字段
+        [BackupField4]      [nvarchar](200) NULL,--备用字段
+        [BackupField5]      [nvarchar](200) NULL,--备用字段
+		[CurrentPage]       [INT] NULL,--当前页码
+		[TotalPage]         [INT] NULL,--总页码
         [UploadState]       [int] NOT NULL CONSTRAINT [DF_HK_Faya_AdibusGetReplenishmentOrder_UploadState] DEFAULT ((0)),
         CONSTRAINT [PK_HK_Faya_AdibusGetReplenishmentOrder] PRIMARY KEY CLUSTERED ([Id] ASC)
     ) ON [PRIMARY]
@@ -34,3 +36,6 @@ BEGIN
         ON [dbo].[HK_Faya_AdibusGetReplenishmentOrder]([DocNo])
 END
 GO
+
+
+

@@ -7,7 +7,7 @@
 @using (Html.BeginForm())
 { 
     <table class="adminContent">
-        <tr> 
+        <tr>
             <td class="adminTitle">
                 <label>公司代码</label>
             </td>
@@ -32,7 +32,7 @@
             </td>
         </tr>
 
-         <tr>
+        <tr>
             <td class="adminTitle">
                 <label>收货店铺编号(可不填，多个用|分隔)</label>
             </td>
@@ -50,7 +50,7 @@
         </tr>
         <tr>
             <td class="adminTitle">
-                <label>接口SERVICE_CODE</label>
+                <label>获取接口SERVICE_CODE</label>
             </td>
             <td class="adminData">
                 @Html.EditorFor(model => model.SERVICECODE)
@@ -72,7 +72,25 @@
                 @Html.EditorFor(model => model.BeginDate)
             </td>
         </tr>
-       
+
+        <tr>
+            <td class="adminTitle">
+                <label>FRS确认补货单数量地址</label>
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.PushReplenishmentOrderUrl)
+            </td>
+        </tr>
+
+        <tr>
+            <td class="adminTitle">
+                <label>确认接口SERVICE_CODE</label>
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.PUSSERVICECODE)
+            </td>
+        </tr>
+
     </table>
 
 

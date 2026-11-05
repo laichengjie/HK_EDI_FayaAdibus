@@ -29,5 +29,15 @@ namespace HK_EDI.Web.Models.Setting
         /// 收货店铺编号
         /// </summary>
         public string DestinationPOSCode { get; set; }
+
+
+        /// <summary>
+        /// FRS确认补货单数量 地址
+        /// </summary>
+        public string PushReplenishmentOrderUrl { get; set; }
+        /// <summary>
+        /// FRS确认补货单数量 接口
+        /// </summary>
+        public string PUSSERVICECODE { get; set; }
     }
 }

@@ -49,11 +49,11 @@ namespace HK_EDI.Service.FayaAdibus.CreateReplenishmentOrder
         public void CreateReplenishmentOrderMethod(SD_Adibus_Interface config, string BillNo)
         {
             lock (GetPostSkuLock(config, "CreateReplenishmentOrderMethod"))
-            {
+            { 
                 try
                 {
                     bool isCreateReplenishment = false;
-                    DataTable dtMaster = DBHelper.ExecuteDataTable(@"  SELECT top 1 1  FROM    HK_Faya_AdibusGetReplenishmentOrder where UploadState = 0 ");
+                    DataTable dtMaster = DBHelper.ExecuteDataTable(@"  SELECT top 1 1  FROM    HK_Faya_AdibusGetReplenishmentOrder where UploadState = 1 ");
                     if (dtMaster != null && dtMaster.Rows.Count > 0)
                     {
                         isCreateReplenishment = true;

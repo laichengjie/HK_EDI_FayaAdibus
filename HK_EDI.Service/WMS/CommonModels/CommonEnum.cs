@@ -34,11 +34,11 @@ namespace HK_EDI.Service.WMS.CommonModels
         /// 获取Adibus补货单
         /// </summary>
         [EnumResource("获取Adibus补货单")]
-        GETREPLENISHMENTORDER = 5,
+        GETREPL = 5,
         /// <summary>
         /// 生成补货单
         /// </summary>
         [EnumResource("生成补货单")]
-        CREATEREPLENISHMENT = 6,
+        CREATEREPL = 6, 
     }
 }
