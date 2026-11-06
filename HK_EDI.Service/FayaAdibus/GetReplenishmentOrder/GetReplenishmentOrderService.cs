@@ -160,7 +160,7 @@ namespace HK_EDI.Service.FayaAdibus.GetReplenishmentOrder
                                 foreach (GetReplenishmentOrderBaseBODY vReplenishment in vReplenishmentOrder)
                                 {
                                     AddDataMethod(vReplenishment, "HK_Faya_AdibusGetReplenishmentOrder");
-                                    _pnno += vReplenishment.Article + ",";
+                                    //_pnno += vReplenishment.Article + ",";
                                 }
 
                                 #region 订单状态

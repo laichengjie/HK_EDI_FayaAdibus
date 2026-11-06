@@ -53,7 +53,7 @@ namespace HK_EDI.Service.FayaAdibus.CreateReplenishmentOrder
                 try
                 {
                     bool isCreateReplenishment = false;
-                    DataTable dtMaster = DBHelper.ExecuteDataTable(@"  SELECT top 1 1  FROM    HK_Faya_AdibusGetReplenishmentOrder where UploadState = 1 ");
+                    DataTable dtMaster = DBHelper.ExecuteDataTable(@"  SELECT top 1 1  FROM    HK_Faya_AdibusGetReplenishmentOrder where UploadState = 0 ");
                     if (dtMaster != null && dtMaster.Rows.Count > 0)
                     {
                         isCreateReplenishment = true;
@@ -61,7 +61,7 @@ namespace HK_EDI.Service.FayaAdibus.CreateReplenishmentOrder
 
                     if (isCreateReplenishment || !string.IsNullOrEmpty(BillNo))
                     {
-                        //生成补货单
+                        //生成补货单(调拨申请单)
                         var outRetVal = new System.Data.SqlClient.SqlParameter("RetVal", "");
                         outRetVal.Direction = ParameterDirection.Output;
                         outRetVal.Size = 1000;
@@ -76,11 +76,11 @@ namespace HK_EDI.Service.FayaAdibus.CreateReplenishmentOrder
                                    outRetVal, outRetMsg
                            });
 
-                        _logger.Information(string.Format("CreateReplenishmentOrder-Information: 生成补货单处理结束,处理时间:{0},公司ID: {1}", DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss:ffff dddd"), _FayaAdibusReplenishmentOrderSet.CompanyId));
+                        _logger.Information(string.Format("CreateReplenishmentOrder-Information: 生成补货单(调拨申请单)处理结束,处理时间:{0},公司ID: {1}", DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss:ffff dddd"), _FayaAdibusReplenishmentOrderSet.CompanyId));
                     }
                     else
                     {
-                        _logger.Information(string.Format("CreateReplenishmentOrder-Information: 没有可生成补货单的数据,时间:{0},公司ID: {1}", DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss:ffff dddd"), _FayaAdibusReplenishmentOrderSet.CompanyId));
+                        _logger.Information(string.Format("CreateReplenishmentOrder-Information: 没有可生成补货单(调拨申请单)的数据,时间:{0},公司ID: {1}", DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss:ffff dddd"), _FayaAdibusReplenishmentOrderSet.CompanyId));
                     }
                 }
                 catch (Exception ex)

@@ -24,7 +24,12 @@ BEGIN
         [BackupField5]      [nvarchar](200) NULL,--备用字段
 		[CurrentPage]       [INT] NULL,--当前页码
 		[TotalPage]         [INT] NULL,--总页码
-        [UploadState]       [int] NOT NULL CONSTRAINT [DF_HK_Faya_AdibusGetReplenishmentOrder_UploadState] DEFAULT ((0)),
+		[ChkNums]   [INT]   DEFAULT (0) NULL,--总页码
+		[OutStockID] VARCHAR(20) NULL ,
+        [InStockID] VARCHAR(20) NULL ,
+		[BillNo] [VARCHAR](40) NULL ,--ERP调拨申请单单号
+        [UploadState]       [int] NOT NULL
+		 CONSTRAINT [DF_HK_Faya_AdibusGetReplenishmentOrder_UploadState] DEFAULT ((0)),
         CONSTRAINT [PK_HK_Faya_AdibusGetReplenishmentOrder] PRIMARY KEY CLUSTERED ([Id] ASC)
     ) ON [PRIMARY]
 END
